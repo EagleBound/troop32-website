@@ -1,0 +1,217 @@
+# Troop 32 Website — Project Overview
+
+## Purpose
+
+This repository holds the **replacement website** for Scouting America Troop 32 in Santa Rosa, California.
+
+The new site should give prospective families, the community, and current members clear, accurate, and safe information about Troop 32. It should be something a Scout Webmaster can understand, maintain, and hand on to the next Webmaster.
+
+The replacement site is currently a **development project**. The existing production website at troop32.org stays untouched (see [Development vs. production](#development-vs-production)).
+
+## Project phases
+
+The project has two phases. They separate building the first website from the permanent Webmaster position.
+
+| | Phase 1: Initial development | Phase 2: Scout Webmaster stewardship |
+| --- | --- | --- |
+| **What** | Design and build Website v1.0 | Keep the website accurate, useful, safe, current, and improving |
+| **Duration** | Temporary; ends at [handoff](#handoff-to-scout-stewardship) | Permanent operating model |
+| **Directing human** | Adult project lead | Scout Webmaster |
+| **Tools** | ChatGPT for planning/review, Clawson for implementation | ChatGPT for planning/teaching/review, Clawson for implementation |
+
+**Why two phases?** Building an entire website from scratch, under a recruiting deadline, is not a fair or consistent responsibility to place on one Scout. If the first Webmaster had to build the site while every later Webmaster inherited a working one, the position would mean something different for each Scout. Adult volunteers therefore build v1.0, and Scout Webmasters receive a functioning, understandable, documented website, not an unfinished development assignment.
+
+**Phase 1 does not redefine the Webmaster position.** It is a temporary adult-led project phase.
+
+The same safeguards apply in both phases: the PLAN → `EXECUTE:` gate, privacy rules, security boundaries, public-repository rules, production restrictions, factual-verification standards, Git safeguards, and documentation requirements. See [WORKFLOW.md](WORKFLOW.md#which-workflow-applies).
+
+### Current phase
+
+**Phase 1: Initial development (Website v1.0).**
+
+This line is the single source of truth for the active phase. It changes only through an approved PLAN → `EXECUTE:` work package with designated adult leader approval, recorded in the [decision log](#decision-log).
+
+## The Webmaster position
+
+> **The Troop 32 Webmaster is the Scout responsible for helping keep the Troop's website accurate, useful, safe, current, and improving over time.**
+
+The position should be substantially the same from one Webmaster to the next. The Scout Webmaster may:
+
+- identify stale or incorrect content;
+- update appropriate public information;
+- add or replace approved photographs and content;
+- identify usability problems;
+- propose improvements;
+- discuss design and technical options with ChatGPT;
+- prepare work requests;
+- review Clawson's PLAN responses;
+- authorize approved implementation through the documented [workflow](WORKFLOW.md);
+- review implementation results and Git diffs;
+- commit and push approved changes;
+- help document the website;
+- and participate in an orderly handoff to the next Webmaster.
+
+**Advanced programming ability is not a prerequisite.** A Scout with technical interest may choose to learn HTML, CSS, JavaScript, Git, accessibility, design, or other skills and contribute more directly to implementation. Another Scout may rely more on ChatGPT and Clawson while exercising good judgment, communication, review, content stewardship, and leadership. **Both can be successful Webmasters.**
+
+The AI-assisted workflow should make the Scout more capable, not reduce the Scout to approving individual keystrokes.
+
+## Troop 32 identity
+
+Organizationally, Troop 32 is two Scouting America troops:
+
+| Troop | Members |
+| --- | --- |
+| **Troop 32-B** | Boys |
+| **Troop 32-G** | Girls |
+
+The two troops normally meet together and take part in outings together. In ordinary public communication they are referred to together simply as **Troop 32**.
+
+- Use **"Troop 32"** for general public content.
+- Use **"Troop 32-B"** or **"Troop 32-G"** only when the organizational distinction matters. Examples: certain awards, leadership positions or changes, registrations, and records.
+- Do not split ordinary public content into separate boys' and girls' versions.
+
+**Regular meetings (approved for public use):** Troop 32 normally meets on **Mondays at 7:00 PM** at **Santa Rosa Bible Church, 4575 Badger Road, Santa Rosa, California**. This approval covers the *regular* meeting only. See [PRIVACY.md](PRIVACY.md#regular-meeting-information-vs-activity-logistics).
+
+**Current Scoutmaster:** James Vickers.
+
+**Tagline:** "Eagle Bound!" is an existing repository/project tagline. It is **not** described as an official Troop 32 motto unless troop leadership confirms that.
+
+Other troop facts, such as history, traditions, and leadership beyond the Scoutmaster, are **not yet confirmed** for this project. See [Open content items](#open-content-items-requiring-confirmation).
+
+## Ownership and succession
+
+The website, repository, documentation, operating rules, account arrangements, and project history belong to the **Troop 32 Webmaster program**. They do not belong to any individual Scout, parent, adult leader, adult volunteer, or AI assistant.
+
+- The Webmaster position changes over time. When a new Scout becomes Webmaster, these rules and documents remain in effect.
+- Avoid designs, accounts, or knowledge that depend on one particular person or tool. Write down how things work.
+- Accounts and services created during Phase 1 should be troop-owned and documented, not tied to a volunteer's personal account. Credentials are never stored in the repository.
+- Changes to the operating rules themselves are major governance changes and need designated adult leader approval (see [WORKFLOW.md](WORKFLOW.md#changing-these-rules)).
+
+## Roles
+
+| Role | Responsibility |
+| --- | --- |
+| **Scout Webmaster** | The [Webmaster position](#the-webmaster-position). Directing human in Phase 2: sets direction, makes ordinary website decisions, reviews and authorizes plans, reviews changes, commits and pushes. Participates in the handoff at the end of Phase 1. |
+| **Adult project lead** | Phase 1 only. Directs initial development of Website v1.0: prepares work requests, reviews plans, authorizes execution, reviews changes, commits and pushes, and prepares the handoff. |
+| **Designated adult leader** | Approves matters involving youth safety, youth/member privacy policy, credentials, production access, machine/system administration, major governance changes, phase changes, and other matters requiring adult oversight. This is a role, not a named person. It is distinct from the adult project lead, though one person may hold both roles. |
+| **Troop leadership** | Approves privacy policy affecting youth/member information and confirms troop facts for public content. |
+| **ChatGPT** | Planning, teaching, prompt-engineering, and review resource used by the directing human. |
+| **Clawson** | The website's AI technical assistant (in Phase 2, the Webmaster's technical assistant). Plans and, when explicitly authorized, implements approved work. Never the Webmaster or the adult project lead. |
+
+## Intended audiences
+
+1. **Prospective families**, including families new to Scouting.
+2. **Community members** and partner organizations.
+3. **Current Scouts and families** looking for general public information.
+4. **Members**, through a *future* authenticated area. Not yet designed (see [Major unresolved decisions](#major-unresolved-architectural-decisions)).
+
+## Objectives
+
+- Clear, welcoming, accurate public information about Troop 32 and Scouting.
+- Privacy by design, appropriate for a youth organization.
+- Accessible to people with disabilities from the start (see [CONTENT-GUIDE.md](CONTENT-GUIDE.md#accessibility)).
+- Maintainable by a Scout Webmaster, with documented decisions.
+- Continuity across Webmaster successions.
+
+## Website v1.0 objectives (temporary)
+
+> **Temporary section.** This applies to Phase 1 only. When v1.0 launches and is handed off, mark this section *completed* rather than deleting it, so the history stays readable.
+
+Website v1.0 has an immediate practical objective: give Troop 32 a **polished, useful public website suitable for its upcoming recruiting Open House**.
+
+That deadline sets the priorities for initial development:
+
+1. Public recruiting experience first.
+2. Prospective-family information first.
+3. Mobile-friendly presentation.
+4. Clear meeting and join information.
+5. Trustworthy and current content.
+6. Polished public appearance.
+7. Privacy and safety.
+8. A realistic v1.0 scope.
+
+Features not needed for the recruiting launch, **especially authenticated/member functionality**, remain future work. The v1.0 launch scope is marked in [SITE-MAP.md](SITE-MAP.md).
+
+**The deadline does not relax any safeguard.** In particular:
+
+- Launching or deploying the site is its own approved work package. Any change to troop32.org, its hosting, or DNS needs designated adult leader approval.
+- The youth-photo policy is still open (see [PRIVACY.md](PRIVACY.md#open-policy-questions)). v1.0 must either launch without identifiable youth photos or wait for an approved policy.
+- Unconfirmed troop facts stay out of public content.
+
+## Handoff to Scout stewardship
+
+Phase 1 ends when Website v1.0 is operational and suitable for handoff. **Draft handoff criteria** (to be confirmed by the designated adult leader):
+
+- [ ] The v1.0 public site is live and working.
+- [ ] How to update content and maintain the site is documented in this repository.
+- [ ] Accounts, domains, and hosting are troop-owned, and the people with access are documented. Credentials are not stored in the repository.
+- [ ] Known issues and planned future work are listed.
+- [ ] The Scout Webmaster has had a walkthrough of the site, the documentation, and the workflow.
+- [ ] The designated adult leader confirms the handoff, and the [Current phase](#current-phase) is changed to Phase 2 through an approved work package.
+
+## Architectural principles
+
+- **Privacy by design.** Decide what is public deliberately. Default to private when uncertain.
+- **Public/member separation.** Public content and future member-only content are kept clearly separate. Private information is never placed on the public site "temporarily."
+- **No secrets or private data in the repository.** The repository is treated as public (see [PRIVACY.md](PRIVACY.md#repository-rules)).
+- **Simple and maintainable over clever.** Prefer approaches a Scout can understand and maintain.
+- **Few, well-known dependencies.** Each one is justified and reported.
+- **GitHub is the durable project record.** History, decisions, and documentation live in the repository so future Webmasters can follow what happened and why.
+
+## Development vs. production
+
+| | Production | Replacement (this repository) |
+| --- | --- | --- |
+| Where | troop32.org (existing site) | Developed locally and in GitHub |
+| Status | Live, **must remain untouched** | In development |
+| Access | No administrative access of any kind without separate explicit authorization | Normal development under the [workflow](WORKFLOW.md) |
+
+Launching v1.0 and any cutover from the old site to the new site are **separate, explicitly approved work packages**. They need designated adult leader approval because they involve production and credentials.
+
+## Current project status
+
+- **Phase 1: Initial development (Website v1.0).**
+- Governance and project documentation established (this document set).
+- **No website code yet.** No framework, hosting, or build tooling has been chosen.
+- The existing `.gitignore` is a generic Node.js template. It does **not** mean a framework has been selected.
+- Design references recorded for a future design review (see [DESIGN-REFERENCES.md](DESIGN-REFERENCES.md)).
+
+## Major unresolved architectural decisions
+
+Each of these needs its own PLAN and approval before anything is built:
+
+1. **Launch target and hosting for v1.0.** Whether v1.0 launches at a new address or replaces troop32.org, where it is hosted, and who holds the accounts. This is the most deadline-sensitive decision.
+2. **Site technology.** Static site generator, framework, or other approach.
+3. **Future member area:** authentication provider, data storage, account management, authorization model, and hosting of private information. This also needs a privacy review and designated adult leader approval.
+4. **Contact method.** How the public reaches the troop (an official troop channel, not personal addresses).
+5. **Content management.** How Scout Webmasters and non-technical leaders could supply updates.
+6. **Photo sources.** How approved photos reach the site. This needs a privacy and access review first.
+7. **Cutover plan** from the existing production site.
+
+## Open content items requiring confirmation
+
+These came from the existing public site and may be stale. They must be **confirmed by troop leadership** before public use:
+
+- Troop history (the old site says the troop was founded in the early 1900s, restarted in 1946, and is among the oldest troops in Sonoma County).
+- The age and grade range served and the program description.
+- Costs and fees.
+- Leadership positions other than the Scoutmaster, and contact arrangements.
+- Whether "Eagle Bound!" is an official troop motto.
+
+## Decision log
+
+| Date | Decision | Approved by |
+| --- | --- | --- |
+| 2026-10-06 | Adopted the PLAN/EXECUTE operating model, Git policy, privacy-first rules, and initial documentation set ([AGENTS.md](../AGENTS.md)). | Adult project lead, via approved EXECUTE work package |
+| 2026-10-06 | Treat the GitHub repository as public. | Adult project lead, via approved EXECUTE work package |
+| 2026-10-06 | Regular Monday 7:00 PM meeting at Santa Rosa Bible Church approved as public information. | Adult project lead, via approved EXECUTE work package |
+| 2026-10-06 | "Troop 32" is the normal public identity; 32-B / 32-G used only where the distinction matters. | Adult project lead, via approved EXECUTE work package |
+| 2026-10-06 | No feature branches or pull requests required at this stage; the directing human commits and pushes to `main`. | Adult project lead, via approved EXECUTE work package |
+| 2026-10-06 | Two-phase model: Phase 1 adult-led initial development of Website v1.0; Phase 2 permanent Scout Webmaster stewardship. Current phase: Phase 1. | Adult project lead, via approved EXECUTE work package |
+| 2026-10-06 | Adopted the Webmaster position definition; advanced programming ability is not a prerequisite. | Adult project lead, via approved EXECUTE work package |
+| 2026-10-06 | The PLAN → `EXECUTE:` gate is mandatory in both phases. | Adult project lead, via approved EXECUTE work package |
+| 2026-10-06 | Adult project lead and designated adult leader are distinct roles that one person may hold. | Adult project lead, via approved EXECUTE work package |
+| 2026-10-06 | Website v1.0 priority: a recruiting-ready public site for the upcoming Open House; member functionality deferred. | Adult project lead, via approved EXECUTE work package |
+| 2026-10-06 | Recorded three neighboring troop websites as design references, not templates ([DESIGN-REFERENCES.md](DESIGN-REFERENCES.md)). | Adult project lead, via approved EXECUTE work package |
+
+Add new rows as decisions are made. Record who approved each decision by role.
