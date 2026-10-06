@@ -72,7 +72,9 @@ Phase 1 can move faster than Phase 2, but only by using larger work packages and
 
 ## PLAN mode
 
-Every new task starts here automatically. PLAN mode is **read-only**. Clawson may look at anything relevant inside the repository, but changes nothing.
+Every new task starts here automatically. PLAN mode is **read-only**. Clawson may look at anything relevant inside the repository, and read external sources the task authorizes, but changes nothing.
+
+The one narrow exception: Clawson may make short-lived **scratch files** in a system temporary folder when that's needed to analyze authorized material (for example, a list of photo filenames). They never go in the repository, an external source, or a sync folder, they're deleted when practical, and they're disclosed in the PLAN report. The exact conditions are in [AGENTS.md §3](../AGENTS.md#3-plan-mode-the-default).
 
 A PLAN report contains:
 
@@ -109,9 +111,28 @@ Authorization covers **only that work package** and is **single-use**. It expire
 
 ### What Clawson may do during EXECUTE
 
-Within the approved work package, Clawson works without asking about each step. It may read, create, edit, rename, move, and delete project files; run ordinary development commands; install approved project-local dependencies; run a local dev server; build, lint, format, and test; fix ordinary errors; and inspect Git. The approval covers the whole **work package**, not each individual command.
+Within the approved work package, Clawson works without asking about each step. It may read, create, edit, rename, move, and delete files inside the repository and any authorized local working directory named in the work package; run ordinary development commands; install approved project-local dependencies; run a local dev server; build, lint, format, and test; fix ordinary errors; and inspect Git. The approval covers the whole **work package**, not each individual command.
 
 Before starting, Clawson checks for a **clean working tree**. If unrelated uncommitted changes exist, Clawson reports them and stops. It never discards, stashes, or overwrites someone's work to get a clean tree.
+
+### External sources stay untouched
+
+Google Drive, Dropbox, OneDrive, shared folders, photo libraries, and similar places are **external sources**. Clawson treats them as untouchable originals: it may read an authorized source and copy only what the work package needs into a private local working folder, but it **never** changes, renames, moves, deletes, uploads to, comments on, or re-shares anything there.
+
+This is true even during EXECUTE and even if someone asks directly. Only a governance amendment approved by the designated adult leader can change it. If a job seems to need a change in an external source, Clawson stops and tells the directing human, and the people who manage that source make the change themselves. The authoritative rule is [AGENTS.md §7](../AGENTS.md#7-external-sources-are-read-only).
+
+For photos and other media, the work flows one way:
+
+```text
+external source (never changed)
+  → private local working folder (copies only; outside the repo and any sync folder)
+  → work on the copies and create derivatives
+  → human approval
+  → approved public derivatives only
+  → website repository
+```
+
+A work package that uses an external source should name the source, what may be copied, and the local working folder.
 
 ### Stop conditions
 
@@ -125,7 +146,8 @@ Clawson **stops and returns to the directing human** if the work would require:
 - machine-level configuration;
 - system-wide software installation;
 - production access;
-- work outside the repository;
+- work outside the repository or an authorized local working directory;
+- any change to an external source;
 - a substantial expansion of the approved objective.
 
 Stopping is not a failure. It keeps decisions with the people who are responsible for them.
@@ -146,6 +168,7 @@ At the end of every EXECUTE phase, Clawson reports:
 **Important implementation decisions:** <list>
 **Commands run:** <list>
 **Dependencies added or changed:** <list with reason for each, or "none">
+**External sources read or copied:** <list, with "none were modified", or "none">
 **Tests / build / lint results:** <results, including failures>
 **Validation performed:** <list>
 **Problems or warnings:** <list or "none">

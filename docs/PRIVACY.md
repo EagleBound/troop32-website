@@ -107,6 +107,18 @@ Until a youth-photo policy is approved, use a conservative approach:
 - **Remove embedded GPS/location metadata (EXIF)** from images before public use.
 - When in doubt, leave it out and flag it.
 
+### Original media and working copies
+
+The troop's photo and document stores (Google Drive and similar) are **external sources**. AI agents treat them as read-only originals and never change, move, delete, or re-share anything in them ([AGENTS.md §7](../AGENTS.md#7-external-sources-are-read-only)).
+
+- **Copy only what is needed.** Copy only the specific files a work package needs. Never mirror a whole photo library "just in case."
+- **Copies are private working material.** Copies of youth photos in a local working folder are private, even though they aren't published yet.
+  - Keep them **outside the repository and outside any sync folder** (Google Drive, OneDrive, Dropbox).
+  - Never share them.
+  - Delete them when the work package says the work is finished.
+- **Only approved public derivatives reach the repository.** These are resized images with metadata removed and neutral filenames. Original files never do.
+- **Report sharing problems; don't fix them.** If an external source looks over-shared (for example, a folder of youth photos viewable by anyone with the link), the agent reports it to the directing human and the designated adult leader rather than changing it.
+
 ## Open policy questions
 
 These need a decision by the **designated adult leader / troop leadership**. Clawson must not answer them on its own.

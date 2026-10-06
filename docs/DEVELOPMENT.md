@@ -90,9 +90,12 @@ When troop leadership approves an official, role-based troop address, set `conta
 
 Only photos approved under the troop's photo policy ([PRIVACY.md](PRIVACY.md#photos-and-images)) may be added. The repository is public.
 
-1. Remove location and camera data (EXIF/GPS) from the photo, and give it a neutral file name with no names (for example `campout-ridge-01.jpg`).
-2. Save it in `src/assets/photos/`.
-3. In `src/data/photos.ts`, import it and set `image` and a meaningful `alt` description on the slot:
+**Never edit the original.** Photos usually come from an external source such as the troop's Google Drive. Those originals are never changed, renamed, moved, or deleted ([AGENTS.md §7](../AGENTS.md#7-external-sources-are-read-only)). Always work on a **copy**.
+
+1. Copy only the approved photo into a private local working folder **outside this repository and outside any sync folder**. For example, use `C:\Troop32-Staging\`, not a folder inside OneDrive, Google Drive, or Dropbox. Windows sometimes puts Pictures and Documents inside OneDrive, so check first.
+2. On the copy, remove location and camera data (EXIF/GPS), resize it, and give it a neutral file name with no names (for example `campout-ridge-01.jpg`).
+3. Save only that approved derivative in `src/assets/photos/`.
+4. In `src/data/photos.ts`, import it and set `image` and a meaningful `alt` description on the slot:
 
    ```ts
    import ridge from '../assets/photos/campout-ridge-01.jpg';

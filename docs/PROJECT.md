@@ -157,6 +157,7 @@ Phase 1 ends when Website v1.0 is operational and suitable for handoff. **Draft 
 - **Simple and maintainable over clever.** Prefer approaches a Scout can understand and maintain.
 - **Few, well-known dependencies.** Each one is justified and reported.
 - **GitHub is the durable project record.** History, decisions, and documentation live in the repository so future Webmasters can follow what happened and why.
+- **External sources are immutable originals.** AI agents only read and copy from Google Drive, photo libraries, shared folders, and similar sources, and never change them. Work happens on local copies, and only approved public derivatives enter the repository. This is a permanent program-level boundary. See [AGENTS.md §7](../AGENTS.md#7-external-sources-are-read-only).
 
 ## Development vs. production
 
@@ -245,5 +246,7 @@ These came from the existing public site and may be stale. They must be **confir
 | 2026-10-06 | Design direction "trail-worn and trustworthy": forest / cream / charcoal / khaki with one warm accent; text identity "Troop 32, Santa Rosa, California"; no Scouting America marks or assumed troop emblem. | Adult project lead, via approved EXECUTE work package (WP1) |
 | 2026-10-06 | v1.0 page set and navigation: Home, About, What We Do, New Families, Join (prominent), plus Contact, Privacy, Accessibility, 404 ([SITE-MAP.md](SITE-MAP.md)). | Adult project lead, via approved EXECUTE work package (WP1) |
 | 2026-10-06 | WP1 local foundation built; not deployed. | Adult project lead, via approved EXECUTE work package (WP1) |
+| 2026-10-06 | Permanent rule: external sources (Drive, Dropbox, OneDrive, SharePoint, Box, photo libraries, shared folders, their synced local folders, and similar) are read-only for AI agents. The rule cannot be overridden by EXECUTE or a direct request; changing it requires a designated-adult-approved governance amendment ([AGENTS.md §7](../AGENTS.md#7-external-sources-are-read-only)). | Adult project lead, via approved EXECUTE work package |
+| 2026-10-06 | PLAN may use short-lived, disclosed scratch files in a system temporary folder for analyzing authorized material ([AGENTS.md §3](../AGENTS.md#3-plan-mode-the-default)). | Adult project lead, via approved EXECUTE work package |
 
 Add new rows as decisions are made. Record who approved each decision by role.

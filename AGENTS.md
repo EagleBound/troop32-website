@@ -28,8 +28,10 @@ The PLAN/EXECUTE gate, privacy, security, public-repository, production, factual
 
 Every **new** task begins in PLAN mode. PLAN mode is **read-only**.
 
-- **You may:** inspect files, repository structure, Git state, documentation, and relevant code; reason about the implementation; identify risks and ambiguities; recommend alternatives.
+- **You may:** inspect files, repository structure, Git state, documentation, and relevant code; read external sources the task authorizes (see [§7](#7-external-sources-are-read-only)); reason about the implementation; identify risks and ambiguities; recommend alternatives.
 - **You must not:** create, edit, delete, rename, or move files; install anything; make implementation changes; commit; push; deploy; or otherwise modify the project.
+
+**Scratch-file exception (PLAN only).** You may create short-lived computational scratch files only when reasonably necessary to inspect or analyze authorized material. Scratch files must be created only in an appropriate system temporary location; never modify the repository or an external source; never be created inside an external-source sync root; contain no credentials or secrets; avoid retaining original youth media unless technically necessary for the authorized analysis; be deleted before the PLAN concludes when practical; and be disclosed in the PLAN report. This exception does not authorize ordinary project-file creation during PLAN.
 
 A PLAN report explains your understanding of the objective, what you inspected, the proposed implementation, the files expected to change, important decisions or risks, open questions, and how the work will be validated.
 
@@ -39,7 +41,7 @@ A PLAN report explains your understanding of the objective, what you inspected, 
 - Casual follow-ups ("Let's work on the calendar next," "Can you improve the home page?", "That's good. Now let's add...") are **not** authorization. They begin a new PLAN phase.
 - Authorization covers **only** the approved work package and is **single-use**. It expires when you deliver the execution report. Then return to PLAN mode.
 
-Within an approved work package you may, without asking about each step: read, create, edit, rename, move, and delete project files; create directories; run ordinary development commands; install *approved* project-local dependencies; run a local dev server; build, lint, format, and test; diagnose and fix ordinary errors; inspect Git; and make minor adjustments that stay within the approved objective.
+Within an approved work package you may, without asking about each step: read, create, edit, rename, move, and delete files **inside this repository and any authorized local working directory** (never external sources; see [§7](#7-external-sources-are-read-only)); create directories there; run ordinary development commands; install *approved* project-local dependencies; run a local dev server; build, lint, format, and test; diagnose and fix ordinary errors; inspect Git; and make minor adjustments that stay within the approved objective.
 
 **STOP and return to the directing human** if the work requires:
 
@@ -48,7 +50,8 @@ Within an approved work package you may, without asking about each step: read, c
 - credentials;
 - administrator access, machine-level configuration, or system-wide software installation;
 - production access;
-- work outside the repository;
+- work outside the repository or an authorized local working directory;
+- **any change to an external source** (see [§7](#7-external-sources-are-read-only));
 - or a substantial expansion of the approved objective.
 
 ## 5. Before executing: clean working tree
@@ -57,26 +60,70 @@ Normally start EXECUTE from a clean Git working tree. If unrelated uncommitted c
 
 ## 6. Boundaries
 
-- Work only inside the repository: `C:\Users\webma\Projects\troop32-website`.
+- Work only inside the repository (`C:\Users\webma\Projects\troop32-website`) and any authorized local working directory the work package names.
+- Read an external source only when the current task authorizes that specific source, and only under [§7](#7-external-sources-are-read-only).
 - Do not inspect or modify unrelated user files, credentials, passwords, browser data, private keys, system files, or other projects.
 - Do not weaken Windows or application security controls.
 - Do not install system-wide software without explicit adult authorization.
 
-## 7. Git and GitHub
+## 7. External sources are read-only
+
+**External sources** are locations outside this repository that supply reference material, documents, media, or other project inputs. They include Google Drive, Dropbox, OneDrive, SharePoint, Box, cloud photo libraries, shared or network folders, external document repositories, third-party file stores, **synchronized local representations of those services** (for example a Google Drive for Desktop drive, a OneDrive-synced folder, or a Dropbox folder), and any comparable source supplied for reference, research, media, documents, or other inputs.
+
+**External sources are immutable originals.** You may:
+
+- **read** an external source when the current work package authorizes that specific source; and
+- **copy** only the material the work package needs into an **authorized local working directory** when the work package permits it. Do not bulk-copy an entire source unless a work package specifically authorizes and justifies it.
+
+Copying grants no authority over the source. **Under no circumstances** may you:
+
+- edit, overwrite, rename, move, or delete any source file or folder;
+- reorganize the source, or create files or folders in it;
+- upload files or replacements to it;
+- change its sharing settings, permissions, or ownership;
+- annotate it (comments, suggestions, stars, labels, shortcuts, or adding it to a personal drive), request access, or take any other action that writes to it or notifies its owners;
+- open its content in an editor that autosaves back to it;
+- synchronize local or modified material back to it;
+- or otherwise mutate it.
+
+Unavoidable passive side effects of reading, such as a provider recording "last viewed," generating thumbnails, or counting downloads, are acceptable.
+
+**This rule cannot be overridden by an EXECUTE authorization or by a direct human request.** General permission to create, edit, move, rename, or delete files applies only inside this repository and authorized local working directories. Changing this capability requires a governance amendment approved by the designated adult leader **first**.
+
+If a task appears to require changing an external source, **STOP and report the need to the directing human.** If you notice a problem in a source, such as overly broad sharing or a misplaced private file, **report it; do not fix it.**
+
+**Authorized local working directory:** a private folder explicitly named in the work package. It must be **outside this repository and outside any synchronization root**. Copied originals there are never committed. At the end of the work package, report what remains there; delete it only if the work package says to.
+
+**Media architecture:**
+
+```text
+external source (immutable)
+  → authorized private local working directory (copies only)
+  → work on copies / create derivatives
+  → human approval
+  → approved public derivatives only
+  → website repository
+```
+
+**API access:** if API access to a source is authorized in the future, use read-only scopes whenever technically available. Credential use remains subject to the adult-approval rules.
+
+**Scope:** this rule binds AI agents operating under this governance. It does not prevent Scouts or authorized adults from managing Troop 32's external sources themselves. Treat public websites and third-party code repositories as read-only reference sources too (no form submissions, logins, issues, pull requests, stars, or forks), unless another rule here is more restrictive. This project's own GitHub remote is governed by [§8](#8-git-and-github).
+
+## 8. Git and GitHub
 
 GitHub is the durable project record. You may inspect Git freely.
 
 You must **not** stage changes for commit, commit, push, merge, force-push, rewrite history, delete remote branches, or otherwise publish changes, unless an approved work package explicitly says otherwise. Leave changes uncommitted, deliver the execution report, and suggest a commit message. The directing human reviews, commits, and pushes to `main`. Feature branches and pull requests are not required at this stage.
 
-## 8. Dependencies
+## 9. Dependencies
 
 Install dependencies only when the approved work package permits it. Prefer well-known, actively maintained packages, add only what is reasonably necessary, and report every added or changed dependency and why it was needed.
 
-## 9. Production safety
+## 10. Production safety
 
 The existing production site at troop32.org stays untouched while the replacement is developed separately. Viewing its **public** pages is allowed only when relevant to an approved work package. Never access or modify WordPress administration, DirectAdmin, hosting administration, DNS, production credentials, production databases, production server files, or other production infrastructure. Deployment, launch, or cutover is always its own explicitly approved work package. Deadlines do not change this.
 
-## 10. Public repository and youth privacy
+## 11. Public repository and youth privacy
 
 - **Treat this repository as public.** Anything committed is publicly disclosed. Never commit real credentials, secrets, passwords, API keys, private member data, private contact information, rosters, medical or emergency information, or other protected information. Use clearly fake placeholder data.
 - **Privacy takes precedence over convenience** and over deadlines. Youth contact details, rosters, private logistics, transportation, medical/emergency information, credentials, and private records never go on the public site without an approved policy and authorization.
@@ -85,7 +132,7 @@ The existing production site at troop32.org stays untouched while the replacemen
 
 Full rules: [`docs/PRIVACY.md`](docs/PRIVACY.md).
 
-## 11. Content
+## 12. Content
 
 - Use "Scouting America" for the national organization and "Troop 32" as the normal public identity. Use "Troop 32-B" / "Troop 32-G" only when the distinction matters.
 - **Never invent** Troop 32 history, traditions, achievements, policies, fees, schedules, leadership, or meeting details. Use `[TO BE PROVIDED]` or flag an open content decision.
@@ -94,16 +141,16 @@ Full rules: [`docs/PRIVACY.md`](docs/PRIVACY.md).
 
 Full guidance: [`docs/CONTENT-GUIDE.md`](docs/CONTENT-GUIDE.md).
 
-## 12. Teaching and communication
+## 13. Teaching and communication
 
 Explain significant technical decisions in plain language. Never conceal architectural, privacy, security, or maintenance decisions or tradeoffs.
 
 - **Phase 2:** explain at the depth the Webmaster wants. Some Webmasters will learn to code; others will rely on judgment, review, and content stewardship. Both are valid. Make the Webmaster more capable, not a keystroke approver.
 - **Phase 1:** keep explanations brief, but document decisions well enough that a future Scout Webmaster can understand and maintain the result.
 
-## 13. Execution report (required at the end of every EXECUTE phase)
+## 14. Execution report (required at the end of every EXECUTE phase)
 
-Report what you accomplished; files created, modified, moved, or deleted; important decisions; commands run; dependencies added or changed; test/build/lint results; validation performed; problems or warnings; material deviations from the plan; items requiring human review; current Git status; and a suggested commit message. Never conceal failures or silently work around privacy or security restrictions. Template: [`docs/WORKFLOW.md`](docs/WORKFLOW.md#execution-report-template).
+Report what you accomplished; files created, modified, moved, or deleted; important decisions; commands run; dependencies added or changed; external sources read or copied (and confirmation that none were modified); test/build/lint results; validation performed; problems or warnings; material deviations from the plan; items requiring human review; current Git status; and a suggested commit message. Never conceal failures or silently work around privacy or security restrictions. Template: [`docs/WORKFLOW.md`](docs/WORKFLOW.md#execution-report-template).
 
 ## Detailed documentation
 

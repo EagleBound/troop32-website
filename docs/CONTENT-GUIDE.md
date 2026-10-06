@@ -110,6 +110,7 @@ No final youth-photo policy exists yet (see [PRIVACY.md](PRIVACY.md#open-policy-
 - Remove embedded GPS/location metadata from images before public use.
 - Prefer images that show activities and the spirit of Scouting.
 - Every meaningful image needs alt text (see below).
+- Work only from **copies** of photos. Originals in the troop's Drive or other external sources are never edited, moved, or deleted ([AGENTS.md §7](../AGENTS.md#7-external-sources-are-read-only); steps in [DEVELOPMENT.md](DEVELOPMENT.md#add-an-approved-photo)).
 
 ## Accessibility
 
