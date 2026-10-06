@@ -1,0 +1,187 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import MeetingCard from '../components/MeetingCard.astro';
+import JoinCallout from '../components/JoinCallout.astro';
+import { site } from '../data/site';
+
+// Frequently asked questions. Answers stay general until troop leadership
+// confirms troop-specific details (see docs/PROJECT.md, open content items).
+const faqs = [
+  {
+    q: 'What is Scouting?',
+    a: [
+      'Scouting is a program where youth learn by doing: outdoor skills, leadership, citizenship, and service. Scouts work in small groups, set goals, and take on more responsibility as they grow.',
+      'The program is built on the Scout Oath and Scout Law, which describe the kind of person a Scout tries to be.',
+    ],
+  },
+  {
+    q: 'Who can join?',
+    a: [
+      `${site.name} is open to boys and girls. Scouting America sets the age and grade requirements for troop membership. Troop leaders can explain them and help you find the right fit for your child.`,
+    ],
+  },
+  {
+    q: 'What happens at a meeting?',
+    a: [
+      `${site.name} meets on ${site.meeting.day} at ${site.meeting.time} at ${site.meeting.place}. Troop meetings are where Scouts plan upcoming activities, practice skills, work on advancement, and spend time with their patrols.`,
+      'The easiest way to understand it is to visit and see for yourself.',
+    ],
+  },
+  {
+    q: 'What does it cost?',
+    a: [
+      'Scouting America charges an annual registration fee, and troops usually have some additional costs for activities and supplies. Troop leaders can explain current costs and what they cover.',
+    ],
+  },
+  {
+    q: 'What does my Scout need?',
+    a: [
+      'Scouts wear a uniform and use a Scout handbook, and outdoor activities call for some personal gear. You do not need everything on day one. Troop leaders can tell you what a new Scout needs first.',
+    ],
+  },
+  {
+    q: 'Do Scouts really lead the troop?',
+    a: [
+      'Yes. Scouting is designed to be Scout-led. Youth leaders plan and run much of the program, and trained adults coach, mentor, and keep activities safe. Scouts learn leadership by practicing it.',
+    ],
+  },
+  {
+    q: 'Can parents get involved?',
+    a: [
+      'Scouting depends on adult volunteers. Parents and guardians help in many ways, and adults who volunteer must register with Scouting America and complete youth protection training. Ask a troop leader about ways to help.',
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="New Families"
+  description={`New to Scouting? Answers for families about ${site.name}: what Scouting is, who can join, costs, gear, and safety.`}
+>
+  <PageHeader
+    eyebrow="New families"
+    title="New to Scouting? Start here."
+    intro="Whether your family has years of Scouting experience or none at all, here are answers to the questions families ask most."
+  />
+
+  <section class="section" aria-labelledby="faq-title">
+    <div class="container faq-layout">
+      <div>
+        <h2 id="faq-title">Common questions</h2>
+        <div class="faq">
+          {
+            faqs.map((item) => (
+              <details>
+                <summary>{item.q}</summary>
+                <div class="faq-answer">
+                  {item.a.map((paragraph) => (
+                    <p>{paragraph}</p>
+                  ))}
+                </div>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+      <aside aria-label="Visit a meeting">
+        <MeetingCard headingLevel={2} title="Visit a meeting" />
+      </aside>
+    </div>
+  </section>
+
+  <section id="safety" class="section section--surface" aria-labelledby="safety-title">
+    <div class="container reading">
+      <p class="eyebrow">For parents</p>
+      <h2 id="safety-title">How Scouting keeps youth safe</h2>
+      <p>
+        The safety of every Scout comes first. Scouting America has youth protection policies that apply to every
+        troop, and every adult who registers as a Scouting volunteer must complete youth protection training.
+      </p>
+      <p>
+        Those policies cover how adults supervise and interact with youth, so that activities are safe, supervised,
+        and appropriate. Troop leaders are glad to answer questions about how these policies work in {site.name}.
+      </p>
+      <p>
+        On this website, we also protect Scouts' privacy: we do not publish youth contact information or the details
+        of upcoming outings. Read our <a href="/privacy/">privacy notice</a>.
+      </p>
+    </div>
+  </section>
+
+  <JoinCallout title="Ready for the next step?" />
+</BaseLayout>
+
+<style>
+  .faq-layout {
+    display: grid;
+    gap: var(--space-7);
+  }
+
+  @media (min-width: 60rem) {
+    .faq-layout {
+      grid-template-columns: 1.6fr 1fr;
+      align-items: start;
+    }
+
+    .faq-layout aside {
+      position: sticky;
+      top: var(--space-5);
+    }
+  }
+
+  .faq {
+    border-top: 2px solid var(--color-border);
+  }
+
+  details {
+    border-bottom: 2px solid var(--color-border);
+  }
+
+  summary {
+    position: relative;
+    display: block;
+    padding: var(--space-4) var(--space-7) var(--space-4) 0;
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+    font-weight: 650;
+    color: var(--forest-900);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary::after {
+    content: '+';
+    position: absolute;
+    right: var(--space-2);
+    top: 50%;
+    transform: translateY(-50%);
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--forest-800);
+    color: var(--cream-50);
+    font-family: var(--font-body);
+    font-size: 1.3rem;
+    line-height: 1;
+  }
+
+  details[open] summary::after {
+    content: '\2212';
+  }
+
+  summary:hover {
+    color: var(--forest-700);
+  }
+
+  .faq-answer {
+    padding-bottom: var(--space-4);
+    max-width: var(--reading-width);
+  }
+</style>

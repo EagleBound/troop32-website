@@ -1,0 +1,100 @@
+---
+// Original, decorative outdoor illustrations used as placeholders until
+// approved troop photographs are available. They depict no people.
+// Decorative only: hidden from assistive technology.
+import type { SceneName } from '../data/photos';
+
+interface Props {
+  scene: SceneName;
+  class?: string;
+}
+
+const { scene, class: className } = Astro.props;
+---
+
+<svg
+  class:list={['scene', className]}
+  viewBox="0 0 400 300"
+  preserveAspectRatio="xMidYMid slice"
+  aria-hidden="true"
+  focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  {
+    scene === 'ridge' && (
+      <g>
+        <rect width="400" height="300" fill="#e9dfc4" />
+        <circle cx="300" cy="92" r="30" fill="#f1c98f" />
+        <path d="M0 170 L70 110 L120 150 L190 80 L260 140 L320 100 L400 150 V300 H0Z" fill="#9fae8e" />
+        <path d="M0 210 L60 160 L130 200 L200 140 L280 195 L340 160 L400 190 V300 H0Z" fill="#5f7d62" />
+        <path d="M0 250 L90 205 L170 240 L250 200 L330 245 L400 225 V300 H0Z" fill="#2f5d3f" />
+        <path d="M0 300 V275 Q100 255 200 270 T400 262 V300Z" fill="#1d3a2a" />
+      </g>
+    )
+  }
+  {
+    scene === 'forest' && (
+      <g>
+        <rect width="400" height="300" fill="#dfe4d2" />
+        <path d="M0 190 Q100 160 200 180 T400 170 V300 H0Z" fill="#9fae8e" />
+        {[20, 70, 125, 180, 240, 300, 355].map((x, i) => (
+          <path
+            d={`M${x} ${120 + (i % 3) * 18} l26 70 h-12 l20 50 h-68 l20 -50 h-12z`}
+            fill={i % 2 ? '#2f5d3f' : '#24482f'}
+          />
+        ))}
+        <path d="M0 260 Q120 240 220 255 T400 250 V300 H0Z" fill="#1d3a2a" />
+        <path d="M165 262 l18 -26 l18 26z" fill="#d2c39b" />
+        <path d="M183 236 v26" stroke="#5f5531" stroke-width="2" />
+      </g>
+    )
+  }
+  {
+    scene === 'lake' && (
+      <g>
+        <rect width="400" height="300" fill="#e6e0cc" />
+        <path d="M0 150 L80 95 L140 130 L210 70 L290 130 L350 100 L400 130 V170 H0Z" fill="#7d9478" />
+        <rect y="170" width="400" height="130" fill="#8fa9a1" />
+        <path d="M30 200 h90 M180 225 h120 M60 255 h70 M260 270 h90" stroke="#e6e0cc" stroke-width="3" stroke-linecap="round" opacity="0.6" />
+        <path d="M150 214 q40 14 80 0 l-10 10 q-30 8 -60 0z" fill="#a8461f" />
+        <path d="M0 165 Q200 150 400 168 V176 Q200 160 0 174Z" fill="#2f5d3f" />
+      </g>
+    )
+  }
+  {
+    scene === 'campfire' && (
+      <g>
+        <rect width="400" height="300" fill="#1d3a2a" />
+        {[[40, 40], [110, 70], [200, 30], [290, 60], [350, 35], [160, 90], [250, 100]].map(([x, y]) => (
+          <circle cx={x} cy={y} r="1.6" fill="#f5efe0" />
+        ))}
+        <path d="M0 210 L60 170 L120 200 L190 150 L260 195 L330 160 L400 190 V300 H0Z" fill="#14261c" />
+        <ellipse cx="200" cy="262" rx="120" ry="22" fill="#24482f" />
+        <path d="M150 262 l100 -18 M150 244 l100 18" stroke="#5f5531" stroke-width="9" stroke-linecap="round" />
+        <path d="M200 252 c-26 -20 -10 -48 0 -68 c4 18 22 24 18 44 c-2 14 -10 22 -18 24z" fill="#a8461f" />
+        <path d="M200 252 c-12 -10 -6 -26 0 -36 c4 10 12 14 9 24 c-2 8 -5 11 -9 12z" fill="#f1c98f" />
+      </g>
+    )
+  }
+  {
+    scene === 'trail' && (
+      <g>
+        <rect width="400" height="300" fill="#efe7d2" />
+        <path d="M0 140 L90 90 L170 125 L250 75 L330 115 L400 95 V300 H0Z" fill="#b9c4a4" />
+        <path d="M0 190 Q150 160 400 180 V300 H0Z" fill="#7d9478" />
+        <path d="M150 300 C190 250 230 230 210 180 C200 160 230 150 260 145" stroke="#d2c39b" stroke-width="22" fill="none" stroke-linecap="round" />
+        <rect x="300" y="190" width="10" height="70" fill="#5f5531" />
+        <rect x="286" y="196" width="46" height="18" rx="3" fill="#2f5d3f" />
+        <path d="M80 300 l20 -60 l20 60z M40 300 l16 -44 l16 44z" fill="#24482f" />
+      </g>
+    )
+  }
+</svg>
+
+<style>
+  .scene {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+</style>

@@ -1,0 +1,104 @@
+---
+// Site footer: meeting information, key links, and Scouting America affiliation.
+import { site, meetingAddress, directionsUrl } from '../data/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <section aria-labelledby="footer-meeting">
+      <h2 id="footer-meeting" class="footer-heading">Visit a meeting</h2>
+      <p>
+        <strong>{site.meeting.day}, {site.meeting.time}</strong><br />
+        {site.meeting.place}<br />
+        {meetingAddress}
+      </p>
+      <p><a href={directionsUrl} rel="noopener noreferrer">Get directions to {site.meeting.place}</a></p>
+    </section>
+
+    <nav aria-labelledby="footer-explore">
+      <h2 id="footer-explore" class="footer-heading">Explore</h2>
+      <ul>
+        <li><a href="/about/">About Troop 32</a></li>
+        <li><a href="/what-we-do/">What We Do</a></li>
+        <li><a href="/new-families/">New Families</a></li>
+        <li><a href="/join/">Join</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+    </nav>
+
+    <nav aria-labelledby="footer-site">
+      <h2 id="footer-site" class="footer-heading">This website</h2>
+      <ul>
+        <li><a href="/privacy/">Privacy</a></li>
+        <li><a href="/accessibility/">Accessibility</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="container footer-base">
+    <p>
+      {site.name} ({site.units.boys} and {site.units.girls}) is part of {site.organization}. &copy; {year}
+      {site.name}, {site.locality}.
+    </p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: var(--forest-950);
+    color: var(--cream-200);
+    padding-top: var(--space-7);
+    border-top: 4px solid var(--khaki-400);
+  }
+
+  .footer-grid {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 48rem) {
+    .footer-grid {
+      grid-template-columns: 1.4fr 1fr 1fr;
+    }
+  }
+
+  .footer-heading {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--khaki-300);
+    margin-bottom: var(--space-3);
+  }
+
+  .site-footer a {
+    color: var(--cream-50);
+  }
+
+  .site-footer a:focus-visible {
+    outline-color: var(--khaki-300);
+  }
+
+  .site-footer ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .site-footer li + li {
+    margin-top: var(--space-2);
+  }
+
+  .footer-base {
+    margin-top: var(--space-6);
+    padding-block: var(--space-5);
+    border-top: 1px solid rgb(245 239 224 / 0.2);
+    font-size: var(--text-sm);
+  }
+
+  .footer-base p {
+    margin: 0;
+  }
+</style>

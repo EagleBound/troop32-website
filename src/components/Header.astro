@@ -1,0 +1,242 @@
+---
+// Site header: text identity, flat navigation, and a prominent Join link.
+// On small screens the navigation collapses behind a menu button.
+// Without JavaScript the navigation simply stays visible.
+import { site, navigation } from '../data/site';
+
+const current = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="identity" href="/">
+      <span class="identity-name">{site.name}</span>
+      <span class="identity-place">{site.locality}</span>
+    </a>
+
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" hidden>
+      <span class="menu-icon" aria-hidden="true"></span>
+      Menu
+    </button>
+
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <ul>
+        {
+          navigation.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class:list={['nav-link', { 'nav-link--cta': 'cta' in item && item.cta }]}
+                aria-current={current.startsWith(item.href) ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  // Progressive enhancement: only collapse the menu when JavaScript runs.
+  const header = document.querySelector<HTMLElement>('.site-header');
+  const toggle = header?.querySelector<HTMLButtonElement>('.menu-toggle');
+  const nav = header?.querySelector<HTMLElement>('#site-nav');
+
+  if (header && toggle && nav) {
+    header.classList.add('has-js');
+    toggle.hidden = false;
+
+    const setOpen = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      header.classList.toggle('is-open', open);
+    };
+
+    toggle.addEventListener('click', () => {
+      setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+    });
+
+    // Escape closes the menu and returns focus to the button.
+    header.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && header.classList.contains('is-open')) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+  }
+</script>
+
+<style>
+  .site-header {
+    background: var(--forest-900);
+    color: var(--cream-50);
+    border-bottom: 4px solid var(--khaki-400);
+  }
+
+  .header-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3) var(--space-5);
+    padding-block: var(--space-4);
+  }
+
+  .identity {
+    display: flex;
+    flex-direction: column;
+    color: var(--cream-50);
+    text-decoration: none;
+    line-height: 1.1;
+  }
+
+  .identity:hover {
+    color: var(--cream-50);
+  }
+
+  .identity-name {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .identity-place {
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--khaki-300);
+    margin-top: 0.2rem;
+  }
+
+  .site-nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2) var(--space-4);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding-inline: var(--space-2);
+    color: var(--cream-50);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+  }
+
+  .nav-link:hover {
+    color: var(--cream-50);
+    border-bottom-color: var(--khaki-300);
+  }
+
+  .nav-link[aria-current='page'] {
+    border-bottom-color: var(--khaki-300);
+  }
+
+  .nav-link--cta {
+    padding-inline: 1.25rem;
+    border-radius: 999px;
+    border-bottom: 0;
+    background: var(--ember-600);
+    color: #fff;
+  }
+
+  .nav-link--cta:hover,
+  .nav-link--cta[aria-current='page'] {
+    background: var(--ember-700);
+    color: #fff;
+  }
+
+  .nav-link:focus-visible {
+    outline-color: var(--khaki-300);
+  }
+
+  .menu-toggle {
+    display: none;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: 2.75rem;
+    padding: 0 var(--space-4);
+    background: transparent;
+    color: var(--cream-50);
+    border: 2px solid var(--cream-200);
+    border-radius: 999px;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .menu-toggle:focus-visible {
+    outline-color: var(--khaki-300);
+  }
+
+  .menu-icon,
+  .menu-icon::before,
+  .menu-icon::after {
+    display: block;
+    width: 1.1rem;
+    height: 2px;
+    background: currentColor;
+    border-radius: 2px;
+  }
+
+  .menu-icon {
+    position: relative;
+  }
+
+  .menu-icon::before,
+  .menu-icon::after {
+    content: '';
+    position: absolute;
+    left: 0;
+  }
+
+  .menu-icon::before {
+    top: -6px;
+  }
+
+  .menu-icon::after {
+    top: 6px;
+  }
+
+  /* Small screens: collapse the menu when JavaScript is available. */
+  @media (max-width: 47.99rem) {
+    .has-js .menu-toggle:not([hidden]) {
+      display: inline-flex;
+    }
+
+    .has-js .site-nav {
+      display: none;
+      flex-basis: 100%;
+    }
+
+    .has-js.is-open .site-nav {
+      display: block;
+    }
+
+    .has-js .site-nav ul {
+      flex-direction: column;
+      align-items: stretch;
+      padding-block: var(--space-2) var(--space-3);
+    }
+
+    .has-js .nav-link {
+      width: 100%;
+      font-size: 1.15rem;
+    }
+
+    .has-js .nav-link--cta {
+      justify-content: center;
+      margin-top: var(--space-2);
+    }
+  }
+</style>

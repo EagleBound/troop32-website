@@ -1,0 +1,354 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MeetingCard from '../components/MeetingCard.astro';
+import PhotoFrame from '../components/PhotoFrame.astro';
+import Scene from '../components/Scene.astro';
+import JoinCallout from '../components/JoinCallout.astro';
+import { site } from '../data/site';
+import { photos } from '../data/photos';
+import { scoutLaw } from '../data/principles';
+
+const pillars = [
+  {
+    title: 'Outdoor Adventure',
+    text: 'Camping, hiking, and time outdoors are at the heart of Scouting. Scouts learn to plan, pack, cook, and care for the places they explore.',
+    slot: photos.outdoor,
+    href: '/what-we-do/#outdoors',
+  },
+  {
+    title: 'Scout-Led Leadership',
+    text: 'Scouts plan and lead their own troop, with adults coaching from the side. Responsibility grows as each Scout does.',
+    slot: photos.leadership,
+    href: '/what-we-do/#leadership',
+  },
+  {
+    title: 'Service',
+    text: '“Do a Good Turn Daily” is more than a slogan. Scouts learn to notice what their community needs and to help.',
+    slot: photos.service,
+    href: '/what-we-do/#service',
+  },
+];
+---
+
+<BaseLayout
+  description={`${site.name} is a Scouting America troop in ${site.locality}, open to boys and girls. Visit a meeting ${site.meeting.day} at ${site.meeting.time} at ${site.meeting.place}.`}
+>
+  <!-- 2. Hero -->
+  <section class="hero on-dark" aria-labelledby="hero-title">
+    <div class="container hero-inner">
+      <p class="eyebrow">{site.name} · {site.locality}</p>
+      <h1 id="hero-title">Adventure, leadership, and friendship for youth in Santa Rosa</h1>
+      <p class="hero-lead">
+        {site.name} is a Scouting America troop for boys and girls. Scouts camp, hike, serve their community, and
+        learn to lead, one adventure at a time.
+      </p>
+      <div class="button-row">
+        <a class="button button--primary" href="/join/">Visit a {site.meeting.dayName} meeting</a>
+        <a class="button button--secondary" href="/what-we-do/">See what Scouts do</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <Scene scene="ridge" />
+    </div>
+  </section>
+
+  <!-- 3. Visit us -->
+  <section class="section section--tight visit" aria-labelledby="visit-title">
+    <div class="container grid-2">
+      <div>
+        <p class="eyebrow">Visit us</p>
+        <h2 id="visit-title">The easiest first step: come see a meeting</h2>
+        <p class="lead">
+          {site.name} meets on {site.meeting.day}. Bring your questions and see what a Scout meeting is really like.
+        </p>
+        <p><a href="/join/">How joining works</a></p>
+      </div>
+      <MeetingCard headingLevel={3} title="Our weekly meeting" />
+    </div>
+  </section>
+
+  <!-- 4. Program pillars -->
+  <section class="section section--surface texture-contours" aria-labelledby="pillars-title">
+    <div class="container">
+      <p class="eyebrow">What Scouts do</p>
+      <h2 id="pillars-title">Three things Scouting does well</h2>
+      <ul class="pillars" role="list">
+        {
+          pillars.map((pillar) => (
+            <li class="pillar">
+              <PhotoFrame slot={pillar.slot} ratio="landscape" sizes="(min-width: 60rem) 33vw, 100vw" />
+              <h3>{pillar.title}</h3>
+              <p>{pillar.text}</p>
+              <a href={pillar.href}>
+                More about {pillar.title.toLowerCase()}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5. How Scout-led Scouting works -->
+  <section class="section" aria-labelledby="scout-led-title">
+    <div class="container grid-2">
+      <div>
+        <p class="eyebrow">For families new to Scouting</p>
+        <h2 id="scout-led-title">How a Scout-led troop works</h2>
+        <p>
+          In Scouting, a troop is run by its Scouts. Scouts work in small groups called <strong>patrols</strong>,
+          and each patrol chooses its own leader. Older Scouts help plan meetings and activities and teach skills to
+          newer Scouts.
+        </p>
+        <p>
+          Trained adult volunteers coach, keep activities safe, and step back so Scouts can learn by doing, including
+          learning from the occasional mistake.
+        </p>
+        <p><a href="/new-families/">Answers to common questions from families</a></p>
+      </div>
+      <ol class="steps" role="list">
+        <li><span class="step-num" aria-hidden="true">1</span><div><strong>Join a patrol.</strong> New Scouts find friends and a place to belong.</div></li>
+        <li><span class="step-num" aria-hidden="true">2</span><div><strong>Learn skills.</strong> Outdoor, first aid, and life skills, learned hands-on.</div></li>
+        <li><span class="step-num" aria-hidden="true">3</span><div><strong>Take on leadership.</strong> Scouts grow into roles that help run the troop.</div></li>
+        <li><span class="step-num" aria-hidden="true">4</span><div><strong>Teach others.</strong> Experienced Scouts pass what they know to the next group.</div></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 6. Photography area (3–5 approved images later) -->
+  <section class="section section--tight section--surface" aria-labelledby="gallery-title">
+    <div class="container">
+      <h2 id="gallery-title" class="visually-hidden">Scouting in action</h2>
+      <ul class="gallery" role="list">
+        {
+          photos.gallery.map((slot) => (
+            <li>
+              <PhotoFrame slot={slot} ratio="square" showCaption sizes="(min-width: 52rem) 25vw, 50vw" />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- 7. Scout Law -->
+  <section class="section section--forest law" aria-labelledby="law-title">
+    <div class="container">
+      <p class="eyebrow">What we live by</p>
+      <h2 id="law-title">The Scout Law</h2>
+      <p class="lead law-intro">A Scout is:</p>
+      <ul class="law-list" role="list">
+        {scoutLaw.map((point) => <li>{point}</li>)}
+      </ul>
+      <p class="law-more">
+        <a href="/about/#principles">The Scout Oath, Scout Motto, Scout Slogan, and Outdoor Code</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- 8. Parent trust -->
+  <section class="section" aria-labelledby="trust-title">
+    <div class="container grid-2">
+      <div>
+        <p class="eyebrow">For parents</p>
+        <h2 id="trust-title">Safety comes first</h2>
+        <p>
+          Scouting America has youth protection policies for every troop, and adult volunteers who work with Scouts
+          must complete youth protection training. Safety, supervision, and respect are part of everything a troop
+          does.
+        </p>
+        <p><a href="/new-families/#safety">How Scouting keeps youth safe</a></p>
+      </div>
+
+      <!-- 9. Troop 32-B and Troop 32-G -->
+      <section class="one-troop" aria-labelledby="one-troop-title">
+        <h2 id="one-troop-title" class="one-troop-title">One troop, open to boys and girls</h2>
+        <p>
+          {site.name} is made up of two Scouting America troops: <strong>{site.units.boys}</strong> for boys and
+          <strong>{site.units.girls}</strong> for girls. They meet together and go on outings together, so families
+          simply know us as <strong>{site.name}</strong>.
+        </p>
+        <p><a href="/about/#structure">More about how {site.name} is organized</a></p>
+      </section>
+    </div>
+  </section>
+
+  <!-- 10. Final recruiting call to action -->
+  <JoinCallout />
+</BaseLayout>
+
+<style>
+  /* Hero */
+  .hero {
+    position: relative;
+    background: var(--forest-900);
+    color: var(--cream-100);
+    overflow: hidden;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    padding-top: var(--space-8);
+    padding-bottom: var(--space-6);
+  }
+
+  .hero h1 {
+    color: var(--cream-50);
+    max-width: 18ch;
+    font-size: clamp(2.4rem, 1.5rem + 4vw, 4.2rem);
+  }
+
+  .hero .eyebrow {
+    color: var(--khaki-300);
+  }
+
+  .hero-lead {
+    max-width: 38rem;
+    font-size: var(--text-lg);
+    color: var(--cream-200);
+  }
+
+  .hero-art {
+    height: clamp(9rem, 22vw, 16rem);
+    margin-top: calc(-1 * var(--space-4));
+  }
+
+  .hero-art :global(.scene) {
+    height: 100%;
+  }
+
+  /* Visit */
+  .visit {
+    padding-top: var(--space-7);
+  }
+
+  /* Pillars */
+  .pillars {
+    display: grid;
+    gap: var(--space-6);
+    list-style: none;
+    padding: 0;
+    margin: var(--space-6) 0 0;
+  }
+
+  @media (min-width: 60rem) {
+    .pillars {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .pillar h3 {
+    margin-top: var(--space-5);
+    margin-bottom: var(--space-2);
+  }
+
+  .pillar a {
+    font-weight: 700;
+  }
+
+  /* Steps */
+  .steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .steps li {
+    display: flex;
+    gap: var(--space-4);
+    align-items: flex-start;
+    padding: var(--space-4) var(--space-5);
+    background: var(--color-surface);
+    border-left: 5px solid var(--forest-700);
+    border-radius: var(--radius);
+  }
+
+  .step-num {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+    background: var(--forest-800);
+    color: var(--cream-50);
+    font-family: var(--font-heading);
+    font-weight: 700;
+  }
+
+  /* Gallery */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  @media (min-width: 52rem) {
+    .gallery {
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-5);
+    }
+  }
+
+  /* Scout Law */
+  .law-intro {
+    margin-bottom: var(--space-3);
+  }
+
+  .law-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-2) var(--space-5);
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-5);
+    font-family: var(--font-heading);
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--cream-50);
+  }
+
+  @media (min-width: 40rem) {
+    .law-list {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (min-width: 60rem) {
+    .law-list {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .law-list li {
+    padding-block: var(--space-2);
+    border-bottom: 1px solid rgb(210 195 155 / 0.35);
+  }
+
+  .law-more {
+    margin: 0;
+    font-weight: 600;
+  }
+
+  /* One troop */
+  .one-troop {
+    padding: var(--space-6);
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    border-top: 6px solid var(--khaki-400);
+  }
+
+  .one-troop-title {
+    font-size: var(--text-xl);
+  }
+
+  .one-troop p:last-child {
+    margin-bottom: 0;
+  }
+</style>

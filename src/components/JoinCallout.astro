@@ -1,0 +1,54 @@
+---
+// Closing recruiting call to action, reused at the bottom of pages.
+import { site } from '../data/site';
+
+interface Props {
+  title?: string;
+  text?: string;
+}
+
+const {
+  title = 'See it for yourself',
+  text = `The best way to understand Scouting is to see it in action. Come to a ${site.name} meeting on ${site.meeting.day} at ${site.meeting.time}.`,
+} = Astro.props;
+---
+
+<section class="join-callout section--forest texture-contours" aria-labelledby="join-callout-title">
+  <div class="container join-callout-inner">
+    <div>
+      <h2 id="join-callout-title">{title}</h2>
+      <p class="lead">{text}</p>
+    </div>
+    <div class="button-row">
+      <a class="button button--primary" href="/join/">How to join</a>
+      <a class="button button--secondary" href="/new-families/">Questions from families</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .join-callout {
+    padding-block: var(--space-8);
+  }
+
+  .join-callout-inner {
+    display: grid;
+    gap: var(--space-5);
+    align-items: center;
+  }
+
+  @media (min-width: 52rem) {
+    .join-callout-inner {
+      grid-template-columns: 1.4fr 1fr;
+    }
+
+    .join-callout .button-row {
+      justify-content: flex-end;
+      margin-top: 0;
+    }
+  }
+
+  .join-callout p {
+    margin-bottom: 0;
+  }
+</style>

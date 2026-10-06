@@ -4,6 +4,24 @@
 >
 > This is an initial information architecture for discussion. Nothing here is decided until the directing human for the current phase (and, where required, the designated adult leader and troop leadership) approves it. See [PROJECT.md → Current phase](PROJECT.md#current-phase). Page names, groupings, and contents will change.
 
+## Implemented v1.0 structure (approved in WP1)
+
+The long-term map below is still proposed. For v1.0, several entries were **combined** into fewer pages:
+
+| URL | Page | Combines these entries from the map below |
+| --- | --- | --- |
+| `/` | Home | Home, plus short sections on the Scout Law, safety, and Troop 32-B / 32-G |
+| `/about/` | About | About Troop 32, Troop 32-B and Troop 32-G, Troop leadership, Scout Oath / Scout Law / Scouting values |
+| `/what-we-do/` | What We Do | What Scouts Do, Outdoor activities, Service, Advancement, The Eagle Scout journey |
+| `/new-families/` | New Families | What Is Scouting?, Information for new families, safety for parents |
+| `/join/` | Join | Join Troop 32, Regular meetings |
+| `/contact/` | Contact | Contact |
+| `/privacy/` | Privacy | Privacy |
+| `/accessibility/` | Accessibility | Accessibility |
+| (any unknown URL) | 404 | Page-not-found help |
+
+**Header navigation:** About · What We Do · New Families · **Join** (prominent). Contact, Privacy, and Accessibility are in the footer. Photos remain on hold, and the member area remains future work.
+
 ## Public site
 
 The **v1.0 launch** column is a *proposed* scope for the recruiting-ready Website v1.0 (see [PROJECT.md → Website v1.0 objectives](PROJECT.md#website-v10-objectives-temporary)). "Yes" means the page is proposed for launch, provided its content is confirmed. "Later" means future work. "On hold" means it is blocked by an open policy question.

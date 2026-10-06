@@ -172,16 +172,44 @@ Launching v1.0 and any cutover from the old site to the new site are **separate,
 
 - **Phase 1: Initial development (Website v1.0).**
 - Governance and project documentation established (this document set).
-- **No website code yet.** No framework, hosting, or build tooling has been chosen.
-- The existing `.gitignore` is a generic Node.js template. It does **not** mean a framework has been selected.
-- Design references recorded for a future design review (see [DESIGN-REFERENCES.md](DESIGN-REFERENCES.md)).
+- Design references reviewed during Website v1.0 planning (see [DESIGN-REFERENCES.md](DESIGN-REFERENCES.md)).
+- **WP1 local foundation built:** an Astro static site with all v1.0 pages (Home, About, What We Do, New Families, Join, Contact, Privacy, Accessibility, 404), the design system, central site data, and original placeholder illustrations instead of photos. See [DEVELOPMENT.md](DEVELOPMENT.md).
+- **Not yet deployed.** No hosting account, preview URL, or DNS change exists. The site is marked `noindex` until launch.
+- **Public contact channel pending.** The Contact page uses the Monday meeting as the contact pathway until leadership approves a role-based troop address (`contact.email` in `src/data/site.ts`).
+- **Astro telemetry:** the Astro build tool sends anonymous usage data about the tool (not about website visitors) unless disabled. Turning it off is a pending decision (see the WP1 execution report).
+
+### Website v1.0 technical architecture
+
+| Area | Choice |
+| --- | --- |
+| Site type | Static site: plain HTML/CSS files, no database, no server code |
+| Framework | [Astro](https://astro.build) (static output) |
+| Styling | Plain modern CSS with design tokens; no Tailwind, no UI framework |
+| JavaScript | Only the accessible mobile-menu toggle; FAQ uses native HTML disclosure (`<details>`) |
+| Fonts | Source Serif 4 + Source Sans 3, self-hosted, SIL Open Font License |
+| Images | Astro image optimization (approved photos only, later); original SVG placeholders now |
+| Repeated facts | `src/data/site.ts` |
+| Security | Static-host headers in `public/_headers` (strict Content-Security-Policy, no inline scripts or styles) |
+| Hosting | Not yet connected. Recommended: Cloudflare Pages from GitHub, troop-owned accounts (a separate work package) |
+
+Future member functionality is a separate project and is not part of this architecture.
+
+### Content still needing confirmation before launch
+
+The v1.0 pages avoid unconfirmed facts by using general Scouting descriptions. These items should be confirmed or supplied:
+
+- That prospective families are welcome to visit a regular Monday meeting (the site invites them to).
+- The current Scouting America rank list and Eagle Scout requirements as summarized on What We Do, and the current program terminology (external verification).
+- Official Scouting America links (youth protection, applications) to add to New Families and Join.
+- Age and grade eligibility, costs, and uniform and gear guidance (currently general: "troop leaders can explain").
+- The public role-based contact address.
 
 ## Major unresolved architectural decisions
 
 Each of these needs its own PLAN and approval before anything is built:
 
 1. **Launch target and hosting for v1.0.** Whether v1.0 launches at a new address or replaces troop32.org, where it is hosted, and who holds the accounts. This is the most deadline-sensitive decision.
-2. **Site technology.** Static site generator, framework, or other approach.
+2. ~~**Site technology.**~~ Decided 2026-10-06: Astro static site (see the decision log).
 3. **Future member area:** authentication provider, data storage, account management, authorization model, and hosting of private information. This also needs a privacy review and designated adult leader approval.
 4. **Contact method.** How the public reaches the troop (an official troop channel, not personal addresses).
 5. **Content management.** How Scout Webmasters and non-technical leaders could supply updates.
@@ -213,5 +241,9 @@ These came from the existing public site and may be stale. They must be **confir
 | 2026-10-06 | Adult project lead and designated adult leader are distinct roles that one person may hold. | Adult project lead, via approved EXECUTE work package |
 | 2026-10-06 | Website v1.0 priority: a recruiting-ready public site for the upcoming Open House; member functionality deferred. | Adult project lead, via approved EXECUTE work package |
 | 2026-10-06 | Recorded three neighboring troop websites as design references, not templates ([DESIGN-REFERENCES.md](DESIGN-REFERENCES.md)). | Adult project lead, via approved EXECUTE work package |
+| 2026-10-06 | Website v1.0 architecture: Astro static site, plain CSS, TypeScript where Astro uses it, minimal JavaScript, self-hosted open-license fonts. No Tailwind or UI framework. | Adult project lead, via approved EXECUTE work package (WP1) |
+| 2026-10-06 | Design direction "trail-worn and trustworthy": forest / cream / charcoal / khaki with one warm accent; text identity "Troop 32, Santa Rosa, California"; no Scouting America marks or assumed troop emblem. | Adult project lead, via approved EXECUTE work package (WP1) |
+| 2026-10-06 | v1.0 page set and navigation: Home, About, What We Do, New Families, Join (prominent), plus Contact, Privacy, Accessibility, 404 ([SITE-MAP.md](SITE-MAP.md)). | Adult project lead, via approved EXECUTE work package (WP1) |
+| 2026-10-06 | WP1 local foundation built; not deployed. | Adult project lead, via approved EXECUTE work package (WP1) |
 
 Add new rows as decisions are made. Record who approved each decision by role.

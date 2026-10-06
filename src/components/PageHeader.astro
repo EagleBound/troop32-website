@@ -1,0 +1,59 @@
+---
+// Header band for interior pages: title, introduction, and a landscape edge.
+interface Props {
+  eyebrow?: string;
+  title: string;
+  intro?: string;
+}
+
+const { eyebrow, title, intro } = Astro.props;
+---
+
+<div class="page-header on-dark">
+  <div class="container page-header-inner">
+    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+    <h1>{title}</h1>
+    {intro && <p class="page-intro">{intro}</p>}
+    <slot />
+  </div>
+  <svg class="page-header-edge" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path d="M0 60 V38 L120 18 L230 34 L360 8 L480 30 L610 14 L740 36 L880 10 L1010 32 L1120 16 L1200 28 V60Z" fill="#fbf8f0" />
+  </svg>
+</div>
+
+<style>
+  .page-header {
+    position: relative;
+    background: var(--forest-800);
+    color: var(--cream-100);
+  }
+
+  .page-header-inner {
+    padding-top: var(--space-8);
+    padding-bottom: calc(var(--space-8) + 2rem);
+  }
+
+  .page-header h1 {
+    color: var(--cream-50);
+    max-width: 20ch;
+  }
+
+  .page-header .eyebrow {
+    color: var(--khaki-300);
+  }
+
+  .page-intro {
+    max-width: var(--reading-width);
+    font-size: var(--text-lg);
+    color: var(--cream-200);
+    margin-bottom: 0;
+  }
+
+  .page-header-edge {
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 2.5rem;
+  }
+</style>

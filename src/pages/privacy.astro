@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout title="Privacy" description={`How the ${site.name} website handles privacy and protects Scouts.`}>
+  <PageHeader
+    eyebrow="This website"
+    title="Privacy"
+    intro={`${site.name} is a youth organization. On this website, protecting Scouts' privacy comes before convenience.`}
+  />
+
+  <section class="section" aria-labelledby="collect-title">
+    <div class="container reading">
+      <h2 id="collect-title">What this website collects</h2>
+      <ul>
+        <li>This website has no forms and does not ask you for personal information.</li>
+        <li>It does not use advertising, tracking, or analytics tools, and it does not set cookies.</li>
+        <li>
+          Like any website, the service that hosts it may keep standard technical logs needed to deliver and protect
+          the site.
+        </li>
+      </ul>
+
+      <h2 id="publish-title">What we do not publish</h2>
+      <p>To help keep Scouts safe, this website does not publish:</p>
+      <ul>
+        <li>contact information for youth members;</li>
+        <li>member rosters or private contact details;</li>
+        <li>details of upcoming outings, campouts, travel, or other youth activities;</li>
+        <li>medical, emergency, or other private records.</li>
+      </ul>
+      <p>
+        The only schedule information on this website is our regular meeting: {site.meeting.day} at
+        {site.meeting.time} at {site.meeting.place}.
+      </p>
+
+      <h2 id="links-title">Links to other websites</h2>
+      <p>
+        Some links, such as directions to our meeting place, lead to other websites. Those websites have their own
+        privacy practices.
+      </p>
+
+      <h2 id="questions-title">Questions</h2>
+      <p>
+        If you have a question or concern about information on this website, please speak with a troop leader at a
+        <a href="/contact/">{site.name} meeting</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

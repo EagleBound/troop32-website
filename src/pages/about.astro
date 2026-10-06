@@ -1,0 +1,167 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import MeetingCard from '../components/MeetingCard.astro';
+import JoinCallout from '../components/JoinCallout.astro';
+import { site } from '../data/site';
+import { scoutOath, scoutLaw, scoutMotto, scoutSlogan, outdoorCode } from '../data/principles';
+---
+
+<BaseLayout
+  title="About"
+  description={`Who ${site.name} is: a Scouting America troop in ${site.locality} for boys and girls, organized as ${site.units.boys} and ${site.units.girls}.`}
+>
+  <PageHeader
+    eyebrow="About us"
+    title={`About ${site.name}`}
+    intro={`${site.name} is a Scouting America troop in ${site.locality}. Scouts here learn outdoor skills, serve their community, and grow into leaders, guided by the Scout Oath and Scout Law.`}
+  />
+
+  <section id="structure" class="section" aria-labelledby="structure-title">
+    <div class="container grid-2">
+      <div class="reading">
+        <h2 id="structure-title">One troop, two Scouting America troops</h2>
+        <p>
+          Organizationally, {site.name} is two Scouting America troops: <strong>{site.units.boys}</strong> for boys
+          and <strong>{site.units.girls}</strong> for girls.
+        </p>
+        <p>
+          The two troops normally meet together and go on outings together. That is why families, and this website,
+          simply call us <strong>{site.name}</strong>. You will see the {site.units.boys} and {site.units.girls}
+          names mainly where the difference matters, such as registration, records, and some awards and leadership
+          positions.
+        </p>
+      </div>
+      <MeetingCard headingLevel={3} title="Where to find us" />
+    </div>
+  </section>
+
+  <section id="leadership" class="section section--surface" aria-labelledby="leadership-title">
+    <div class="container reading">
+      <h2 id="leadership-title">Leadership</h2>
+      <p>
+        {site.name} is led by its Scouts, with the support of trained adult volunteers. Our Scoutmaster is
+        <strong>{site.scoutmaster}</strong>.
+      </p>
+      <p>
+        In Scouting, the Scoutmaster and other adult leaders coach and mentor the Scouts' own leaders, help keep
+        activities safe, and make sure every Scout has the chance to learn and grow.
+      </p>
+    </div>
+  </section>
+
+  <section id="principles" class="section" aria-labelledby="principles-title">
+    <div class="container">
+      <div class="reading">
+        <p class="eyebrow">What we live by</p>
+        <h2 id="principles-title">Scouting's principles</h2>
+        <p class="lead">
+          These principles guide every Scout and every Scouting activity. Scouts learn them, and work to live by them
+          every day.
+        </p>
+      </div>
+
+      <div class="principles">
+        <section class="principle principle--wide" aria-labelledby="oath-title">
+          <h3 id="oath-title">Scout Oath</h3>
+          <p class="verse">{scoutOath.map((line, i) => <>{line}{i < scoutOath.length - 1 && <br />}</>)}</p>
+        </section>
+
+        <section class="principle principle--wide" aria-labelledby="law-title">
+          <h3 id="law-title">Scout Law</h3>
+          <p>A Scout is:</p>
+          <ul class="law-points" role="list">
+            {scoutLaw.map((point) => <li>{point}</li>)}
+          </ul>
+        </section>
+
+        <section class="principle" aria-labelledby="motto-title">
+          <h3 id="motto-title">Scout Motto</h3>
+          <p class="saying">{scoutMotto}</p>
+        </section>
+
+        <section class="principle" aria-labelledby="slogan-title">
+          <h3 id="slogan-title">Scout Slogan</h3>
+          <p class="saying">{scoutSlogan}</p>
+        </section>
+
+        <section class="principle principle--wide" aria-labelledby="code-title">
+          <h3 id="code-title">Outdoor Code</h3>
+          <p class="verse">{outdoorCode.map((line, i) => <>{line}{i < outdoorCode.length - 1 && <br />}</>)}</p>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <JoinCallout />
+</BaseLayout>
+
+<style>
+  .principles {
+    display: grid;
+    gap: var(--space-5);
+    margin-top: var(--space-6);
+  }
+
+  @media (min-width: 48rem) {
+    .principles {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .principle--wide {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .principle {
+    padding: var(--space-6);
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    border-left: 6px solid var(--forest-700);
+  }
+
+  .principle h3 {
+    margin-bottom: var(--space-3);
+  }
+
+  .principle p:last-child,
+  .principle ul:last-child {
+    margin-bottom: 0;
+  }
+
+  .verse {
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+    line-height: 1.7;
+  }
+
+  .saying {
+    font-family: var(--font-heading);
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--forest-800);
+  }
+
+  .law-points {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-2) var(--space-5);
+    list-style: none;
+    padding: 0;
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+    font-weight: 600;
+  }
+
+  @media (min-width: 40rem) {
+    .law-points {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (min-width: 60rem) {
+    .law-points {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,95 @@
+---
+// The regular weekly meeting, from central site data.
+// Only the REGULAR meeting is public; never add outing or event logistics here.
+import { site, meetingAddress, directionsUrl } from '../data/site';
+
+interface Props {
+  /** Heading level used for the card title, to keep page outlines logical. */
+  headingLevel?: 2 | 3;
+  title?: string;
+}
+
+const { headingLevel = 2, title = `Come to a ${site.meeting.dayName} meeting` } = Astro.props;
+const Heading = `h${headingLevel}` as 'h2' | 'h3';
+---
+
+<section class="meeting-card" aria-label="Regular meeting time and place">
+  <Heading class="meeting-title">{title}</Heading>
+  <dl class="meeting-details">
+    <div>
+      <dt>When</dt>
+      <dd>{site.meeting.day} at {site.meeting.time}</dd>
+    </div>
+    <div>
+      <dt>Where</dt>
+      <dd>
+        {site.meeting.place}<br />
+        {meetingAddress}
+      </dd>
+    </div>
+  </dl>
+  <a class="meeting-directions" href={directionsUrl} rel="noopener noreferrer">
+    Get directions to {site.meeting.place}
+  </a>
+</section>
+
+<style>
+  .meeting-card {
+    position: relative;
+    padding: var(--space-6);
+    background: var(--cream-50);
+    color: var(--color-text);
+    border: 2px solid var(--forest-700);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+  }
+
+  .meeting-card::before {
+    /* Trail-marker accent. */
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: var(--space-6);
+    width: 3.5rem;
+    height: 6px;
+    background: var(--ember-600);
+    border-radius: 0 0 4px 4px;
+  }
+
+  .meeting-title {
+    font-size: var(--text-xl);
+    color: var(--forest-900);
+  }
+
+  .meeting-details {
+    display: grid;
+    gap: var(--space-4);
+    margin-bottom: var(--space-5);
+  }
+
+  @media (min-width: 36rem) {
+    .meeting-details {
+      grid-template-columns: auto 1fr;
+      column-gap: var(--space-6);
+    }
+  }
+
+  .meeting-details dt {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--khaki-700);
+  }
+
+  .meeting-details dd {
+    margin: 0;
+    font-size: var(--text-lg);
+    font-weight: 600;
+  }
+
+  .meeting-directions {
+    font-weight: 700;
+    color: var(--forest-700);
+  }
+</style>

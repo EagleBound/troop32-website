@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import MeetingCard from '../components/MeetingCard.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout
+  title="Join"
+  description={`How to join ${site.name}: visit a meeting ${site.meeting.day} at ${site.meeting.time} at ${site.meeting.place}, ${site.meeting.city}.`}
+>
+  <PageHeader
+    eyebrow="Join us"
+    title={`Join ${site.name}`}
+    intro="Joining a Scout troop starts with a visit. Come see a meeting, meet the Scouts and leaders, and ask your questions."
+  />
+
+  <section class="section" aria-labelledby="steps-title">
+    <div class="container join-layout">
+      <div>
+        <h2 id="steps-title">How joining works</h2>
+        <ol class="join-steps" role="list">
+          <li>
+            <h3>Visit a meeting</h3>
+            <p>
+              Come to a {site.name} meeting on {site.meeting.day} at {site.meeting.time} at {site.meeting.place}. It is
+              the best way to see what the troop is like.
+            </p>
+          </li>
+          <li>
+            <h3>Talk with troop leaders</h3>
+            <p>
+              Ask about the program, costs, gear, and anything else on your mind. Leaders can explain eligibility and
+              what to expect as a new Scout family.
+            </p>
+          </li>
+          <li>
+            <h3>Register with Scouting America</h3>
+            <p>
+              When your family is ready, troop leaders will help you complete the registration paperwork and get your
+              new Scout started.
+            </p>
+          </li>
+        </ol>
+      </div>
+      <aside aria-label="Meeting time and place">
+        <MeetingCard headingLevel={2} />
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section--surface" aria-labelledby="more-title">
+    <div class="container reading">
+      <h2 id="more-title">Still deciding?</h2>
+      <p>
+        Read the <a href="/new-families/">answers to common questions from new families</a>, learn
+        <a href="/what-we-do/">what Scouts do</a>, or find out more <a href="/about/">about {site.name}</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .join-layout {
+    display: grid;
+    gap: var(--space-7);
+  }
+
+  @media (min-width: 60rem) {
+    .join-layout {
+      grid-template-columns: 1.5fr 1fr;
+      align-items: start;
+    }
+  }
+
+  .join-steps {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-5) 0 0;
+    counter-reset: step;
+  }
+
+  .join-steps li {
+    position: relative;
+    counter-increment: step;
+    padding: 0 0 var(--space-6) 4rem;
+  }
+
+  .join-steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    background: var(--ember-600);
+    color: #fff;
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+
+  .join-steps li:not(:last-child)::after {
+    /* Trail line connecting the steps. */
+    content: '';
+    position: absolute;
+    left: 1.3rem;
+    top: 3.1rem;
+    bottom: 0.4rem;
+    border-left: 3px dashed var(--khaki-400);
+  }
+
+  .join-steps h3 {
+    margin-bottom: var(--space-2);
+    padding-top: 0.35rem;
+  }
+
+  .join-steps p {
+    margin: 0;
+  }
+</style>

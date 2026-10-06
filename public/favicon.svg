@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Original Troop 32 favicon: "32" on a forest-green rounded square with a ridge line. -->
+  <rect width="64" height="64" rx="14" fill="#1d3a2a"/>
+  <path d="M6 50 L20 40 L30 46 L42 34 L58 46 V58 H6Z" fill="#2f5d3f"/>
+  <text x="32" y="36" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="28" font-weight="700" fill="#fbf8f0">32</text>
+</svg>

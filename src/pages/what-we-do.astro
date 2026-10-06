@@ -1,0 +1,157 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import PhotoFrame from '../components/PhotoFrame.astro';
+import JoinCallout from '../components/JoinCallout.astro';
+import { site } from '../data/site';
+import { photos } from '../data/photos';
+---
+
+<BaseLayout
+  title="What We Do"
+  description={`Outdoor adventure, Scout-led leadership, service, and advancement: what Scouts do in ${site.name}.`}
+>
+  <PageHeader
+    eyebrow="The program"
+    title="What Scouts do"
+    intro="Scouting is learning by doing. Scouts build real skills outdoors, take on real responsibility, and help their community along the way."
+  />
+
+  <section id="outdoors" class="section" aria-labelledby="outdoors-title">
+    <div class="container grid-2">
+      <div class="reading">
+        <h2 id="outdoors-title">Outdoor adventure</h2>
+        <p>
+          The outdoors is Scouting's classroom. Scouts learn to camp, hike, cook, navigate, and take care of themselves
+          and each other, starting with the basics and building toward bigger challenges as they grow.
+        </p>
+        <p>
+          Scouts also learn to respect the places they explore. The Outdoor Code asks every Scout to be clean in their
+          outdoor manners, careful with fire, considerate in the outdoors, and conservation minded.
+        </p>
+      </div>
+      <PhotoFrame slot={photos.outdoor} ratio="landscape" />
+    </div>
+  </section>
+
+  <section id="leadership" class="section section--surface" aria-labelledby="leadership-title">
+    <div class="container grid-2">
+      <PhotoFrame slot={photos.leadership} ratio="landscape" />
+      <div class="reading">
+        <h2 id="leadership-title">Scout-led leadership</h2>
+        <p>
+          A Scout troop is run by its Scouts. Scouts are organized into <strong>patrols</strong>, small groups that
+          work, learn, and camp together. Each patrol has its own youth leader, and youth leaders across the troop plan
+          the troop's program together.
+        </p>
+        <p>
+          Adult leaders are coaches and mentors. They keep activities safe and help Scouts succeed, but they let Scouts
+          make the decisions and learn from them. Over time, Scouts who started as the newest members become the ones
+          teaching and leading.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="service" class="section" aria-labelledby="service-title">
+    <div class="container grid-2">
+      <div class="reading">
+        <h2 id="service-title">Service</h2>
+        <p>
+          The Scout Slogan is “Do a Good Turn Daily!” Service is part of Scouting at every level, from small everyday
+          kindnesses to projects that improve the community.
+        </p>
+        <p>
+          Through service, Scouts learn to notice what others need, work as a team to help, and see the difference
+          they can make.
+        </p>
+      </div>
+      <PhotoFrame slot={photos.service} ratio="landscape" />
+    </div>
+  </section>
+
+  <section id="advancement" class="section section--surface" aria-labelledby="advancement-title">
+    <div class="container">
+      <div class="reading">
+        <h2 id="advancement-title">Advancement and the path to Eagle</h2>
+        <p>
+          As Scouts learn and demonstrate new skills, they earn ranks and merit badges. Each Scout advances at their
+          own pace, and the goal is real learning, not a race.
+        </p>
+      </div>
+
+      <ol class="ranks" role="list" aria-label="Scout ranks in order">
+        <li>Scout</li>
+        <li>Tenderfoot</li>
+        <li>Second Class</li>
+        <li>First Class</li>
+        <li>Star</li>
+        <li>Life</li>
+        <li class="rank-eagle">Eagle Scout</li>
+      </ol>
+
+      <div class="reading">
+        <h3 id="eagle">The Eagle Scout journey</h3>
+        <p>
+          Eagle Scout is the highest rank in Scouting. Reaching it takes years of commitment, earning required and
+          elective merit badges, serving in leadership positions, and planning and leading a service project that
+          benefits the community.
+        </p>
+        <p>
+          Not every Scout becomes an Eagle Scout, and that is fine. Every step along the way builds skills and
+          character that last a lifetime.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <JoinCallout />
+</BaseLayout>
+
+<style>
+  .ranks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    list-style: none;
+    padding: 0;
+    margin: var(--space-5) 0 var(--space-7);
+    counter-reset: rank;
+  }
+
+  .ranks li {
+    counter-increment: rank;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    background: var(--cream-50);
+    border: 2px solid var(--forest-700);
+    border-radius: 999px;
+    font-weight: 700;
+    color: var(--forest-900);
+  }
+
+  .ranks li::before {
+    content: counter(rank);
+    display: grid;
+    place-items: center;
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 50%;
+    background: var(--forest-800);
+    color: var(--cream-50);
+    font-size: 0.85rem;
+  }
+
+  .ranks .rank-eagle {
+    background: var(--forest-800);
+    color: var(--cream-50);
+    border-color: var(--forest-800);
+  }
+
+  .ranks .rank-eagle::before {
+    background: var(--khaki-300);
+    color: var(--forest-950);
+  }
+</style>

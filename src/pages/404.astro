@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout title="Page not found" description={`This page could not be found on the ${site.name} website.`}>
+  <PageHeader
+    eyebrow="Off trail"
+    title="We couldn't find that page"
+    intro="The page may have moved, or the link may be out of date. Here are some good places to get back on the trail."
+  >
+    <div class="button-row">
+      <a class="button button--primary" href="/join/">How to join</a>
+      <a class="button button--secondary" href="/">Go to the home page</a>
+    </div>
+  </PageHeader>
+</BaseLayout>

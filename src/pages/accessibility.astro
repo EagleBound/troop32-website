@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout title="Accessibility" description={`The ${site.name} website's commitment to accessibility.`}>
+  <PageHeader
+    eyebrow="This website"
+    title="Accessibility"
+    intro={`We want everyone to be able to use the ${site.name} website, including people with disabilities.`}
+  />
+
+  <section class="section" aria-labelledby="commitment-title">
+    <div class="container reading">
+      <h2 id="commitment-title">Our commitment</h2>
+      <p>
+        This website is designed with the goal of meeting the Web Content Accessibility Guidelines (WCAG) 2.2 at
+        Level AA. We are working toward that goal; we do not claim that every page fully meets it today.
+      </p>
+
+      <h2 id="features-title">What we do</h2>
+      <ul>
+        <li>Pages use clear headings and structure, and work with screen readers.</li>
+        <li>Everything can be used with a keyboard, with a visible focus indicator.</li>
+        <li>Text and important visuals are designed to have strong color contrast.</li>
+        <li>Meaningful images have text descriptions; decorative images are hidden from screen readers.</li>
+        <li>The site works on phones, tablets, and computers, and respects reduced-motion settings.</li>
+      </ul>
+
+      <h2 id="report-title">Tell us about a problem</h2>
+      <p>
+        If something on this website is hard to use, please let a troop leader know at a
+        <a href="/contact/">{site.name} meeting</a>, so we can fix it.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
