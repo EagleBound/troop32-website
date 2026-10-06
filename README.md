@@ -29,5 +29,6 @@ New Webmaster or adult leader? Start here.
 | [docs/CONTENT-GUIDE.md](docs/CONTENT-GUIDE.md) | Terminology, tone, Scouting principles, imagery, and accessibility |
 | [docs/SITE-MAP.md](docs/SITE-MAP.md) | Proposed (not final) structure of the new website and v1.0 launch scope |
 | [docs/DESIGN-REFERENCES.md](docs/DESIGN-REFERENCES.md) | Other troop websites used as design inspiration, and the rules for using them |
+| [docs/PHOTO-LOG.md](docs/PHOTO-LOG.md) | Where each published photo came from, its privacy review, and who approved it |
 
 This repository is public. Never commit passwords, secrets, or private member information. See [docs/PRIVACY.md](docs/PRIVACY.md).

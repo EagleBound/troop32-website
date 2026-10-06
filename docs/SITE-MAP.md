@@ -20,7 +20,7 @@ The long-term map below is still proposed. For v1.0, several entries were **comb
 | `/accessibility/` | Accessibility | Accessibility |
 | (any unknown URL) | 404 | Page-not-found help |
 
-**Header navigation:** About · What We Do · New Families · **Join** (prominent). Contact, Privacy, and Accessibility are in the footer. Photos remain on hold, and the member area remains future work.
+**Header navigation:** About · What We Do · New Families · **Join** (prominent). Contact, Privacy, and Accessibility are in the footer. A Photos page remains on hold, and the member area remains future work. Real photos appear in a few page sections ([PHOTO-LOG.md](PHOTO-LOG.md)); the homepage photo mosaic is hidden until it can show at least four approved photos from at least three different events.
 
 ## Public site
 

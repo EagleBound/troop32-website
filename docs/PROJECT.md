@@ -174,7 +174,8 @@ Launching v1.0 and any cutover from the old site to the new site are **separate,
 - **Phase 1: Initial development (Website v1.0).**
 - Governance and project documentation established (this document set).
 - Design references reviewed during Website v1.0 planning (see [DESIGN-REFERENCES.md](DESIGN-REFERENCES.md)).
-- **WP1 local foundation built:** an Astro static site with all v1.0 pages (Home, About, What We Do, New Families, Join, Contact, Privacy, Accessibility, 404), the design system, central site data, and original placeholder illustrations instead of photos. See [DEVELOPMENT.md](DEVELOPMENT.md).
+- **WP1 local foundation built:** an Astro static site with all v1.0 pages (Home, About, What We Do, New Families, Join, Contact, Privacy, Accessibility, 404), the design system, central site data, and original placeholder illustrations. See [DEVELOPMENT.md](DEVELOPMENT.md).
+- **First real photos integrated:** three human-approved photos from the Troop 32 Melita Island 2026 collection (homepage hero, homepage Scout-Led Leadership card, What We Do › Outdoor adventure), recorded in [PHOTO-LOG.md](PHOTO-LOG.md). Every other photo slot keeps its illustration **on purpose**, reserved for photos from other Troop 32 events (service, weekend camping, high adventure, fundraisers, meetings). The homepage photo mosaic is hidden until it has at least four approved photos from at least three events.
 - **Not yet deployed.** No hosting account, preview URL, or DNS change exists. The site is marked `noindex` until launch.
 - **Public contact channel pending.** The Contact page uses the Monday meeting as the contact pathway until leadership approves a role-based troop address (`contact.email` in `src/data/site.ts`).
 - **Astro telemetry:** the Astro build tool sends anonymous usage data about the tool (not about website visitors) unless disabled. Turning it off is a pending decision (see the WP1 execution report).
@@ -188,7 +189,7 @@ Launching v1.0 and any cutover from the old site to the new site are **separate,
 | Styling | Plain modern CSS with design tokens; no Tailwind, no UI framework |
 | JavaScript | Only the accessible mobile-menu toggle; FAQ uses native HTML disclosure (`<details>`) |
 | Fonts | Source Serif 4 + Source Sans 3, self-hosted, SIL Open Font License |
-| Images | Astro image optimization (approved photos only, later); original SVG placeholders now |
+| Images | Astro responsive images (WebP at several widths) from approved, sanitized derivatives in `src/assets/photos/`; separate photo slot per page section in `src/data/photos.ts`; original SVG illustrations in slots awaiting photos |
 | Repeated facts | `src/data/site.ts` |
 | Security | Static-host headers in `public/_headers` (strict Content-Security-Policy, no inline scripts or styles) |
 | Hosting | Not yet connected. Recommended: Cloudflare Pages from GitHub, troop-owned accounts (a separate work package) |
@@ -214,7 +215,7 @@ Each of these needs its own PLAN and approval before anything is built:
 3. **Future member area:** authentication provider, data storage, account management, authorization model, and hosting of private information. This also needs a privacy review and designated adult leader approval.
 4. **Contact method.** How the public reaches the troop (an official troop channel, not personal addresses).
 5. **Content management.** How Scout Webmasters and non-technical leaders could supply updates.
-6. **Photo sources.** How approved photos reach the site. This needs a privacy and access review first.
+6. ~~**Photo sources.**~~ Decided 2026-10-06: authorized read-only external source → private staging → full-resolution review → human approval → sanitized derivative → repository ([PHOTO-LOG.md](PHOTO-LOG.md)). A permanent youth-photo **policy** is still open (see [PRIVACY.md](PRIVACY.md#open-policy-questions)).
 7. **Cutover plan** from the existing production site.
 
 ## Open content items requiring confirmation
@@ -248,5 +249,7 @@ These came from the existing public site and may be stale. They must be **confir
 | 2026-10-06 | WP1 local foundation built; not deployed. | Adult project lead, via approved EXECUTE work package (WP1) |
 | 2026-10-06 | Permanent rule: external sources (Drive, Dropbox, OneDrive, SharePoint, Box, photo libraries, shared folders, their synced local folders, and similar) are read-only for AI agents. The rule cannot be overridden by EXECUTE or a direct request; changing it requires a designated-adult-approved governance amendment ([AGENTS.md §7](../AGENTS.md#7-external-sources-are-read-only)). | Adult project lead, via approved EXECUTE work package |
 | 2026-10-06 | PLAN may use short-lived, disclosed scratch files in a system temporary folder for analyzing authorized material ([AGENTS.md §3](../AGENTS.md#3-plan-mode-the-default)). | Adult project lead, via approved EXECUTE work package |
+| 2026-10-06 | Photos from the Troop 32 Google Drive collection the adult project lead authorizes are troop-controlled and authorized for public website use; each individual photo still requires full-resolution review and human publication approval, recorded in [PHOTO-LOG.md](PHOTO-LOG.md). | Adult project lead |
+| 2026-10-06 | First real photos published: 3 from Melita Island 2026 (all privacy class B after full-resolution review). Separate photo slots per page; illustrations intentionally retained for future event collections; homepage mosaic hidden until 4+ photos from 3+ events. | Adult project lead, via approved EXECUTE work package |
 
 Add new rows as decisions are made. Record who approved each decision by role.

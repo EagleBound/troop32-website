@@ -16,10 +16,13 @@ interface Props {
 }
 
 const { slot, ratio = 'landscape', showCaption = false, sizes = '(min-width: 52rem) 50vw, 100vw' } = Astro.props;
+
+// Focal point uses classes (not inline styles) so the strict Content-Security-Policy still applies.
+const focusClasses = [`fx-${slot.focus?.x ?? 50}`, `fy-${slot.focus?.y ?? 50}`];
 ---
 
 <figure class:list={['photo-frame', `photo-frame--${ratio}`]}>
-  <div class="photo-frame-media">
+  <div class:list={['photo-frame-media', ...focusClasses]}>
     {
       slot.image ? (
         <Image src={slot.image} alt={slot.alt ?? ''} widths={[480, 800, 1200]} sizes={sizes} />
@@ -61,7 +64,32 @@ const { slot, ratio = 'landscape', showCaption = false, sizes = '(min-width: 52r
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: var(--fx, 50%) var(--fy, 50%);
   }
+
+  /* Focal-point steps (see FocusStep in src/data/photos.ts). */
+  .fx-0 { --fx: 0%; }
+  .fx-10 { --fx: 10%; }
+  .fx-20 { --fx: 20%; }
+  .fx-30 { --fx: 30%; }
+  .fx-40 { --fx: 40%; }
+  .fx-50 { --fx: 50%; }
+  .fx-60 { --fx: 60%; }
+  .fx-70 { --fx: 70%; }
+  .fx-80 { --fx: 80%; }
+  .fx-90 { --fx: 90%; }
+  .fx-100 { --fx: 100%; }
+  .fy-0 { --fy: 0%; }
+  .fy-10 { --fy: 10%; }
+  .fy-20 { --fy: 20%; }
+  .fy-30 { --fy: 30%; }
+  .fy-40 { --fy: 40%; }
+  .fy-50 { --fy: 50%; }
+  .fy-60 { --fy: 60%; }
+  .fy-70 { --fy: 70%; }
+  .fy-80 { --fy: 80%; }
+  .fy-90 { --fy: 90%; }
+  .fy-100 { --fy: 100%; }
 
   figcaption {
     margin-top: var(--space-2);

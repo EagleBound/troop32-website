@@ -71,9 +71,10 @@ then open the address it prints (normally <http://localhost:4321/>). Stop it wit
 | **Page shell** | `src/layouts/BaseLayout.astro` | The `<head>`, skip link, header, and footer that wrap every page. |
 | **Repeated troop facts** | `src/data/site.ts` | Troop name, meeting day/time/place, Scoutmaster, public contact, navigation. **Change a fact here and it updates on every page.** |
 | **Scouting principles** | `src/data/principles.ts` | Scout Oath, Law, Motto, Slogan, Outdoor Code. Must match [CONTENT-GUIDE.md](CONTENT-GUIDE.md). |
-| **Photo slots** | `src/data/photos.ts` | Which illustration or approved photo appears in each photo spot. |
+| **Photo slots** | `src/data/photos.ts` | Which illustration or approved photo appears in each photo spot. Each page section has its **own** slot (`hero`, `home.*`, `whatWeDo.*`), so a photo never repeats on another page by accident. |
+| **Photo approval record** | `docs/PHOTO-LOG.md` | Source, privacy review, and approval for every published photo. |
 | **Styles** | `src/styles/global.css` | Colors, fonts, spacing, and buttons, defined once as "design tokens" at the top. Each component also has its own `<style>` section. |
-| **Approved photos (future)** | `src/assets/photos/` | Not created yet. Only approved, EXIF-stripped photos go here (see below). |
+| **Approved photos** | `src/assets/photos/` | Only approved, sanitized derivatives (metadata removed, neutral names). Never originals. |
 | **Other site files** | `public/` | Files copied as-is: `favicon.svg`, `robots.txt`, and `_headers` (security headers for hosting). |
 
 ## Common tasks
@@ -92,18 +93,24 @@ Only photos approved under the troop's photo policy ([PRIVACY.md](PRIVACY.md#pho
 
 **Never edit the original.** Photos usually come from an external source such as the troop's Google Drive. Those originals are never changed, renamed, moved, or deleted ([AGENTS.md §7](../AGENTS.md#7-external-sources-are-read-only)). Always work on a **copy**.
 
-1. Copy only the approved photo into a private local working folder **outside this repository and outside any sync folder**. For example, use `C:\Troop32-Staging\`, not a folder inside OneDrive, Google Drive, or Dropbox. Windows sometimes puts Pictures and Documents inside OneDrive, so check first.
-2. On the copy, remove location and camera data (EXIF/GPS), resize it, and give it a neutral file name with no names (for example `campout-ridge-01.jpg`).
-3. Save only that approved derivative in `src/assets/photos/`.
-4. In `src/data/photos.ts`, import it and set `image` and a meaningful `alt` description on the slot:
+1. **Copy to private staging.** Copy only the candidate photos into a private local working folder **outside this repository and outside any sync folder**. The troop uses `C:\Users\webma\Troop32-Staging\<Event-Year>\` with `originals\` and `derivatives\` subfolders. Don't use a folder inside OneDrive, Google Drive, or Dropbox. Windows sometimes puts Pictures and Documents inside OneDrive, so check first.
+2. **Make sanitized derivatives.** On the copies, correct the rotation, remove all location and camera data (EXIF/GPS), resize (about 2560 px on the long side for a hero, 1600 px for cards), and give each one a neutral, subject-based name with no names or event in it (for example `water-sailing-01.jpg`).
+3. **Review at full resolution.** Look for clearly identifiable faces, names on clothing or gear, readable signs, plates, location clues, branding, and anything unsuitable. Thumbnails are not enough.
+4. **Get human approval and record it** in [PHOTO-LOG.md](PHOTO-LOG.md): source file, collection, privacy class, observations, approver role, and date.
+5. **Add the derivative to the site.** Save only the approved derivative in `src/assets/photos/`. Never add originals.
+6. **Assign it to a slot** in `src/data/photos.ts`: import it and set `image`, a meaningful `alt` (or `''` if purely decorative), `event` (its collection), and `focus` (where the important part of the photo is, so crops keep it in frame):
 
    ```ts
    import ridge from '../assets/photos/campout-ridge-01.jpg';
    // ...
-   outdoor: { scene: 'ridge', image: ridge, alt: 'Scouts hiking along a ridge trail at sunrise', caption: 'Outdoor adventure' },
+   home: {
+     outdoor: { scene: 'ridge', image: ridge, alt: 'Scouts hiking along a ridge trail at sunrise', focus: { x: 50, y: 40 }, event: 'Sierra backpacking 2027' },
+   },
    ```
 
-Astro automatically creates smaller, faster versions of the photo for phones and computers. Always double-check the built image before committing.
+Astro automatically creates smaller, faster versions of the photo for phones and computers. Always check the built page before committing.
+
+**Keep the site balanced.** Slots that still show an illustration are being kept on purpose for photos from other Troop 32 events (service projects, weekend camping, high adventure such as Philmont or Northern Tier, fundraisers, ordinary meetings). Don't fill a slot just because a photo exists. The homepage photo mosaic (`photos.gallery`) stays hidden until it holds at least four approved photos from at least three different events.
 
 ### Change colors or fonts
 

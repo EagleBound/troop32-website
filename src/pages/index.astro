@@ -1,30 +1,31 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import MeetingCard from '../components/MeetingCard.astro';
+import { Image } from 'astro:assets';
 import PhotoFrame from '../components/PhotoFrame.astro';
 import Scene from '../components/Scene.astro';
 import JoinCallout from '../components/JoinCallout.astro';
 import { site } from '../data/site';
-import { photos } from '../data/photos';
+import { photos, galleryIsReady } from '../data/photos';
 import { scoutLaw } from '../data/principles';
 
 const pillars = [
   {
     title: 'Outdoor Adventure',
     text: 'Camping, hiking, and time outdoors are at the heart of Scouting. Scouts learn to plan, pack, cook, and care for the places they explore.',
-    slot: photos.outdoor,
+    slot: photos.home.outdoor,
     href: '/what-we-do/#outdoors',
   },
   {
     title: 'Scout-Led Leadership',
     text: 'Scouts plan and lead their own troop, with adults coaching from the side. Responsibility grows as each Scout does.',
-    slot: photos.leadership,
+    slot: photos.home.leadership,
     href: '/what-we-do/#leadership',
   },
   {
     title: 'Service',
     text: '“Do a Good Turn Daily” is more than a slogan. Scouts learn to notice what their community needs and to help.',
-    slot: photos.service,
+    slot: photos.home.service,
     href: '/what-we-do/#service',
   },
 ];
@@ -35,7 +36,24 @@ const pillars = [
 >
   <!-- 2. Hero -->
   <section class="hero on-dark" aria-labelledby="hero-title">
+    <div class="hero-media">
+      {
+        photos.hero.image ? (
+          <Image
+            src={photos.hero.image}
+            alt={photos.hero.alt ?? ''}
+            widths={[640, 960, 1280, 1920, 2560]}
+            sizes="100vw"
+            priority
+            class="hero-photo"
+          />
+        ) : (
+          <Scene scene={photos.hero.scene} />
+        )
+      }
+    </div>
     <div class="container hero-inner">
+      <div class="hero-copy">
       <p class="eyebrow">{site.name} · {site.locality}</p>
       <h1 id="hero-title">Adventure, leadership, and friendship for youth in Santa Rosa</h1>
       <p class="hero-lead">
@@ -46,9 +64,7 @@ const pillars = [
         <a class="button button--primary" href="/join/">Visit a {site.meeting.dayName} meeting</a>
         <a class="button button--secondary" href="/what-we-do/">See what Scouts do</a>
       </div>
-    </div>
-    <div class="hero-art">
-      <Scene scene="ridge" />
+      </div>
     </div>
   </section>
 
@@ -76,7 +92,7 @@ const pillars = [
         {
           pillars.map((pillar) => (
             <li class="pillar">
-              <PhotoFrame slot={pillar.slot} ratio="landscape" sizes="(min-width: 60rem) 33vw, 100vw" />
+              <PhotoFrame slot={pillar.slot} ratio="portrait" sizes="(min-width: 60rem) 33vw, 100vw" />
               <h3>{pillar.title}</h3>
               <p>{pillar.text}</p>
               <a href={pillar.href}>
@@ -115,21 +131,23 @@ const pillars = [
     </div>
   </section>
 
-  <!-- 6. Photography area (3–5 approved images later) -->
-  <section class="section section--tight section--surface" aria-labelledby="gallery-title">
-    <div class="container">
-      <h2 id="gallery-title" class="visually-hidden">Scouting in action</h2>
-      <ul class="gallery" role="list">
-        {
-          photos.gallery.map((slot) => (
-            <li>
-              <PhotoFrame slot={slot} ratio="square" showCaption sizes="(min-width: 52rem) 25vw, 50vw" />
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </section>
+  <!-- 6. Photo mosaic: shown only once it has 4+ approved photos from 3+ different events (see galleryIsReady). -->
+  {
+    galleryIsReady() && (
+      <section class="section section--tight section--surface" aria-labelledby="gallery-title">
+        <div class="container">
+          <h2 id="gallery-title" class="visually-hidden">Scouting in action</h2>
+          <ul class="gallery" role="list">
+            {photos.gallery.map((slot) => (
+              <li>
+                <PhotoFrame slot={slot} ratio="square" showCaption sizes="(min-width: 52rem) 25vw, 50vw" />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
 
   <!-- 7. Scout Law -->
   <section class="section section--forest law" aria-labelledby="law-title">
@@ -178,9 +196,15 @@ const pillars = [
 </BaseLayout>
 
 <style>
-  /* Hero */
+  /* Hero
+     Small screens: text on forest green, photo as a band below it.
+     Wide screens (72rem+): full-bleed photo with a dark gradient behind the text.
+     The photo is cropped so the Scouts sit to the right of the text, and the
+     photographer's arm at the bottom-left edge stays out of view. */
   .hero {
     position: relative;
+    display: flex;
+    flex-direction: column;
     background: var(--forest-900);
     color: var(--cream-100);
     overflow: hidden;
@@ -189,14 +213,34 @@ const pillars = [
   .hero-inner {
     position: relative;
     z-index: 1;
+    order: 1;
     padding-top: var(--space-8);
-    padding-bottom: var(--space-6);
+    padding-bottom: var(--space-7);
+  }
+
+  .hero-media {
+    order: 2;
+    aspect-ratio: 4 / 3;
+    max-height: 70vh;
+    width: 100%;
+  }
+
+  .hero-media :global(img),
+  .hero-media :global(.scene) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 53% 60%;
+  }
+
+  .hero-copy {
+    max-width: 34rem;
   }
 
   .hero h1 {
     color: var(--cream-50);
-    max-width: 18ch;
-    font-size: clamp(2.4rem, 1.5rem + 4vw, 4.2rem);
+    font-size: clamp(2.3rem, 1.6rem + 2.6vw, 3.6rem);
   }
 
   .hero .eyebrow {
@@ -204,18 +248,45 @@ const pillars = [
   }
 
   .hero-lead {
-    max-width: 38rem;
     font-size: var(--text-lg);
     color: var(--cream-200);
   }
 
-  .hero-art {
-    height: clamp(9rem, 22vw, 16rem);
-    margin-top: calc(-1 * var(--space-4));
-  }
+  @media (min-width: 72rem) {
+    .hero {
+      justify-content: center;
+      min-height: clamp(36rem, 54vw, 64rem);
+    }
 
-  .hero-art :global(.scene) {
-    height: 100%;
+    .hero-media {
+      position: absolute;
+      inset: 0;
+      aspect-ratio: auto;
+      max-height: none;
+    }
+
+    .hero-media :global(img) {
+      object-position: 0% 60%;
+    }
+
+    /* Dark gradient for readable text over the photo. */
+    .hero-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        90deg,
+        rgb(20 38 28 / 0.9) 0%,
+        rgb(20 38 28 / 0.85) 42%,
+        rgb(20 38 28 / 0.45) 58%,
+        rgb(20 38 28 / 0) 72%
+      ),
+      linear-gradient(0deg, rgb(20 38 28 / 0.35) 0%, rgb(20 38 28 / 0) 30%);
+    }
+
+    .hero-inner {
+      padding-block: var(--space-9);
+    }
   }
 
   /* Visit */

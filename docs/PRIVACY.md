@@ -106,6 +106,7 @@ Until a youth-photo policy is approved, use a conservative approach:
 - Avoid images that reveal private locations, such as homes or meeting-up points.
 - **Remove embedded GPS/location metadata (EXIF)** from images before public use.
 - When in doubt, leave it out and flag it.
+- Every published photo needs a **full-resolution privacy review** and **human publication approval**, recorded in [PHOTO-LOG.md](PHOTO-LOG.md). Thumbnails are not enough to judge whether faces, names, or tags are visible.
 
 ### Original media and working copies
 
