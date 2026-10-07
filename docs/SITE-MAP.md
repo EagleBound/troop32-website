@@ -49,8 +49,8 @@ The **v1.0 launch** column is a *proposed* scope for the recruiting-ready Websit
 | **Photos** | Superseded | Show Scouting in action | Everyone | Replaced by the planned **Events** area below. The youth-photo policy was approved 2026-10-07 (E0). |
 | **Events** | Built (E2); first events added (E3) | Upcoming Events, Recent Adventures (completed less than 12 months ago), Troop 32 Archive (12 months or older), with curated event galleries | Everyone | Policy approved 2026-10-07 (E0): primary nav label "Events", plus a homepage teaser. General information only for ordinary events; full details only for designated public events ([PRIVACY.md → Events](PRIVACY.md#events-what-may-be-public-approved-e0-2026-10-07)). Pages built in E2. First five real 2026 events and the homepage teaser (up to three text-only cards) added in E3. |
 | **Contact** | Yes | Reach the troop | Everyone | Through an official troop channel. **The channel must be decided before launch.** No personal youth contact details. |
-| **Privacy** | Yes | How the site handles information | Everyone | Public-facing notice. Wording needs leadership review. |
-| **Accessibility** | Yes | Accessibility commitment and how to report problems | Everyone | States the WCAG 2.2 AA target without claiming guaranteed compliance. |
+| **Privacy** | Yes | How the site handles information | Everyone | Public notice summarizing [PRIVACY.md](PRIVACY.md): events, photos and names, what is never published, and how to ask for changes or removals. Revised and approved by the adult project lead in P1 (last reviewed October 2026). |
+| **Accessibility** | Yes | Accessibility commitment and how to report problems | Everyone | States the WCAG 2.2 AA target without claiming guaranteed compliance. Problems can be reported by email or at a meeting (last reviewed October 2026). |
 
 ## Future member area (authenticated)
 

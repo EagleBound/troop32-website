@@ -38,7 +38,7 @@ const teaserEvents = await getHomepageTeaser();
 <BaseLayout
   description={`${site.name} is a Scouting America troop in ${site.locality}, open to boys and girls. Visit a meeting ${site.meeting.day} at ${site.meeting.time} at ${site.meeting.place}.`}
 >
-  <!-- 2. Hero -->
+  {/* 2. Hero */}
   <section class="hero on-dark" aria-labelledby="hero-title">
     <div class="hero-media">
       {
@@ -72,7 +72,7 @@ const teaserEvents = await getHomepageTeaser();
     </div>
   </section>
 
-  <!-- 3. Visit us -->
+  {/* 3. Visit us */}
   <section class="section section--tight visit" aria-labelledby="visit-title">
     <div class="container grid-2">
       <div>
@@ -87,7 +87,7 @@ const teaserEvents = await getHomepageTeaser();
     </div>
   </section>
 
-  <!-- 4. Program pillars -->
+  {/* 4. Program pillars */}
   <section class="section section--surface texture-contours" aria-labelledby="pillars-title">
     <div class="container">
       <p class="eyebrow">What Scouts do</p>
@@ -109,7 +109,7 @@ const teaserEvents = await getHomepageTeaser();
     </div>
   </section>
 
-  <!-- 5. How Scout-led Scouting works -->
+  {/* 5. How Scout-led Scouting works */}
   <section class="section" aria-labelledby="scout-led-title">
     <div class="container grid-2">
       <div>
@@ -135,7 +135,7 @@ const teaserEvents = await getHomepageTeaser();
     </div>
   </section>
 
-  <!-- 6. Photo mosaic: shown only once it has 4+ approved photos from 3+ different events (see galleryIsReady). -->
+  {/* 6. Photo mosaic: shown only once it has 4+ approved photos from 3+ different events (see galleryIsReady). */}
   {
     galleryIsReady() && (
       <section class="section section--tight section--surface" aria-labelledby="gallery-title">
@@ -165,10 +165,10 @@ const teaserEvents = await getHomepageTeaser();
     )
   }
 
-  <!-- 6b. Events teaser: text-only cards (no photos, so homepage photos aren't repeated). Omitted when nothing qualifies. -->
+  {/* 6b. Events teaser: text-only cards (no photos, so homepage photos aren't repeated). Omitted when nothing qualifies. */}
   <EventTeaser events={teaserEvents} />
 
-  <!-- 7. Scout Law -->
+  {/* 7. Scout Law */}
   <section class="section section--forest law" aria-labelledby="law-title">
     <div class="container">
       <p class="eyebrow">What we live by</p>
@@ -183,7 +183,7 @@ const teaserEvents = await getHomepageTeaser();
     </div>
   </section>
 
-  <!-- 8. Parent trust -->
+  {/* 8. Parent trust */}
   <section class="section" aria-labelledby="trust-title">
     <div class="container grid-2">
       <div>
@@ -197,11 +197,11 @@ const teaserEvents = await getHomepageTeaser();
         <p><a href="/new-families/#safety">How Scouting keeps youth safe</a></p>
       </div>
 
-      <!-- 9. Troop 32-B and Troop 32-G -->
+      {/* 9. Troop 32-B and Troop 32-G */}
       <section class="one-troop" aria-labelledby="one-troop-title">
         <h2 id="one-troop-title" class="one-troop-title">One troop, open to boys and girls</h2>
         <p>
-          {site.name} is made up of two Scouting America troops: <strong>{site.units.boys}</strong> for boys and
+          {site.name} is made up of two Scouting America troops: <strong>{site.units.boys}</strong> for boys and{' '}
           <strong>{site.units.girls}</strong> for girls. They meet together and go on outings together, so families
           simply know us as <strong>{site.name}</strong>.
         </p>
@@ -210,7 +210,7 @@ const teaserEvents = await getHomepageTeaser();
     </div>
   </section>
 
-  <!-- 10. Final recruiting call to action -->
+  {/* 10. Final recruiting call to action */}
   <JoinCallout />
 </BaseLayout>
 

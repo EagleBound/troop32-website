@@ -2,6 +2,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { site } from '../data/site';
+
+// Update "Last reviewed" when this page is reviewed again.
+const email = site.contact.email;
 ---
 
 <BaseLayout title="Accessibility" description={`The ${site.name} website's commitment to accessibility.`}>
@@ -30,9 +33,21 @@ import { site } from '../data/site';
 
       <h2 id="report-title">Tell us about a problem</h2>
       <p>
-        If something on this website is hard to use, please let a troop leader know at a
+        If something on this website is hard to use, please email{' '}
+        {email ? <a href={`mailto:${email}`}>{email}</a> : 'the Scoutmaster'} or let a troop leader know at
+        a{' '}
         <a href="/contact/">{site.name} meeting</a>, so we can fix it.
       </p>
+
+      <p class="last-reviewed">Last reviewed: October 2026</p>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .last-reviewed {
+    margin-top: var(--space-7);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+</style>

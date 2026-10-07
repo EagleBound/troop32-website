@@ -74,11 +74,42 @@ test('no editorial notes or HTML comments reach visitors', () => {
   for (const { file, html } of ALL) {
     assert.ok(!/\bTODO\b|For the Webmaster|docs\/DEVELOPMENT/.test(html), `${file} contains editorial notes`);
   }
-  // The recruiting pages carry no HTML comments at all. (The homepage still has
-  // short descriptive section comments; out of scope for L1.)
-  for (const route of ['join', 'new-families', 'contact', 'about', 'about/scoutmaster']) {
-    assert.ok(!/<!--/.test(page(route)), `${route} contains an HTML comment`);
+  // No page ships HTML comments (use {/* */} in .astro pages instead).
+  for (const { file, html } of ALL) assert.ok(!/<!--/.test(html), `${file} contains an HTML comment`);
+});
+
+test('no words run into a following link or bold text (Astro drops line-break spaces)', () => {
+  for (const { file, html } of ALL) {
+    const glued = html.match(/[A-Za-z0-9,.;:)]<(?:a|strong|em|time|span) [^>]*>[^<]{0,25}/);
+    assert.equal(glued, null, `${file}: missing space before "${glued?.[0]}"`);
   }
+});
+
+test('Privacy notice matches what the site actually publishes (P1)', () => {
+  const html = page('privacy');
+  const body = text(main(html));
+  // Statements that stopped being true once Events existed.
+  assert.ok(!body.includes('The only schedule information on this website'), 'stale "only schedule" claim');
+  assert.ok(!/does not publish[^.]*upcoming outings/.test(body), 'stale blanket "upcoming outings" claim');
+  for (const shown of [
+    'We share selected troop events by month and year',
+    'Exact dates, times, and locations appear only for events troop leadership has opened to the public',
+    'We never publish meeting points, travel or transportation details, who is attending, or similar logistics.',
+    'location data is removed from them',
+    'we use only their first name and last initial',
+    'adult leaders are named as Mr. or Mrs. Last Name',
+    "If you'd like a photo, name, or story about your family changed or removed, email scoutmaster@troop32.org or speak with a troop leader.",
+    'Last reviewed: October 2026',
+  ]) {
+    assert.ok(body.includes(shown), `missing "${shown}"`);
+  }
+  assert.equal(html.match(new RegExp(`href="mailto:${PUBLIC_EMAIL}"`, 'g'))?.length, 2, 'removals + questions');
+});
+
+test('Accessibility: email reporting pathway and review date (P1)', () => {
+  const html = page('accessibility');
+  assert.match(html, new RegExp(`href="mailto:${PUBLIC_EMAIL}"`));
+  assert.ok(text(main(html)).includes('Last reviewed: October 2026'));
 });
 
 test('New Families: official eligibility, visiting, gear, Youth Protection; costs unchanged', () => {

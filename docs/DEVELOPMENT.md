@@ -113,6 +113,11 @@ npm run preview:fixtures   # serve dist-fixtures/
 
 ## Common tasks
 
+### Two Astro writing habits
+
+- **Comments in pages:** write `{/* note */}` in the HTML part of an `.astro` file, or `//` comments in the top `---` section. Don't use `<!-- note -->`: those are sent to every visitor. A page test checks this.
+- **Spaces before links:** if a line of text ends and the next line starts with a link or bold text, Astro drops the space between them ("visit a<a…>meeting" shows as "visit ameeting"). End the first line with `{' '}`, or keep the text and the link on one line. A page test checks this too.
+
 ### Change the meeting time or place
 
 Edit `meeting` in `src/data/site.ts`. Every page updates automatically. Changes to public information still go through the [workflow](WORKFLOW.md), and only the **regular** meeting belongs there, never outing or event details ([PRIVACY.md](PRIVACY.md#regular-meeting-information-vs-activity-logistics)).

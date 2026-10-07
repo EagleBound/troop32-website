@@ -1,7 +1,13 @@
 ---
+// Public privacy notice. It summarizes the project's privacy policy
+// (docs/PRIVACY.md) for families; keep the two consistent. Wording approved
+// by the adult project lead in P1 (October 2026). Update "Last reviewed" when
+// the notice is reviewed again.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { site } from '../data/site';
+
+const email = site.contact.email;
 ---
 
 <BaseLayout title="Privacy" description={`How the ${site.name} website handles privacy and protects Scouts.`}>
@@ -23,30 +29,59 @@ import { site } from '../data/site';
         </li>
       </ul>
 
-      <h2 id="publish-title">What we do not publish</h2>
-      <p>To help keep Scouts safe, this website does not publish:</p>
+      <h2 id="events-title">Events</h2>
+      <p>
+        We share selected troop events by month and year, with a general description. Exact dates, times, and
+        locations appear only for events troop leadership has opened to the public, such as a community breakfast.
+        We never publish meeting points, travel or transportation details, who is attending, or similar logistics.
+      </p>
+      <p>
+        Our regular meeting is also public: {site.meeting.day} at {site.meeting.time} at {site.meeting.place}.
+      </p>
+
+      <h2 id="photos-title">Photos and names</h2>
+      <p>
+        Photos are reviewed before they're published, and location data is removed from them. When we name a Scout,
+        we use only their first name and last initial; adult leaders are named as Mr. or Mrs. Last Name.
+      </p>
+
+      <h2 id="publish-title">What we never publish</h2>
+      <p>To help keep Scouts safe, this website never publishes:</p>
       <ul>
         <li>contact information for youth members;</li>
         <li>member rosters or private contact details;</li>
-        <li>details of upcoming outings, campouts, travel, or other youth activities;</li>
         <li>medical, emergency, or other private records.</li>
       </ul>
+
+      <h2 id="changes-title">Changes and removals</h2>
       <p>
-        The only schedule information on this website is our regular meeting: {site.meeting.day} at
-        {site.meeting.time} at {site.meeting.place}.
+        If you'd like a photo, name, or story about your family changed or removed, email{' '}
+        {email ? <a href={`mailto:${email}`}>{email}</a> : 'the Scoutmaster'} or speak with a troop leader.
       </p>
 
       <h2 id="links-title">Links to other websites</h2>
       <p>
-        Some links, such as directions to our meeting place, lead to other websites. Those websites have their own
-        privacy practices.
+        Some links, such as directions to our meeting place or information from Scouting America, lead to other
+        websites. Those websites have their own privacy practices.
       </p>
 
       <h2 id="questions-title">Questions</h2>
       <p>
-        If you have a question or concern about information on this website, please speak with a troop leader at a
+        If you have a question or concern about information on this website, email{' '}
+        {email ? <a href={`mailto:${email}`}>{email}</a> : 'the Scoutmaster'} or speak with a troop leader at
+        a{' '}
         <a href="/contact/">{site.name} meeting</a>.
       </p>
+
+      <p class="last-reviewed">Last reviewed: October 2026</p>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .last-reviewed {
+    margin-top: var(--space-7);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+</style>
