@@ -114,6 +114,13 @@ test('normal build: homepage teaser links only to real event pages, at most 3, n
   for (const slug of slugs) assert.ok(eventDirs(DIST).includes(slug), `teaser links to missing page ${slug}`);
   assert.ok(!/<img|<figure/.test(section), 'teaser cards are text-only');
   assert.match(section, /<a href="\/events\/"[^>]*>See all events<\/a>/);
+
+  // Only Recent Adventures (completed) may appear; never Upcoming. Order matches /events/.
+  const events = page(DIST, 'events');
+  const recent = cardSlugs(events, 'recent-title');
+  const upcoming = cardSlugs(events, 'upcoming-title');
+  assert.deepEqual(slugs, recent.slice(0, 3), 'teaser = first three Recent Adventures');
+  for (const slug of slugs) assert.ok(!upcoming.includes(slug), `upcoming event ${slug} in the teaser`);
 });
 
 test('normal build: no fixture events or assets', () => {
@@ -216,16 +223,19 @@ test('fixture build: accessible structure and images', () => {
   assert.match(eagle, /<h2 id="event-gallery-title"[^>]*>Photos<\/h2>/);
 });
 
-test('fixture build: homepage teaser (public upcoming first, then recent; max 3; text-only; placed before the Scout Law)', () => {
+test('fixture build: homepage teaser (Recent Adventures only, newest first; max 3; text-only; placed before the Scout Law)', () => {
   const home = page(FIXTURES, '');
   const section = home.match(/<section[^>]*aria-labelledby="event-teaser-title"[\s\S]*?<\/section>/)?.[0] ?? '';
+  assert.deepEqual(cardSlugs(home, 'event-teaser-title'), VISIBLE.recent.slice(0, 3));
   assert.deepEqual(cardSlugs(home, 'event-teaser-title'), [
-    'example-community-pancake-breakfast-2027', // planned public-community, soonest
-    'example-tba-fundraiser-2027', // planned public-community
-    'example-eagle-project-trail-bench-2027', // newest recent
+    'example-eagle-project-trail-bench-2027', // July 2027
+    'example-summer-trek-2027', // June–July 2027 (title tiebreak)
+    'example-open-house-2027', // March 2027: a completed public-community event qualifies
   ]);
+  assert.match(section, /<h2 id="event-teaser-title"[^>]*>Recent adventures<\/h2>/);
   assert.ok(!/<img|<figure/.test(section), 'text-only cards');
-  for (const excluded of ['Example Lake Campout', 'Example Ridge Hike', 'Example River Paddle', 'Example Summer Trek']) {
+  for (const slug of VISIBLE.upcoming) assert.ok(!section.includes(`/events/${slug}/`), `upcoming ${slug} must not be featured`);
+  for (const excluded of ['Example Community Pancake Breakfast', 'Example Community Fundraiser', 'Open to the public', 'Example Lake Campout', 'Example Ridge Hike', 'Example River Paddle']) {
     assert.ok(!text(section).includes(excluded), `${excluded} must not be featured`);
   }
   const at = (id: string) => home.indexOf(`id="${id}"`);

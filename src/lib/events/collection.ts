@@ -37,9 +37,9 @@ export async function getEventViews(): Promise<Record<PublicView, SiteEvent[]>> 
   };
 }
 
-/** Events for the homepage teaser (may be empty: then the section is omitted). */
+/** Homepage "Recent adventures": recent completed events only (may be empty: then the section is omitted). */
 export async function getHomepageTeaser(): Promise<SiteEvent[]> {
-  return selectTeaserEvents(await getEventViews());
+  return selectTeaserEvents((await getEventViews()).recent);
 }
 
 /**

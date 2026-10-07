@@ -1,7 +1,9 @@
 ---
-// Homepage Events teaser: up to 3 text-only cards chosen by selectTeaserEvents
-// (src/lib/events/present.ts). No photos, so photos already on the homepage
-// aren't repeated. Renders nothing when no event qualifies.
+// Homepage "Recent adventures" teaser: up to 3 text-only cards of recent
+// COMPLETED events, chosen by selectTeaserEvents (src/lib/events/present.ts).
+// Upcoming events are never shown here; they live on /events/. No photos, so
+// photos already on the homepage aren't repeated. Renders nothing when no
+// event qualifies.
 import EventList from './EventList.astro';
 import type { SiteEvent } from '../../lib/events/collection';
 

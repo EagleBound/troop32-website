@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import { TEASER_LIMIT, selectTeaserEvents, toPublicEvent } from '../../src/lib/events/present.ts';
 import type { EventRecord, PublicEvent } from '../../src/lib/events/present.ts';
 
-// FICTIONAL records only. Views are passed already classified and sorted, as
-// collection.ts provides them; the teaser never classifies.
+// FICTIONAL records only. The teaser receives the already-classified, sorted
+// Recent Adventures view (as collection.ts provides it); it never classifies.
 const record = (title: string, overrides: Partial<EventRecord<string>> = {}): EventRecord<string> => ({
   title,
   summary: `${title} summary.`,
@@ -13,52 +13,45 @@ const record = (title: string, overrides: Partial<EventRecord<string>> = {}): Ev
   designation: 'ordinary',
   ...overrides,
 });
+const slug = (title: string) => title.toLowerCase().replace(/\W+/g, '-');
 const up = (title: string, overrides: Partial<EventRecord<string>> = {}) =>
-  toPublicEvent(title.toLowerCase().replace(/\W+/g, '-'), record(title, { status: 'planned', month: '2027-09', ...overrides }), 'upcoming');
-const recent = (title: string) => toPublicEvent(title.toLowerCase().replace(/\W+/g, '-'), record(title), 'recent');
+  toPublicEvent(slug(title), record(title, { status: 'planned', month: '2027-09', ...overrides }), 'upcoming');
+const recent = (title: string) => toPublicEvent(slug(title), record(title), 'recent');
 const titles = (events: PublicEvent[]) => events.map((e) => e.title);
 
-const publicPlanned = (title: string) =>
-  up(title, { designation: 'public-community', publicDetails: { date: '2027-09-04', venue: { name: 'Example Hall' } } });
+test('only Recent Adventures, in the given newest-first order', () => {
+  assert.deepEqual(titles(selectTeaserEvents([recent('Chill'), recent('Melita'), recent('Philmont')])), ['Chill', 'Melita', 'Philmont']);
+});
 
-test('planned public-community events first (in the given soonest-first order), then recent', () => {
-  const views = {
-    upcoming: [publicPlanned('Open House'), up('Campout'), publicPlanned('Breakfast')],
-    recent: [recent('Trek'), recent('Camporee')],
-  };
-  assert.deepEqual(titles(selectTeaserEvents(views)), ['Open House', 'Breakfast', 'Trek']);
+test('upcoming events of every kind can never take a slot', () => {
+  const upcoming = [
+    up('Public breakfast', { designation: 'public-community', publicDetails: { date: '2027-09-04', venueToBeAnnounced: true } }),
+    up('Ordinary campout'),
+    up('Postponed hike', { status: 'postponed' }),
+    up('Cancelled paddle', { status: 'cancelled' }),
+  ];
+  // Even if upcoming events were passed in by mistake, only Recent items survive.
+  assert.deepEqual(titles(selectTeaserEvents([...upcoming, recent('Trek'), ...upcoming])), ['Trek']);
+  assert.deepEqual(selectTeaserEvents(upcoming), []);
+  const archived = toPublicEvent('old', record('Old trek', { month: '2025-01' }), 'archive');
+  assert.deepEqual(selectTeaserEvents([archived]), []);
 });
 
 test('at most 3 cards by default', () => {
   assert.equal(TEASER_LIMIT, 3);
-  const views = { upcoming: [], recent: ['A', 'B', 'C', 'D', 'E'].map(recent) };
-  assert.deepEqual(titles(selectTeaserEvents(views)), ['A', 'B', 'C']);
-  assert.deepEqual(titles(selectTeaserEvents(views, 2)), ['A', 'B']);
-});
-
-test('ordinary upcoming, postponed, and cancelled events are never featured', () => {
-  const views = {
-    upcoming: [
-      up('Ordinary campout'),
-      up('Postponed hike', { status: 'postponed' }),
-      up('Cancelled paddle', { status: 'cancelled' }),
-      up('Postponed public', { status: 'postponed', designation: 'public-community', publicDetails: { date: '2027-09-04' } }),
-      up('Cancelled public', { status: 'cancelled', designation: 'public-community', publicDetails: { date: '2027-09-04' } }),
-    ],
-    recent: [recent('Trek')],
-  };
-  assert.deepEqual(titles(selectTeaserEvents(views)), ['Trek']);
+  const items = ['A', 'B', 'C', 'D', 'E'].map(recent);
+  assert.deepEqual(titles(selectTeaserEvents(items)), ['A', 'B', 'C']);
+  assert.deepEqual(titles(selectTeaserEvents(items, 2)), ['A', 'B']);
 });
 
 test('nothing qualifies → empty (the homepage section is omitted)', () => {
-  assert.deepEqual(selectTeaserEvents({ upcoming: [up('Ordinary campout')], recent: [] }), []);
-  assert.deepEqual(selectTeaserEvents({ upcoming: [], recent: [] }), []);
+  assert.deepEqual(selectTeaserEvents([]), []);
 });
 
 test('teaser items are the allowlisted public objects, unchanged', () => {
   const trek = recent('Trek');
-  const [item] = selectTeaserEvents({ upcoming: [], recent: [trek] });
+  const [item] = selectTeaserEvents([trek]);
   assert.equal(item, trek);
   const text = JSON.stringify(item);
-  for (const hidden of ['uid', 'review', 'publicDesignation', 'draft', 'designation']) assert.ok(!text.includes(hidden), hidden);
+  for (const hidden of ['uid', 'review', 'publicDesignation', 'draft', 'designation', 'publicEvent']) assert.ok(!text.includes(hidden), hidden);
 });

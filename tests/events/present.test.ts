@@ -74,7 +74,7 @@ test('only allowlisted fields reach the page (no uid, review, designation approv
   for (const hidden of ['evt-test0001', 'uid', 'review', 'reviewedByRole', 'webmaster', 'publicDesignation', 'approvedByRole', 'scoutmaster', 'draft', 'designation']) {
     assert.ok(!text.includes(hidden), `leaked "${hidden}"`);
   }
-  assert.deepEqual(Object.keys(shown).sort(), ['badge', 'gallery', 'href', 'publicEvent', 'publicInfo', 'slug', 'status', 'summary', 'title', 'view', 'when', 'year']);
+  assert.deepEqual(Object.keys(shown).sort(), ['badge', 'gallery', 'href', 'publicInfo', 'slug', 'status', 'summary', 'title', 'view', 'when', 'year']);
 });
 
 test('ordinary events show month only, never a day, even if publicDetails were present', () => {

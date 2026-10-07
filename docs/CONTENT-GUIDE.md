@@ -131,7 +131,7 @@ Full rules: [PRIVACY.md → Events](PRIVACY.md#events-what-may-be-public-approve
 - The primary navigation label is **Events** (built in E2).
 - `/events/` shows **Upcoming events** and **Recent Adventures** (completed events less than 12 months old); `/events/archive/` is the **Troop 32 Archive** (12 months or older).
 - The Events pages are a selection of events suitable for the public, **not** the troop's full calendar. Don't write copy that suggests every troop event appears there.
-- The homepage shows a short **Recent adventures** teaser (E3): up to three text-only cards. A planned public/community event is featured first; ordinary upcoming events are not featured on the homepage.
+- The homepage shows a short **Recent adventures** teaser: up to three text-only cards of the newest **completed** Recent Adventures. Upcoming events, including public/community ones, are never featured there; they appear under Upcoming on `/events/`.
 - Event galleries: normally 6–12 curated photos; more than 12 triggers an editorial warning; 20 is the hard maximum.
 
 ## Imagery
