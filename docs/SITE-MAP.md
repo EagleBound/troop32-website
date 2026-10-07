@@ -18,7 +18,7 @@ The long-term map below is still proposed. For v1.0, several entries were **comb
 | `/contact/` | Contact | Contact |
 | `/privacy/` | Privacy | Privacy |
 | `/accessibility/` | Accessibility | Accessibility |
-| `/events/` | Events | Upcoming events, Recent Adventures, and a link to the Archive (added in E2) |
+| `/events/` | Events | Upcoming events (compact list, no photos), Recent Adventures (photo cards), and a link to the Archive (added in E2) |
 | `/events/archive/` | Troop 32 Archive | Completed events 12 months or older, by year (E2) |
 | `/events/<slug>/` | One event | Permanent page for each event shown in a view (E2) |
 | (any unknown URL) | 404 | Page-not-found help |

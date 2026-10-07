@@ -86,3 +86,10 @@ test('focus uses 10% steps', () => {
   assert.ok(schema.safeParse(ordinaryEvent({ cover: { ...photo(1), focus: { x: 40, y: 100 } } })).success);
   rejects(ordinaryEvent({ cover: { ...photo(1), focus: { x: 45 } } }), 'focus');
 });
+
+test('venueToBeAnnounced: public-community only, exactly true, never with a venue', () => {
+  assert.ok(schema.safeParse(publicEvent({ publicDetails: { date: '2027-03-06', venueToBeAnnounced: true } })).success);
+  rejects(publicEvent({ publicDetails: { venueToBeAnnounced: true, venue: { name: 'Example Hall' } } }), 'not both');
+  rejects(ordinaryEvent({ publicDetails: { venueToBeAnnounced: true } }), 'public-community');
+  for (const bad of [false, 'yes', 1]) rejects(publicEvent({ publicDetails: { venueToBeAnnounced: bad } }), 'venueToBeAnnounced');
+});

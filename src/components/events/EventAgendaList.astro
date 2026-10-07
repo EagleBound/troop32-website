@@ -1,0 +1,156 @@
+---
+// Compact list for Upcoming events on /events/: one row per event, the date in
+// its own column, no images. Stays readable with many events. On narrow
+// screens the date sits above the title. Shows only the public event
+// (src/lib/events/present.ts); the "empty" slot is used when there are none.
+import type { SiteEvent } from '../../lib/events/collection';
+
+interface Props {
+  events: SiteEvent[];
+}
+
+const { events } = Astro.props;
+---
+
+{
+  events.length > 0 ? (
+    <ul class="event-agenda" role="list">
+      {events.map((event) => (
+        <li class="event-agenda-item">
+          <p class="event-agenda-date">
+            {event.when.prefix && <span class="event-agenda-prefix">{event.when.prefix}</span>}
+            <time datetime={event.when.datetime}>{event.when.text}</time>
+          </p>
+          <div class="event-agenda-body">
+            <h3 class="event-agenda-title">
+              <a href={event.href}>{event.title}</a>
+            </h3>
+            {(event.badge || event.destination || event.publicInfo?.venueToBeAnnounced) && (
+              <p class="event-agenda-meta">
+                {event.badge && (
+                  <span class:list={['event-badge', { 'event-badge--alert': event.status === 'cancelled', 'event-badge--notice': event.status === 'postponed' }]}>
+                    {event.badge}
+                  </span>
+                )}
+                {event.destination && (
+                  <span>
+                    <span class="visually-hidden">Place: </span>
+                    {event.destination}
+                  </span>
+                )}
+                {event.publicInfo?.venueToBeAnnounced && <span>Location to be announced</span>}
+              </p>
+            )}
+            <p class="event-agenda-summary">{event.summary}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <div class="event-empty">
+      <slot name="empty" />
+    </div>
+  )
+}
+
+<style>
+  .event-agenda {
+    max-width: 56rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--khaki-300);
+  }
+
+  .event-agenda-item {
+    display: grid;
+    gap: var(--space-2) var(--space-5);
+    padding-block: var(--space-4);
+    border-bottom: 1px solid var(--khaki-300);
+  }
+
+  @media (min-width: 40rem) {
+    .event-agenda-item {
+      grid-template-columns: 13rem minmax(0, 1fr);
+    }
+  }
+
+  .event-agenda-date {
+    margin: 0;
+    font-weight: 700;
+    color: var(--forest-900);
+  }
+
+  .event-agenda-prefix {
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text-muted);
+  }
+
+  .event-agenda-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    min-width: 0;
+  }
+
+  .event-agenda-title {
+    margin: 0;
+    font-size: var(--text-lg);
+  }
+
+  .event-agenda-title a {
+    color: var(--forest-900);
+  }
+
+  .event-agenda-title a:hover {
+    color: var(--forest-700);
+  }
+
+  .event-agenda-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2) var(--space-3);
+    margin: 0;
+    font-size: var(--text-sm);
+    font-weight: 600;
+  }
+
+  .event-agenda-summary {
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+
+  /* Same badge look as EventMeta: words carry the meaning; color only reinforces it. */
+  .event-badge {
+    display: inline-block;
+    padding: 0.1rem 0.6rem;
+    border-radius: 999px;
+    background: var(--cream-200);
+    color: var(--forest-900);
+    font-weight: 700;
+    line-height: 1.5;
+  }
+
+  .event-badge--notice {
+    color: var(--khaki-700);
+  }
+
+  .event-badge--alert {
+    color: var(--ember-700);
+  }
+
+  .event-empty {
+    max-width: var(--reading-width);
+    padding: var(--space-5);
+    border: 1px dashed var(--khaki-400);
+    border-radius: var(--radius-lg);
+    color: var(--color-text-muted);
+  }
+
+  .event-empty :global(p) {
+    margin: 0;
+  }
+</style>

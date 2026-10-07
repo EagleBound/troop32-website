@@ -152,3 +152,15 @@ test('archive grouping by the event\'s last year, newest first, order kept withi
     [[2026, ['A', 'B']], [2024, ['C']]],
   );
 });
+
+test('venue to be announced: shown only while planned, never alongside a venue, never for ordinary events', () => {
+  const tba = { date: '2027-10-02', venueToBeAnnounced: true };
+  assert.deepEqual(toPublicEvent('x', publicRecord({ publicDetails: tba }), 'upcoming').publicInfo, { venueToBeAnnounced: true });
+  for (const status of ['postponed', 'cancelled', 'completed'] as const) {
+    assert.equal(toPublicEvent('x', publicRecord({ status, publicDetails: tba }), 'upcoming').publicInfo, undefined, status);
+  }
+  // Defensive (the schema forbids both): a real venue wins.
+  const both = toPublicEvent('x', publicRecord({ publicDetails: { ...tba, venue: { name: 'Example Hall' } } }), 'upcoming');
+  assert.deepEqual(both.publicInfo, { venueName: 'Example Hall' });
+  assert.equal(toPublicEvent('x', ordinary({ publicDetails: tba }), 'recent').publicInfo, undefined);
+});

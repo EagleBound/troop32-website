@@ -74,7 +74,12 @@ export function buildEventSchema<TImage extends z.ZodType>(image: () => TImage) 
       /** Not rendered. NOT private: the repository is public. */
       draft: z.boolean().default(false),
       designation: z.enum(EVENT_DESIGNATIONS).default('ordinary'),
-      /** Who authorized the public/community designation. Required for, and only for, public-community events. */
+      /**
+       * Who authorized the public/community designation. Required for, and only
+       * for, public-community events. `approvedOn` is the date the authorization
+       * to publish was given or confirmed to the Webmaster. Record the role
+       * only, never the person's name.
+       */
       publicDesignation: z
         .strictObject({ approvedByRole: z.enum(DESIGNATION_ROLES), approvedOn: isoDate })
         .optional(),
@@ -90,6 +95,8 @@ export function buildEventSchema<TImage extends z.ZodType>(image: () => TImage) 
               address: z.string().trim().min(1).max(200).optional(),
             })
             .optional(),
+          /** The venue isn't decided yet. Shown as "To be announced". Replace with `venue` when known. */
+          venueToBeAnnounced: z.literal(true).optional(),
           /** Admission, how to take part, or how to help. */
           participation: z.string().trim().min(1).max(500).optional(),
         })
@@ -126,6 +133,9 @@ export function buildEventSchema<TImage extends z.ZodType>(image: () => TImage) 
         const d = parseIsoDate(details.date);
         const m = monthIndex({ year: d.year, month: d.month });
         if (m < start || m > end) issue('publicDetails', '`publicDetails.date` must fall within the event month(s).');
+      }
+      if (details?.venueToBeAnnounced && details.venue) {
+        issue('publicDetails', 'Use either `venue` or `venueToBeAnnounced: true`, not both. Remove the flag once the venue is known.');
       }
       if (details?.startTime && details.endTime && details.endTime <= details.startTime) {
         issue('publicDetails', '`endTime` must be after `startTime`.');

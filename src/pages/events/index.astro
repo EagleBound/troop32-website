@@ -3,6 +3,7 @@
 // Which event appears where is decided by src/lib/events/classify.ts at build time.
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
+import EventAgendaList from '../../components/events/EventAgendaList.astro';
 import EventList from '../../components/events/EventList.astro';
 import { getEventViews } from '../../lib/events/collection';
 import { site } from '../../data/site';
@@ -23,12 +24,12 @@ const { upcoming, recent, archive } = await getEventViews();
   <section class="section section--tight" aria-labelledby="upcoming-title">
     <div class="container">
       <h2 id="upcoming-title">Upcoming events</h2>
-      <EventList events={upcoming}>
+      <EventAgendaList events={upcoming}>
         <p slot="empty">
           Upcoming adventures are shared here when appropriate for the public. Interested in {site.name}?
           <a href="/join/">Learn more about visiting a {site.meeting.dayName} meeting</a>.
         </p>
-      </EventList>
+      </EventAgendaList>
     </div>
   </section>
 

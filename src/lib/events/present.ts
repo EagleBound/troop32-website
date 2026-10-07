@@ -29,6 +29,7 @@ export interface EventRecord<TImage> extends ClassifiableEvent {
     startTime?: string;
     endTime?: string;
     venue?: { name: string; address?: string };
+    venueToBeAnnounced?: boolean;
     participation?: string;
   };
   cover?: RecordPhoto<TImage>;
@@ -66,7 +67,14 @@ export interface PublicEvent<TImage = unknown> {
   when: { prefix?: string; text: string; datetime: string };
   destination?: string;
   /** Public-community events only, already reduced to what this status may show. */
-  publicInfo?: { time?: string; venueName?: string; venueAddress?: string; participation?: string };
+  publicInfo?: {
+    time?: string;
+    venueName?: string;
+    venueAddress?: string;
+    /** Planned event whose venue isn't decided yet (shown as "To be announced"). */
+    venueToBeAnnounced?: true;
+    participation?: string;
+  };
   cover?: PublicPhoto<TImage>;
   gallery: PublicPhoto<TImage>[];
 }
@@ -130,7 +138,7 @@ function copyPhoto<TImage>(photo: RecordPhoto<TImage>): PublicPhoto<TImage> {
 
 /**
  * Public schedule details by status (E2 decision Q3), public-community events only:
- * - planned:   date, time, venue name and address, participation
+ * - planned:   date, time, venue name and address (or "to be announced"), participation
  * - postponed / cancelled: date and venue name; no time, address, or participation
  * - completed: date and venue name (history); no time, address, or participation
  */
@@ -144,6 +152,7 @@ function publicInfoFor(record: EventRecord<unknown>): PublicEvent['publicInfo'] 
     const time = formatTimeRange(details.startTime, details.endTime);
     if (time) info.time = time;
     if (details.venue?.address) info.venueAddress = details.venue.address;
+    if (details.venueToBeAnnounced && !details.venue) info.venueToBeAnnounced = true;
     if (details.participation) info.participation = details.participation;
   }
   return Object.keys(info).length > 0 ? info : undefined;

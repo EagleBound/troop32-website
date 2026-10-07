@@ -43,6 +43,12 @@ const info = event.publicInfo;
             </dd>
           </div>
         )}
+        {info.venueToBeAnnounced && (
+          <div>
+            <dt>Where</dt>
+            <dd>To be announced</dd>
+          </div>
+        )}
         {info.participation && (
           <div>
             <dt>How to take part</dt>

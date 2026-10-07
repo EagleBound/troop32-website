@@ -183,8 +183,8 @@ The story of the event goes here, in plain Markdown.
 
 - **`uid`**: `evt-` plus 8 random lowercase letters and digits, unique to this event. A future member area will use it to link private information without putting that information here. Make one with `node -e "console.log('evt-'+Math.random().toString(36).slice(2,10).padEnd(8,'0'))"`.
 - **`status`**: a planned event whose month has passed is hidden and flagged until you mark it `completed`, `cancelled`, or `postponed`; the site never assumes it happened. `postponed` shows in Upcoming as "Postponed; new date to be announced". When the new month is known, set `status: planned` and the new `month`. `cancelled` shows as "Cancelled" through its month, then disappears.
-- **Where it appears** (worked out at each build): Upcoming for planned, postponed, and current cancelled events; **Recent Adventures** for completed events less than 12 months after their month; the **Troop 32 Archive** after that. Because the site is static, an event moves only when the site is rebuilt. Drafts, planned events whose month has passed, and cancelled events after their month have **no page** (their address shows "page not found").
-- **What the page shows**: title, summary, the month (or month range), status label, destination, cover, story, and gallery. For a **public/community** event it also shows the exact date; while the event is still planned it adds the time, venue and address, and how to take part. A postponed or cancelled public event shows only its original date and venue name. A completed one keeps its date and venue name. The `uid`, the review, and who authorized the public designation are **never** shown.
+- **Where it appears** (worked out at each build): Upcoming (a compact list: date, title, status, and summary, with no photos) for planned, postponed, and current cancelled events; **Recent Adventures** for completed events less than 12 months after their month; the **Troop 32 Archive** after that. Because the site is static, an event moves only when the site is rebuilt. Drafts, planned events whose month has passed, and cancelled events after their month have **no page** (their address shows "page not found").
+- **What the page shows**: title, summary, the month (or month range), status label, destination, cover, story, and gallery. For a **public/community** event it also shows the exact date; while the event is still planned it adds the time, venue and address (or "To be announced"), and how to take part. A postponed or cancelled public event shows only its original date and venue name. A completed one keeps its date and venue name. The `uid`, the review, and who authorized the public designation are **never** shown.
 - **The story** (the Markdown below the `---`): use `##` headings, not `#` (the page already has the main heading). Don't put images, videos, or embedded content in the story; the build rejects them. Photos go in `cover` and `gallery`.
 - **Photos** must already be approved and listed in [PHOTO-LOG.md](PHOTO-LOG.md) (the build checks this) and saved in `src/assets/photos/`. Every photo needs alt text; don't name youth in alt text. A planned event may use an older photo as its cover, but its alt text and caption must not suggest the photo shows the upcoming event.
 - **Names**: a Scout is real First L.; an adult leader is Mr. or Mrs. Last Name. You are the review point for who is a Scout and who is an adult. If you're not sure, ask; don't guess.
@@ -204,9 +204,38 @@ The story of the event goes here, in plain Markdown.
     participation: Open to everyone. Tickets at the door.
   ```
 
+  - **`approvedOn`** is the date the authorization to publish was **given or confirmed to the Webmaster** (for example, the date of the leader's email). Record only the **role**, never the person's name. If you don't have an authorization date, the event can't be public-community yet. Don't guess a date.
+  - **Venue not decided yet?** Leave out `venue` and add `venueToBeAnnounced: true` inside `publicDetails`. The page shows "Where: To be announced" and the Upcoming list shows "Location to be announced". When the venue is known, **delete the flag** and add `venue` (the build rejects both together). Never put "TBD" or a guess in `venue`.
+  - Only fill in what you've actually been told. Leave out any field you don't know (time, venue, participation) rather than guessing.
+
 **What the build checks.** Errors (build stops): unknown fields, missing alt text or review, more than 20 gallery photos, a gallery on an event that isn't completed, public details without a public designation, a duplicate `uid`, a bad file name, a photo missing from PHOTO-LOG.md, a "completed" event in a future month, any Google Drive or Docs link, and an email address or phone number in an ordinary event. Warnings (review them): more than 12 gallery photos, a planned event whose date has passed, an email or phone number in a public/community event (confirm it is meant to be public), and a clock time or exact date in an ordinary event. Names, captions, and who is a Scout are **not** checked automatically; that is the human review.
 
 In `npm run dev`, editing an event reloads it but doesn't rerun the cross-event checks. Run `npm run build` before committing.
+
+### Write a public event page
+
+The story (below the `---`) is where richer information goes once it's confirmed. A helpful structure for a public/community event:
+
+```md
+## About the event
+
+What the event is and who it's for, in a few plain sentences.
+
+## What to expect
+
+What visitors will see or do, written for someone new to Scouting.
+
+## Additional information
+
+Anything else the public needs to know.
+```
+
+To see this layout filled in with example text, run `npm run dev:fixtures` and open the fictional "Example Community Fundraiser" page.
+
+- **Add a section only when you have confirmed facts for it.** Until then, one honest line is enough, for example: "More details will be added here when they're available." Never publish placeholder text such as "Example text" or "TBD" headings on a real event page.
+- **Put the date, time, venue, and how to take part in `publicDetails`**, not in the story. The page shows them in the "Event details" box and hides them automatically when the event is postponed, cancelled, or over.
+- **Flyers (PDFs or images):** don't link or upload a flyer, and don't copy it word for word. Copy in only the facts that are meant to be public, and leave out names, personal phone numbers or emails, and meeting points. Contact details need leadership approval; the build warns if a public event contains an email address or phone number.
+- **Never include** youth names beyond First L., private logistics (meeting points, transportation, attendee lists, patrols), or anything you aren't sure is public.
 
 ### The troop emblem
 

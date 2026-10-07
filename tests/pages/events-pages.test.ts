@@ -26,10 +26,10 @@ function allFiles(dir: string): string[] {
 const main = (html: string) => html.match(/<main[\s\S]*?<\/main>/)?.[0] ?? '';
 const text = (html: string) => html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
 
-/** Event slugs linked from cards inside the section labelled `id`. */
+/** Event slugs linked from cards or agenda rows inside the section labelled `id`. */
 function cardSlugs(html: string, id: string): string[] {
   const section = html.split(`aria-labelledby="${id}"`)[1]?.split('</section>')[0] ?? '';
-  return [...section.matchAll(/class="event-card-title"[^>]*><a href="\/events\/([^/"]+)\/"/g)].map((m) => m[1]);
+  return [...section.matchAll(/class="event-(?:card|agenda)-title"[^>]*>\s*<a href="\/events\/([^/"]+)\/"/g)].map((m) => m[1]);
 }
 
 const VISIBLE = {
@@ -38,6 +38,7 @@ const VISIBLE = {
     'example-cancelled-paddle-2027', // August 2027
     'example-lake-campout-2027', // September 2027
     'example-community-pancake-breakfast-2027', // October 2, 2027
+    'example-tba-fundraiser-2027', // November 13, 2027 (location to be announced)
   ],
   recent: [
     'example-eagle-project-trail-bench-2027', // July 2027
@@ -159,7 +160,7 @@ test('fixture build: no private or review metadata anywhere', () => {
 });
 
 test('fixture build: ordinary events show month-level dates only', () => {
-  for (const slug of [...VISIBLE.upcoming, ...VISIBLE.recent, ...VISIBLE.archive].filter((s) => !/pancake|open-house/.test(s))) {
+  for (const slug of [...VISIBLE.upcoming, ...VISIBLE.recent, ...VISIBLE.archive].filter((s) => !/pancake|open-house|tba-fundraiser/.test(s))) {
     const html = main(page(FIXTURES, `events/${slug}`));
     assert.ok(!/datetime="\d{4}-\d{2}-\d{2}"/.test(html), `${slug}: day-level <time>`);
     assert.ok(!/(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),/.test(text(html)), `${slug}: weekday`);
@@ -219,17 +220,62 @@ test('fixture build: homepage teaser (public upcoming first, then recent; max 3;
   const home = page(FIXTURES, '');
   const section = home.match(/<section[^>]*aria-labelledby="event-teaser-title"[\s\S]*?<\/section>/)?.[0] ?? '';
   assert.deepEqual(cardSlugs(home, 'event-teaser-title'), [
-    'example-community-pancake-breakfast-2027', // planned public-community
+    'example-community-pancake-breakfast-2027', // planned public-community, soonest
+    'example-tba-fundraiser-2027', // planned public-community
     'example-eagle-project-trail-bench-2027', // newest recent
-    'example-summer-trek-2027',
   ]);
   assert.ok(!/<img|<figure/.test(section), 'text-only cards');
-  for (const excluded of ['Example Lake Campout', 'Example Ridge Hike', 'Example River Paddle']) {
+  for (const excluded of ['Example Lake Campout', 'Example Ridge Hike', 'Example River Paddle', 'Example Summer Trek']) {
     assert.ok(!text(section).includes(excluded), `${excluded} must not be featured`);
   }
   const at = (id: string) => home.indexOf(`id="${id}"`);
   assert.ok(at('gallery-title') < at('event-teaser-title') && at('event-teaser-title') < at('law-title'), 'between mosaic and Scout Law');
   assert.equal(home.match(/<h1[\s>]/g)?.length, 1);
+});
+
+test('fixture build: compact Upcoming list (one row per event, date column, no images)', () => {
+  const events = page(FIXTURES, 'events');
+  const section = events.split('aria-labelledby="upcoming-title"')[1]?.split('</section>')[0] ?? '';
+  assert.match(section, /<ul class="event-agenda"[^>]*role="list"/);
+  assert.equal(section.match(/<li class="event-agenda-item"/g)?.length, VISIBLE.upcoming.length);
+  assert.equal(section.match(/<h3 class="event-agenda-title"/g)?.length, VISIBLE.upcoming.length);
+  assert.equal(section.match(/<time datetime=/g)?.length, VISIBLE.upcoming.length);
+  assert.ok(!/<img|<figure|event-card/.test(section), 'no images or photo cards in Upcoming');
+  assert.match(section, /<time datetime="2027-11-13"[^>]*>Saturday, November 13, 2027<\/time>/);
+  assert.ok(text(section).includes('Location to be announced'));
+  // Recent Adventures keeps its photo cards.
+  const recent = events.split('aria-labelledby="recent-title"')[1]?.split('</section>')[0] ?? '';
+  assert.match(recent, /class="event-card"/);
+});
+
+test('fixture build: location to be announced, with no invented venue details', () => {
+  const tba = text(main(page(FIXTURES, 'events/example-tba-fundraiser-2027')));
+  assert.ok(tba.includes('Where To be announced'), 'details block shows Where: To be announced');
+  assert.ok(tba.includes('Saturday, November 13, 2027'));
+  assert.ok(tba.includes('About the event') && tba.includes('What to expect') && tba.includes('Example text:'), 'example sections render');
+  assert.ok(!/\d{1,2}:\d{2} (AM|PM)|Example (Community )?Hall|Example Street/.test(tba), 'no time or venue');
+  // The flag only affects events that set it.
+  assert.ok(!text(main(page(FIXTURES, 'events/example-community-pancake-breakfast-2027'))).includes('To be announced'));
+});
+
+test('normal build: Pancake Breakfast 2027 shows only its confirmed public information', () => {
+  const route = 'events/pancake-breakfast-2027';
+  if (!existsSync(join(DIST, route, 'index.html'))) return; // after March 7, 2027 it awaits a status update
+  const html = main(page(DIST, route));
+  const body = text(html);
+  for (const shown of [
+    'Pancake Breakfast',
+    'Sunday, March 7, 2027',
+    'Open to the public',
+    'Where To be announced',
+    'More details will be added here when they',
+    'pancake breakfast is open to the public.',
+  ]) {
+    assert.ok(body.includes(shown), `missing "${shown}"`);
+  }
+  assert.match(html, /<time datetime="2027-03-07"/);
+  assert.ok(!/\d{1,2}:\d{2} (AM|PM)|How to take part|<img|Mr\.|Mrs\./.test(html), 'no time, participation, image, or adult name');
+  assert.equal(html.match(/<h2[\s>]/g)?.length, 1, 'only the Event details heading: no placeholder sections');
 });
 
 test('homepage: existing photos unchanged and not repeated by the teaser (both builds)', () => {
