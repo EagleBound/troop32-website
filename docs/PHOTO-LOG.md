@@ -40,7 +40,7 @@ Class B and C photos need explicit human publication approval. Thumbnail review 
 
 ## Where each photo is used
 
-In general page slots, each photo appears in exactly one place, so the site shows variety. Slots are defined in `src/data/photos.ts`. A future event gallery may also include a photo used in a slot. That reuse is allowed as part of the event's historical record ([PRIVACY.md → Event galleries](PRIVACY.md#event-galleries)). This log keeps its current single-file structure for now.
+In general page slots, each photo appears in exactly one place, so the site shows variety. Slots are defined in `src/data/photos.ts`. An event page may also show a photo used in a slot (see [Event pages](#event-pages)). That reuse is allowed as part of the event's historical record ([PRIVACY.md → Event galleries](PRIVACY.md#event-galleries)). This log keeps its current single-file structure for now.
 
 | Page › section | Photo | Collection | Frame |
 | --- | --- | --- | --- |
@@ -64,6 +64,28 @@ In general page slots, each photo appears in exactly one place, so the site show
   - **Patrol huddle:** from the homepage Leadership card to What We Do › Scout-led leadership. That text is about patrols, which the photo shows directly.
   - **Sailing:** from What We Do › Outdoor adventure to a square mosaic tile. The Philmont trail photo matches that section's text ("camp, hike, cook, navigate") more closely.
 - No photo slot shows a placeholder illustration any more. `Scene.astro` stays as the fallback for any slot without a photo.
+
+### Event pages
+
+*Added in E3 (2026-10-07). Placement record only: every photo below was already approved (entries further down). No approval changed.*
+
+Each event's cover is shown at the top of its page and is not repeated in its gallery. The homepage Events teaser uses **text-only** cards, so no photo appears twice on the homepage.
+
+| Event page | Photo | Use | Alt text / caption |
+| --- | --- | --- | --- |
+| `/events/melita-island-2026/` | `hero-trail-walk-01.jpg` | Cover | New alt text approved for this use: "Scouts carrying daypacks walk along a path at camp." (On the homepage hero it stays decorative.) |
+| `/events/melita-island-2026/` | `water-sailing-01.jpg` | Gallery | Existing approved alt text |
+| `/events/melita-island-2026/` | `leadership-patrol-huddle-01.jpg` | Gallery | Existing approved alt text |
+| `/events/philmont-trek-2026/` | `summit-panorama-01.jpg` | Cover | Existing alt text; approved caption "Summit day, Philmont Scout Ranch" |
+| `/events/philmont-trek-2026/` | `backpacking-trail-break-01.jpg` | Gallery | Existing approved alt text |
+| `/events/chill-outing-2026/` | `camp-tent-pitching-01.jpg` | Cover | Existing approved alt text |
+| `/events/chill-outing-2026/` | `camp-sleeping-outdoors-01.jpg` | Gallery | Existing approved alt text |
+| `/events/snow-camping-2026/` | `winter-sled-haul-01.jpg` | Cover | Existing approved alt text |
+| `/events/pancake-breakfast-2026/` | `kitchen-pancake-line-01.jpg` | Cover | Existing approved alt text; the approved privacy crop is unchanged |
+
+**Not on any event page:** `service-trail-fence-01.jpg` and `service-planter-bench-01.jpg` (Eagle service projects 2026). Their approval relied on the Eagle candidate **not** being identifiable. Putting them on an Eagle-project event page would change that context, so it needs a fresh human privacy review first (E3 decision).
+
+Galleries are smaller than the recommended 6–12 photos. That was accepted for E3; fuller galleries wait for a future photo-intake work package.
 
 ## Approved photographs not displayed
 
