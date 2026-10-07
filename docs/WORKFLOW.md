@@ -134,6 +134,8 @@ external source (never changed)
 
 A work package that uses an external source should name the source, what may be copied, and the local working folder.
 
+**Google Drive has an extra, permanent limit.** AI agents may look only inside the troop's **"Troop 32 Photos"** folder, even though the troop's Google account can see much more. The folder's link is never written in this public repository. When a work package needs Drive, the directing human gives Clawson the link at the start. The work package may then narrow access to specific year or event folders, and that narrower scope ends when the work package ends. The full rule is in [AGENTS.md §7](../AGENTS.md#google-drive-access-scope-permanent).
+
 ### Stop conditions
 
 Clawson **stops and returns to the directing human** if the work would require:

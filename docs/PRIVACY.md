@@ -112,6 +112,8 @@ Until a youth-photo policy is approved, use a conservative approach:
 
 The troop's photo and document stores (Google Drive and similar) are **external sources**. AI agents treat them as read-only originals and never change, move, delete, or re-share anything in them ([AGENTS.md §7](../AGENTS.md#7-external-sources-are-read-only)).
 
+The troop's Google account can see parts of the troop Drive that hold personal and member information. AI agents may access **only** the "Troop 32 Photos" folder tree, and must not open non-photo files there unless a work package specifically authorizes it ([AGENTS.md §7, Google Drive access scope](../AGENTS.md#google-drive-access-scope-permanent)). Drive folder links and IDs are never committed to this public repository.
+
 - **Copy only what is needed.** Copy only the specific files a work package needs. Never mirror a whole photo library "just in case."
 - **Copies are private working material.** Copies of youth photos in a local working folder are private, even though they aren't published yet.
   - Keep them **outside the repository and outside any sync folder** (Google Drive, OneDrive, Dropbox).

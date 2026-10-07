@@ -52,6 +52,7 @@ Within an approved work package you may, without asking about each step: read, c
 - production access;
 - work outside the repository or an authorized local working directory;
 - **any change to an external source** (see [§7](#7-external-sources-are-read-only));
+- **Google Drive access outside the authorized Drive root** (see [§7](#google-drive-access-scope-permanent));
 - or a substantial expansion of the approved objective.
 
 ## 5. Before executing: clean working tree
@@ -108,6 +109,36 @@ external source (immutable)
 **API access:** if API access to a source is authorized in the future, use read-only scopes whenever technically available. Credential use remains subject to the adult-approval rules.
 
 **Scope:** this rule binds AI agents operating under this governance. It does not prevent Scouts or authorized adults from managing Troop 32's external sources themselves. Treat public websites and third-party code repositories as read-only reference sources too (no form submissions, logins, issues, pull requests, stars, or forks), unless another rule here is more restrictive. This project's own GitHub remote is governed by [§8](#8-git-and-github).
+
+### Google Drive access scope (permanent)
+
+**Authorized Drive root.** AI agents may access Google Drive **only** inside the folder named **"Troop 32 Photos"** and its descendants, reached top-down from that folder. **All other Google Drive content is out of bounds**, whoever owns it and however it is shared. That includes the rest of the troop's Drive, which may contain personal and member information, and any public-link Drive content.
+
+**No IDs or URLs in this repository.** The repository is public, so the root's folder ID and URL are never committed. When a work package needs Drive access, the directing human supplies the root URL or folder ID, or the URL of an authorized descendant, **at runtime**.
+
+**Account permissions are not authorization.** The Google account an agent uses (for example the troop webmaster account) may be able to see far more of Drive. That technical access does not authorize an AI agent to use it.
+
+**Outside the authorized root, never:** list or browse folders; search; view names, metadata, or thumbnails; open, read, or preview files; download or copy; query or enumerate content; follow shortcuts or links; or otherwise access or infer what is there.
+
+**How to stay inside:**
+
+- **Entry point:** begin directly at the runtime-supplied root, or an authorized descendant, and move **downward only**. Never use Drive home, "My Drive", "Shared with me", "Recent", "Starred", account-wide search, or parent folders.
+- **Folder IDs:** a folder ID from anywhere other than a downward listing inside the root counts as outside until it is confirmed to have been reached top-down. That includes IDs used before.
+- **Sibling folders:** while passing through a folder (for example a year folder), you may see the names of sibling folders in its listing. Seeing a name does not authorize opening it. Enter only the folders the current work package authorizes.
+- **Shortcuts:** never follow a shortcut that points outside the authorized tree. Report it.
+- **API access:** if API access is ever authorized, it must use read-only scopes and request only the children of in-scope folders. Never run account-wide queries. API scopes usually cover the whole account, so this rule, not the scope, is the boundary.
+
+**Non-media files.** Inside the photo tree, a document, spreadsheet, PDF, roster, form, or other non-media file is not opened or inspected unless the work package specifically authorizes that file or file type. Report its existence only.
+
+**Crossing the boundary.** If a search result, shortcut, link, API result, inherited permission, or anything else would lead outside the authorized tree, **STOP**. Don't follow it, and report it to the directing human. If something outside the tree is seen by accident, don't use it, record it, or describe it. Report only that the boundary was crossed.
+
+**Inside the authorized tree**, the rest of this section still applies in full: read-only, copy only what is needed into an authorized local working directory, and the human review and approval workflow for anything published.
+
+**Narrower work packages.** A work package may limit access further, to specific folders inside the authorized root. Such limits apply only to that work package and expire with it. A work package can **never** widen access beyond the root.
+
+**Changing this rule.** Neither an EXECUTE authorization nor a direct human request can change or widen the authorized Drive root. Changing it, or authorizing any other Google Drive source, requires a governance amendment approved by the designated adult leader **first**.
+
+**Scope.** This limits AI agents only. Scout Webmasters and adult leaders may use the troop's Google accounts and Drive normally.
 
 ## 8. Git and GitHub
 
