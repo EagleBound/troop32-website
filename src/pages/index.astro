@@ -136,13 +136,25 @@ const pillars = [
     galleryIsReady() && (
       <section class="section section--tight section--surface" aria-labelledby="gallery-title">
         <div class="container">
-          <h2 id="gallery-title" class="visually-hidden">Scouting in action</h2>
+          <h2 id="gallery-title" class="gallery-title">Scouting in action</h2>
           <ul class="gallery" role="list">
-            {photos.gallery.map((slot) => (
-              <li>
-                <PhotoFrame slot={slot} ratio="square" showCaption sizes="(min-width: 52rem) 25vw, 50vw" />
-              </li>
-            ))}
+            {photos.gallery.map((slot) =>
+              slot.tile === 'wide' ? (
+                <li class="gallery-item gallery-item--wide">
+                  <PhotoFrame
+                    slot={slot}
+                    ratio="panorama"
+                    showCaption
+                    widths={[800, 1200, 1600, 2000]}
+                    sizes="(min-width: 52rem) 66vw, 100vw"
+                  />
+                </li>
+              ) : (
+                <li class="gallery-item">
+                  <PhotoFrame slot={slot} ratio="square" showCaption sizes="(min-width: 52rem) 33vw, 50vw" />
+                </li>
+              )
+            )}
           </ul>
         </div>
       </section>
@@ -350,7 +362,16 @@ const pillars = [
     font-weight: 700;
   }
 
-  /* Gallery */
+  /* Gallery (photo mosaic)
+     Phones and tablets: two columns; each wide (panoramic) tile gets its own
+     row and the square tiles pair up.
+     Wide screens (52rem+): three columns; each row is one wide tile plus one
+     square. The wide tile is given exactly one column's height (measured with
+     container query units) so its bottom edge lines up with the square's. */
+  .gallery-title {
+    margin-bottom: var(--space-5);
+  }
+
   .gallery {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -360,10 +381,21 @@ const pillars = [
     margin: 0;
   }
 
+  .gallery-item--wide {
+    grid-column: span 2;
+  }
+
   @media (min-width: 52rem) {
     .gallery {
-      grid-template-columns: repeat(4, 1fr);
+      container-type: inline-size;
+      grid-template-columns: repeat(3, 1fr);
       gap: var(--space-5);
+    }
+
+    /* Width and height are both set, so the frame's 2:1 shape no longer applies. */
+    .gallery-item--wide :global(.photo-frame-media) {
+      width: 100%;
+      height: calc((100cqi - 2 * var(--space-5)) / 3);
     }
   }
 

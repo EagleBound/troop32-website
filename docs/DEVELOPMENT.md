@@ -71,7 +71,7 @@ then open the address it prints (normally <http://localhost:4321/>). Stop it wit
 | **Page shell** | `src/layouts/BaseLayout.astro` | The `<head>`, skip link, header, and footer that wrap every page. |
 | **Repeated troop facts** | `src/data/site.ts` | Troop name, meeting day/time/place, Scoutmaster, public contact, navigation. **Change a fact here and it updates on every page.** |
 | **Scouting principles** | `src/data/principles.ts` | Scout Oath, Law, Motto, Slogan, Outdoor Code. Must match [CONTENT-GUIDE.md](CONTENT-GUIDE.md). |
-| **Photo slots** | `src/data/photos.ts` | Which illustration or approved photo appears in each photo spot. Each page section has its **own** slot (`hero`, `home.*`, `whatWeDo.*`), so a photo never repeats on another page by accident. |
+| **Photo slots** | `src/data/photos.ts` | Which approved photo (or fallback illustration) appears in each photo spot. Each page section has its **own** slot (`hero`, `home.*`, `whatWeDo.*`, and the `gallery` mosaic list), so a photo never repeats on another page by accident. |
 | **Photo approval record** | `docs/PHOTO-LOG.md` | Source, privacy review, and approval for every published photo. |
 | **Styles** | `src/styles/global.css` | Colors, fonts, spacing, and buttons, defined once as "design tokens" at the top. Each component also has its own `<style>` section. |
 | **Approved photos** | `src/assets/photos/` | Only approved, sanitized derivatives (metadata removed, neutral names). Never originals. |
@@ -111,7 +111,11 @@ Only photos approved under the troop's photo policy ([PRIVACY.md](PRIVACY.md#pho
 
 Astro automatically creates smaller, faster versions of the photo for phones and computers. Always check the built page before committing.
 
-**Keep the site balanced.** Slots that still show an illustration are being kept on purpose for photos from other Troop 32 events (service projects, weekend camping, high adventure such as Philmont or Northern Tier, fundraisers, ordinary meetings). Don't fill a slot just because a photo exists. The homepage photo mosaic (`photos.gallery`) stays hidden until it holds at least four approved photos from at least three different events.
+**Crops.** If something private is near the edge of a photo (a readable sign or schedule, a name, a crew or campsite number, a cut-off person), crop it out of the derivative itself. Don't rely on the page's `focus` crop, because a different screen size can bring it back into view. Record the crop in [PHOTO-LOG.md](PHOTO-LOG.md).
+
+**The homepage mosaic** (`photos.gallery`) is a list of photos with optional captions. Set `tile: 'wide'` for panoramic photos (about 2:1), which span two columns; other photos are square. Keep the order alternating (wide, square, square, wide) so the panoramas sit on opposite sides on wide screens. The mosaic stays hidden unless it holds at least four approved photos from at least three different events.
+
+**Keep the site balanced.** Every slot now has a real photo, drawn from six 2026 events, with each photo used once (see [PHOTO-LOG.md → Where each photo is used](PHOTO-LOG.md#where-each-photo-is-used)). When new photos arrive, replace a slot only if the new photo tells the troop's story better, and prefer events that aren't already shown on that page. Don't add a photo just because it exists. Record every change of placement in PHOTO-LOG.md.
 
 ### The troop emblem
 

@@ -126,7 +126,7 @@ The troop's Google account can see parts of the troop Drive that hold personal a
 
 These need a decision by the **designated adult leader / troop leadership**. Clawson must not answer them on its own.
 
-1. **Youth photographs.** May identifiable youth faces appear publicly? Group shots only? What consent is required, from whom, and how is it recorded?
+1. **Youth photographs.** May identifiable youth faces appear publicly? Group shots only? What consent is required, from whom, and how is it recorded? *(Pre-launch item. The development site uses photos the adult project lead approved one by one ([PHOTO-LOG.md](PHOTO-LOG.md)), many with identifiable youth. Those approvals don't answer this question.)*
 2. **Youth names.** First names only, first name plus last initial, or none? Does this differ for youth leaders, such as a Senior Patrol Leader?
 3. **Eagle Scout and award recognition.** May names, photos, dates, project descriptions, or biographies of Eagle Scouts be published? With whose consent?
 4. **Adult leader information.** Which adult names and roles may be public? Should contact go through role-based addresses instead of personal ones?

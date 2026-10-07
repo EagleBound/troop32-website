@@ -20,7 +20,7 @@ The long-term map below is still proposed. For v1.0, several entries were **comb
 | `/accessibility/` | Accessibility | Accessibility |
 | (any unknown URL) | 404 | Page-not-found help |
 
-**Header navigation:** About · What We Do · New Families · **Join** (prominent). Contact, Privacy, and Accessibility are in the footer. A Photos page remains on hold, and the member area remains future work. Real photos appear in a few page sections ([PHOTO-LOG.md](PHOTO-LOG.md)); the homepage photo mosaic is hidden until it can show at least four approved photos from at least three different events.
+**Header navigation:** About · What We Do · New Families · **Join** (prominent). Contact, Privacy, and Accessibility are in the footer. A Photos page remains on hold, and the member area remains future work. Real photos from six 2026 Troop 32 events appear on Home (hero, program cards, and a "Scouting in action" mosaic) and What We Do ([PHOTO-LOG.md](PHOTO-LOG.md#where-each-photo-is-used)). This does not settle the open youth-photo policy, which is a pre-launch item.
 
 ## Public site
 

@@ -8,14 +8,22 @@ import type { PhotoSlot } from '../data/photos';
 interface Props {
   slot: PhotoSlot;
   /** Visual shape of the frame. */
-  ratio?: 'landscape' | 'square' | 'portrait' | 'wide';
+  ratio?: 'landscape' | 'square' | 'portrait' | 'wide' | 'panorama';
   /** Show the caption under the frame. */
   showCaption?: boolean;
   /** Responsive sizes hint for approved photos. */
   sizes?: string;
+  /** Image widths Astro generates. Large frames (such as panoramas) need bigger ones. */
+  widths?: number[];
 }
 
-const { slot, ratio = 'landscape', showCaption = false, sizes = '(min-width: 52rem) 50vw, 100vw' } = Astro.props;
+const {
+  slot,
+  ratio = 'landscape',
+  showCaption = false,
+  sizes = '(min-width: 52rem) 50vw, 100vw',
+  widths = [480, 800, 1200],
+} = Astro.props;
 
 // Focal point uses classes (not inline styles) so the strict Content-Security-Policy still applies.
 const focusClasses = [`fx-${slot.focus?.x ?? 50}`, `fy-${slot.focus?.y ?? 50}`];
@@ -25,7 +33,7 @@ const focusClasses = [`fx-${slot.focus?.x ?? 50}`, `fy-${slot.focus?.y ?? 50}`];
   <div class:list={['photo-frame-media', ...focusClasses]}>
     {
       slot.image ? (
-        <Image src={slot.image} alt={slot.alt ?? ''} widths={[480, 800, 1200]} sizes={sizes} />
+        <Image src={slot.image} alt={slot.alt ?? ''} widths={widths} sizes={sizes} />
       ) : (
         <Scene scene={slot.scene} />
       )
@@ -57,6 +65,10 @@ const focusClasses = [`fx-${slot.focus?.x ?? 50}`, `fy-${slot.focus?.y ?? 50}`];
 
   .photo-frame--wide .photo-frame-media {
     aspect-ratio: 16 / 9;
+  }
+
+  .photo-frame--panorama .photo-frame-media {
+    aspect-ratio: 2 / 1;
   }
 
   .photo-frame-media :global(img) {
