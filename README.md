@@ -6,14 +6,14 @@ Official website repository for Scouting America Troop 32 in Santa Rosa, Califor
 
 ## Quick start
 
-Requires Node.js 22.12 or newer. From this folder:
+Requires Node.js 22.18 or newer. From this folder:
 
 ```bash
 npm install     # first time, or after package.json changes
 npm run dev     # then open http://localhost:4321/
 ```
 
-Press **Ctrl + C** to stop the server. `npm run build` creates the finished site in `dist/`. Full instructions are in [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md).
+Press **Ctrl + C** to stop the server. `npm run build` creates the finished site in `dist/`; `npm test` runs the automated tests. Full instructions are in [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md).
 
 ## Project Documentation
 

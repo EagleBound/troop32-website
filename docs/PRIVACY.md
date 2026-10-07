@@ -131,6 +131,8 @@ Documentation example (fictional Scout): *Eagle Project · Jordan Q. — July 20
 
 Private or member event information never goes in this public Git repository, in any form. A future member system will keep it in separate private storage and link it to the public event through a **stable event identifier**. Authentication, private storage, email subscriptions, and member pages are future work and need their own PLAN and approval.
 
+That identifier is each event record's permanent `uid` (E1). **A draft event is not private.** `draft: true` only keeps the event off the website; the file is still in the public repository, so a draft may contain only information suitable for public disclosure.
+
 ### Recency and retention
 
 - Completed events less than **12 months** old will be shown as **Recent Adventures**. At 12 months or older, they move to the **Troop 32 Archive**. *(Policy only; not built yet.)*

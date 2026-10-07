@@ -10,7 +10,7 @@ The site is built with **[Astro](https://astro.build)**, a tool that turns page 
 
 ## Prerequisites
 
-- **Node.js** version **22.12 or newer** (the project was set up with Node 24). Check with:
+- **Node.js** version **22.18 or newer** (the project was set up with Node 24). 22.18 is the first version that runs the TypeScript tests directly. Check with:
 
   ```bash
   node --version
@@ -62,6 +62,16 @@ then open the address it prints (normally <http://localhost:4321/>). Stop it wit
 
 `dist/` is not saved in Git. The hosting service builds its own copy (set up in a later, separately approved work package).
 
+The build also **checks every event record** (see [Add an event](#add-an-event)). Errors stop the build; warnings are printed in yellow for the Webmaster to review.
+
+## Run the tests
+
+```bash
+npm test
+```
+
+This runs the automated tests in `tests/` with Node's built-in test runner (no extra tools). They check the event rules: the schema, Upcoming/Recent/Archive classification (including the 12-month boundary), and the content checks. A run that ends with `fail 0` passed. Test data is **fictional** (for example *Jordan Q.*); never put a real Scout in a test.
+
 ## Where things live
 
 | What | Where | Notes |
@@ -72,6 +82,8 @@ then open the address it prints (normally <http://localhost:4321/>). Stop it wit
 | **Repeated troop facts** | `src/data/site.ts` | Troop name, meeting day/time/place, Scoutmaster, public contact, navigation. **Change a fact here and it updates on every page.** |
 | **Scouting principles** | `src/data/principles.ts` | Scout Oath, Law, Motto, Slogan, Outdoor Code. Must match [CONTENT-GUIDE.md](CONTENT-GUIDE.md). |
 | **Photo slots** | `src/data/photos.ts` | Which approved photo (or fallback illustration) appears in each photo spot. Each page section has its **own** slot (`hero`, `home.*`, `whatWeDo.*`, and the `gallery` mosaic list), so a photo never repeats on another page by accident. |
+| **Events** | `src/content/events/` | One Markdown file per event (see [Add an event](#add-an-event)). Rules: `src/lib/events/`; collection setup: `src/content.config.ts`. |
+| **Tests** | `tests/` | Automated tests, run with `npm test`. |
 | **Photo approval record** | `docs/PHOTO-LOG.md` | Source, privacy review, and approval for every published photo. |
 | **Styles** | `src/styles/global.css` | Colors, fonts, spacing, and buttons, defined once as "design tokens" at the top. Each component also has its own `<style>` section. |
 | **Approved photos** | `src/assets/photos/` | Only approved, sanitized derivatives (metadata removed, neutral names). Never originals. |
@@ -117,6 +129,62 @@ Astro automatically creates smaller, faster versions of the photo for phones and
 
 **Keep the site balanced.** Every slot now has a real photo, drawn from six 2026 events, with each photo used once (see [PHOTO-LOG.md → Where each photo is used](PHOTO-LOG.md#where-each-photo-is-used)). When new photos arrive, replace a slot only if the new photo tells the troop's story better, and prefer events that aren't already shown on that page. Don't add a photo just because it exists. Record every change of placement in PHOTO-LOG.md. The "used once" rule covers these general page slots only. Future event galleries may reuse a photo as part of the event's historical record ([PRIVACY.md → Event galleries](PRIVACY.md#event-galleries)).
 
+### Add an event
+
+> **Data only, so far.** Event records and their checks exist, but no Events pages show them yet (a later work package). Policy: [PRIVACY.md → Events](PRIVACY.md#events-what-may-be-public-approved-e0-2026-10-07) and [Youth names](PRIVACY.md#youth-names).
+
+Each event is one Markdown file in `src/content/events/`. **The file name is the event's permanent URL**: lowercase words joined by hyphens, at most 60 characters. Including the year is recommended (`eagle-project-trail-bench-2027.md` → `/events/eagle-project-trail-bench-2027/`) but not required. **Never put a Scout's name in the file name**, not even First L. Don't rename a published event.
+
+```md
+---
+uid: evt-k3m9q2zt           # permanent ID; never change or reuse (see below)
+title: "Eagle Project · Jordan Q."   # fictional example; real content uses the Scout's real First L.
+summary: Scouts built a bench along a hillside trail.
+status: completed           # planned | completed | cancelled | postponed
+month: "2027-07"            # month only for ordinary events; quote it
+# endMonth: "2027-08"       # only for events that span months
+# draft: true               # not shown on the site, but STILL PUBLIC in Git
+# destination: Melita Island   # general or well-known place only
+cover:
+  src: ../../assets/photos/example-photo-01.jpg
+  alt: Scouts carry a wooden bench up a dirt trail.
+gallery:                    # completed events only; aim for 6–12, max 20
+  - src: ../../assets/photos/example-photo-02.jpg
+    alt: Two Scouts sand the bench seat.
+    caption: Finishing the seat
+review:                     # required unless draft
+  reviewedByRole: webmaster # webmaster | adult-project-lead
+  reviewedOn: 2027-08-03
+---
+
+The story of the event goes here, in plain Markdown.
+```
+
+- **`uid`**: `evt-` plus 8 random lowercase letters and digits, unique to this event. A future member area will use it to link private information without putting that information here. Make one with `node -e "console.log('evt-'+Math.random().toString(36).slice(2,10).padEnd(8,'0'))"`.
+- **`status`**: a planned event whose month has passed is hidden and flagged until you mark it `completed`, `cancelled`, or `postponed`; the site never assumes it happened. `postponed` shows in Upcoming as "Postponed; new date to be announced". When the new month is known, set `status: planned` and the new `month`. `cancelled` shows as "Cancelled" through its month, then disappears.
+- **Where it appears** (worked out at each build): Upcoming for planned, postponed, and current cancelled events; **Recent Adventures** for completed events less than 12 months after their month; the **Troop 32 Archive** after that. Because the site is static, an event moves only when the site is rebuilt.
+- **Photos** must already be approved and listed in [PHOTO-LOG.md](PHOTO-LOG.md) (the build checks this) and saved in `src/assets/photos/`. Every photo needs alt text; don't name youth in alt text. A planned event may use an older photo as its cover, but its alt text and caption must not suggest the photo shows the upcoming event.
+- **Names**: a Scout is real First L.; an adult leader is Mr. or Mrs. Last Name. You are the review point for who is a Scout and who is an adult. If you're not sure, ask; don't guess.
+- **Never add** meeting points, departure or return times, drivers or transport, attendee lists, patrols, itineraries, campsite details, contact details, or Google Drive links. The schema rejects unknown fields, and the build rejects Drive links.
+- **Public/community events** (for example a pancake breakfast open to everyone) can show an exact date, time, venue, and how to take part, but only after the Scoutmaster, Committee Chair, or designated adult leader authorizes it. Record that authorization:
+
+  ```yaml
+  designation: public-community
+  publicDesignation:
+    approvedByRole: scoutmaster   # scoutmaster | committee-chair | designated-adult-leader
+    approvedOn: 2027-01-15
+  publicDetails:
+    date: 2027-03-06
+    startTime: "08:00"            # 24-hour, quoted
+    endTime: "11:00"
+    venue: { name: Example Hall, address: "100 Example Street, Example City" }
+    participation: Open to everyone. Tickets at the door.
+  ```
+
+**What the build checks.** Errors (build stops): unknown fields, missing alt text or review, more than 20 gallery photos, a gallery on an event that isn't completed, public details without a public designation, a duplicate `uid`, a bad file name, a photo missing from PHOTO-LOG.md, a "completed" event in a future month, any Google Drive or Docs link, and an email address or phone number in an ordinary event. Warnings (review them): more than 12 gallery photos, a planned event whose date has passed, an email or phone number in a public/community event (confirm it is meant to be public), and a clock time or exact date in an ordinary event. Names, captions, and who is a Scout are **not** checked automatically; that is the human review.
+
+In `npm run dev`, editing an event reloads it but doesn't rerun the cross-event checks. Run `npm run build` before committing.
+
 ### The troop emblem
 
 The header shows the Troop 32 emblem from `src/assets/brand/troop32-emblem.png`. It was prepared from the original emblem file, which is kept **outside** this repository and never modified, by:
@@ -159,6 +227,7 @@ All three are changed together in the separately approved launch work package.
 | `Cannot find module` or `astro: not found` | Run `npm install`. |
 | Port 4321 is already in use | Another copy of the server is running. Stop it with Ctrl + C in its terminal, or run `npm run dev -- --port 4322` and open <http://localhost:4322/>. |
 | The page didn't update | Save the file, then refresh the browser. If it is still stuck, stop the server (Ctrl + C) and run `npm run dev` again. |
+| `Event content check failed` or `does not match collection schema` | The message names the event file and the problem. See [Add an event](#add-an-event). |
 | The build shows an error | Read the first red error line: it usually names the file and line. Ask Clawson in a PLAN request to explain it. |
 | Something looks very wrong after many changes | `git status` and `git diff` show exactly what changed. Nothing is permanent until it is committed. |
 

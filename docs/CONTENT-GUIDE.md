@@ -124,6 +124,7 @@ Full rules: [PRIVACY.md → Events](PRIVACY.md#events-what-may-be-public-approve
 - **Designated public/community events** (for example the Annual Pancake Breakfast or an Open House): the exact date, time, public venue, and admission details are allowed, but **only** when leadership has designated that event as public.
 - **Eagle projects** follow the same rules as any other event. A named Scout is First L., upcoming or completed. The event type decides the logistics. An ordinary listing shows month and year and a general description (e.g. *Eagle Project · Jordan Q. — July 2027*, a fictional example). Exact date, time, location, and participation details appear only if leadership designates the project a public event ([PRIVACY.md](PRIVACY.md#named-scouts-in-event-content-including-eagle-projects)). The slug never contains the name: `/events/eagle-project-trail-bench-2027/`.
 - **Event pages and galleries** are a historical record. They may reuse photos that also appear elsewhere on the site.
+- **Event records:** how to write one, its fields, and what the build checks are in [DEVELOPMENT.md → Add an event](DEVELOPMENT.md#add-an-event).
 
 ### Events area (future)
 
