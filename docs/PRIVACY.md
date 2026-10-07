@@ -50,10 +50,7 @@ Do **not** publish publicly without an explicitly approved policy and appropriat
 - private troop records;
 - any other information that could unnecessarily identify, locate, contact, or profile youth members.
 
-Also in this tier until a policy is approved:
-
-- youth names, photographs, and identifying captions (see [Open policy questions](#open-policy-questions));
-- Eagle Scout and other recognition that identifies individual youth.
+Youth names, photographs, captions, and Eagle Scout recognition are now governed by the approved [Youth names, photographs, and recognition](#youth-names-photographs-and-recognition) policy. Anything outside that policy stays in this tier.
 
 ### Tier 4: Never in the repository or on the website
 
@@ -86,6 +83,60 @@ Specific youth activity logistics stay **private** unless troop leadership expli
 
 **Why the difference?** A regular weekly meeting at a public church building is how families find the troop. Specific dates and places of youth activities away from the meeting location can reveal where identifiable youth will be, and when, which raises safety concerns.
 
+## Events: what may be public (approved E0, 2026-10-07)
+
+### Ordinary troop events (the default)
+
+For outings, campouts, high adventure, service projects, and other ordinary troop activities, the public site may show **only general information**:
+
+- event name;
+- month and year;
+- a general description;
+- a well-known destination, where appropriate. Well-known Scouting destinations such as **Camp Meriwether**, **Melita Island**, and **Philmont Scout Ranch** may be named.
+
+**Why:** these rules exist to reduce how much information about Scouts that could help someone identify or locate them is publicly available. They lower, but can't remove, the risk that an outsider uses the troop website to identify, locate, track, contact, or otherwise target a youth. The [naming rules](#youth-names) and these event rules work together.
+
+For ordinary troop activities, don't publicly expose anything that isn't needed and could materially help someone locate or track Scouts:
+
+- youth full names;
+- private operational locations or rendezvous points;
+- unnecessary exact dates and times;
+- departure or return schedules;
+- transportation or driver information;
+- attendee lists or rosters;
+- patrol assignments;
+- private itineraries;
+- other non-public logistical or personal information.
+
+Private troop logistics in that list (rendezvous points, departure and return times, transportation and driver arrangements, attendee lists, campsite details, patrol assignments, itineraries, and similar operational information) must also **never be stored in the public repository**, even in a field that isn't displayed.
+
+### Designated public/community events (opt-in)
+
+Troop leadership may **explicitly designate** an event as intended for the general public. Examples: the Annual Pancake Breakfast, an Open House, or another community event. For a designated public event, the site may publish the exact date, time, public venue, admission information, and other details the public needs to attend.
+
+This is an **affirmative leadership designation**, made for each event. It is never the default for ordinary troop activities. If no designation is recorded, treat the event as ordinary.
+
+### Named Scouts in event content (including Eagle projects)
+
+*Amended 2026-10-07 (E0 clarifications). This replaces the earlier rule that upcoming Eagle listings don't name the Scout. Eagle projects have no separate naming convention.*
+
+A Scout named in any event content, upcoming or completed, is named as **First L.** under the general [naming rules](#youth-names). The kind of event decides only which logistics may appear alongside the name:
+
+- **Ordinary troop event (the default):** First L., month and year, a general description, and anything else the [ordinary-event rules](#ordinary-troop-events-the-default) allow. **No** exact date or time, rendezvous information, specific operational location details, transportation arrangements, attendee information, or other private logistics.
+- **Designated public/community event:** if troop leadership affirmatively designates the event (for example an Eagle project) as public, the [public-event exception](#designated-publiccommunity-events-opt-in) applies. The site may then publish the exact date, time, public location, participation information, and other details the public needs to attend or help.
+
+Documentation example (fictional Scout): *Eagle Project · Jordan Q. — July 2027* at `/events/eagle-project-trail-bench-2027/`.
+
+### Public and private event information are kept apart
+
+Private or member event information never goes in this public Git repository, in any form. A future member system will keep it in separate private storage and link it to the public event through a **stable event identifier**. Authentication, private storage, email subscriptions, and member pages are future work and need their own PLAN and approval.
+
+### Recency and retention
+
+- Completed events less than **12 months** old will be shown as **Recent Adventures**. At 12 months or older, they move to the **Troop 32 Archive**. *(Policy only; not built yet.)*
+- The Troop 32 Archive is meant to be a **durable historical record**. By default, archived events and approved photos may stay up indefinitely.
+- Troop leadership must always be able to **remove or revise** a youth's name, photograph, caption, or historical record when a family or privacy concern comes up. Handle such a request promptly. Removing something from the site doesn't remove it from Git history (see [Repository rules](#repository-rules)), so tell the directing human and the designated adult leader if history needs attention.
+
 ## Repository rules
 
 **Treat this GitHub repository as public.** Anything committed, including in documentation, drafts, code comments, test data, or Git history, should be considered publicly disclosed. Removing something in a later commit does **not** remove it from history.
@@ -97,16 +148,70 @@ Specific youth activity logistics stay **private** unless troop leadership expli
 - Future member-area *code* may live in this public repository. Private production *data* must not.
 - If something private is ever committed by mistake, **stop and tell the directing human (see [PROJECT.md → Current phase](PROJECT.md#current-phase)) and the designated adult leader**. Do not try to quietly rewrite history.
 
+## Youth names, photographs, and recognition
+
+Approved in work package E0 (2026-10-07). This resolves open questions 1–4, 6, and 8 below.
+
+### Photographs of Scouts
+
+**Recognizable Scouts may appear** in approved public photographs of ordinary Scouting activities, after the established review process: full-resolution privacy review, then human publication approval recorded in [PHOTO-LOG.md](PHOTO-LOG.md).
+
+Approval of a recognizable face doesn't approve everything else in the frame. Still check each photo for sensitive information such as names, tags, signs, plates, schedules, private locations, and awards tied to individuals (see [Photos and images](#photos-and-images)).
+
+### Youth names
+
+The naming rule depends on **who the person is** (a Scout/youth or an adult leader), **not on the type of event or content.** It's part of the same safeguard as the event rules (see the **Why** under [Ordinary troop events](#ordinary-troop-events-the-default)).
+
+- Whenever a Scout is identified anywhere in public-facing content, use the Scout's **real first name and real last initial: First L.** That covers event stories, captions, Eagle projects, courts of honor, service projects, camp stories, leadership stories, awards, historical records, and all other public content.
+- **Never publish a Scout's full last name**, even if it's available from a source.
+- **Never substitute a fictional or placeholder identity for a real Scout** in actual site content.
+- **Fictional names** such as *Jordan Q.* belong **only** in documentation, templates, tests, or examples where no real person is shown. Every *Jordan Q.* example in these documents is fictional.
+- Example (documentation only): an actual event displayed as *Eagle Project · Jordan Q. — July 2027* would use the permanent URL `/events/eagle-project-trail-bench-2027/`. The name is visible on the page; the slug describes the project.
+- A youth's name may appear in a caption when it adds real editorial value, such as recognition or a leadership role. **Don't identify Scouts just because the Webmaster knows who they are.**
+- **Alt text** normally describes the photo without naming individual youth.
+- **Never put youth names in URLs or slugs, not even abbreviated.** A page may visibly say "Eagle Project · Jordan Q.", but its permanent slug describes the project, not the Scout. For example: `eagle-project-trail-bench-2026`.
+
+### Adult names
+
+Whenever an adult leader is identified in public-facing content, use **Mr. Last Name** or **Mrs. Last Name**, as appropriate. This doesn't extend to adults' personal contact details (see [Tier 3](#tier-3-requires-explicit-policy-and-leadership-approval-before-any-publication)).
+
+### Scout or adult?
+
+- **The Webmaster is the human review point** for whether a person is a Scout or an adult, and for names, captions, and the public/private boundary.
+- If Clawson treats someone as a Scout and the Webmaster says the person is an adult leader (or the reverse), correct the naming.
+- **Don't guess or invent** whether someone is a youth or an adult when it matters and isn't known. Ask the Webmaster.
+- Don't build a system for storing or inferring people's youth/adult status. Human editorial review handles it.
+
+### Eagle Scout projects
+
+Eagle projects have **no separate naming convention**. A Scout named in Eagle project content, upcoming or completed, is named as First L. The event rules decide what logistics may accompany the name ([Named Scouts in event content](#named-scouts-in-event-content-including-eagle-projects)).
+
+### Swimming and aquatic photographs
+
+Use contextual editorial judgment. Don't reject every photo that shows water or swimwear. This is an editorial and privacy safeguard. It doesn't mean aquatic activities are inappropriate.
+
+- Ordinary boating, sailing, canoeing, kayaking, and similar Scouting photos are acceptable when otherwise appropriate.
+- Incidental or background swimwear, at a resolution low enough that no individual is prominent, is generally not a concern.
+- Boys in ordinary swim shorts are generally acceptable, if the photo is otherwise appropriate.
+- **Be substantially more conservative with photos that prominently show girls in swimsuits.** Don't publish a photo where a girl in a swimsuit is a prominent or high-resolution subject, unless a **designated adult leader specifically approves that image** for publication. Record that approval in PHOTO-LOG.md.
+
+Photos already approved before this policy, including `water-sailing-01.jpg`, are not re-reviewed just because the policy changed.
+
 ## Photos and images
 
-Until a youth-photo policy is approved, use a conservative approach:
+Every photo, with or without recognizable youth:
 
 - Use only images the troop has appropriate permission to use.
-- Avoid unnecessary identifying captions. Do not pair names with faces.
-- Avoid images that reveal private locations, such as homes or meeting-up points.
+- Follow the [names and captions rules](#youth-names) above. Avoid captions that identify people without editorial value.
+- Avoid images that reveal private locations or logistics, such as homes, meeting-up points, vehicles with legible plates, or posted schedules.
 - **Remove embedded GPS/location metadata (EXIF)** from images before public use.
 - When in doubt, leave it out and flag it.
 - Every published photo needs a **full-resolution privacy review** and **human publication approval**, recorded in [PHOTO-LOG.md](PHOTO-LOG.md). Thumbnails are not enough to judge whether faces, names, or tags are visible.
+
+### Event galleries
+
+- An approved photo may appear **both** in an event's historical gallery **and** elsewhere on the site. The "use each photo once" preference applies to general marketing and page slots where visual variety matters. It doesn't stop appropriate reuse in an event's historical record.
+- An event gallery should normally hold **6–12 strong, curated photos**. More than 12 should eventually produce an editorial warning, not an automatic failure. **20 is the intended hard maximum.** *(Not yet enforced.)*
 
 ### Original media and working copies
 
@@ -126,13 +231,15 @@ The troop's Google account can see parts of the troop Drive that hold personal a
 
 These need a decision by the **designated adult leader / troop leadership**. Clawson must not answer them on its own.
 
-1. **Youth photographs.** May identifiable youth faces appear publicly? Group shots only? What consent is required, from whom, and how is it recorded? *(Pre-launch item. The development site uses photos the adult project lead approved one by one ([PHOTO-LOG.md](PHOTO-LOG.md)), many with identifiable youth. Those approvals don't answer this question.)*
-2. **Youth names.** First names only, first name plus last initial, or none? Does this differ for youth leaders, such as a Senior Patrol Leader?
-3. **Eagle Scout and award recognition.** May names, photos, dates, project descriptions, or biographies of Eagle Scouts be published? With whose consent?
-4. **Adult leader information.** Which adult names and roles may be public? Should contact go through role-based addresses instead of personal ones?
+Questions resolved in work package E0 (2026-10-07) are struck through. Their decisions are recorded above and in the [decision log](PROJECT.md#decision-log). Any part a decision left open is noted.
+
+1. ~~**Youth photographs.**~~ **Resolved:** recognizable Scouts may appear in approved photos of ordinary Scouting activities ([Photographs of Scouts](#photographs-of-scouts)). *Still open: whether any family consent or opt-out process is needed, and how it would be recorded.*
+2. ~~**Youth names.**~~ **Resolved:** real First L. throughout public content, whatever the type of event or content; never full last names; never in URLs ([Youth names](#youth-names)). The same rule applies to youth leaders, such as a Senior Patrol Leader.
+3. ~~**Eagle Scout and award recognition.**~~ **Resolved for naming:** any Scout named in recognition (Eagle projects, awards, courts of honor), upcoming or completed, is named as First L.; event rules govern the accompanying logistics ([Eagle Scout projects](#eagle-scout-projects)). *Still open: whether to publish Eagle Scout biographies and individual portraits, and any consent step.*
+4. ~~**Adult leader information.**~~ **Resolved for names:** Mr. or Mrs. Last Name, as appropriate ([Adult names](#adult-names)). *Still open: which roles are listed, and role-based contact addresses (see question 5).*
 5. **Public contact channel.** What official troop contact method should the public use?
-6. **Calendar.** What, if anything, about upcoming activities may be public beyond the regular meeting?
-7. **Member area.** What information belongs there, who gets accounts, and who manages them?
-8. **Retention.** How long should old posts, photos, and recognition stay up?
+6. ~~**Calendar.**~~ **Resolved:** general information only for ordinary events; full public details only for events leadership designates as public ([Events](#events-what-may-be-public-approved-e0-2026-10-07)). *Still open: who records a public-event designation, and how.*
+7. **Member area.** What information belongs there, who gets accounts, and who manages them? *(E0 set only the boundary: private event information never goes in this repository and links to public events by a stable event identifier.)*
+8. ~~**Retention.**~~ **Resolved:** the Archive is kept indefinitely by default, and leadership can remove or revise youth content on request ([Recency and retention](#recency-and-retention)).
 
 When a question is resolved, record the decision in [PROJECT.md](PROJECT.md#decision-log) and update this document.

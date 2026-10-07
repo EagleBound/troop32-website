@@ -20,7 +20,7 @@ The long-term map below is still proposed. For v1.0, several entries were **comb
 | `/accessibility/` | Accessibility | Accessibility |
 | (any unknown URL) | 404 | Page-not-found help |
 
-**Header navigation:** About · What We Do · New Families · **Join** (prominent). Contact, Privacy, and Accessibility are in the footer. A Photos page remains on hold, and the member area remains future work. Real photos from six 2026 Troop 32 events appear on Home (hero, program cards, and a "Scouting in action" mosaic) and What We Do ([PHOTO-LOG.md](PHOTO-LOG.md#where-each-photo-is-used)). This does not settle the open youth-photo policy, which is a pre-launch item.
+**Header navigation:** About · What We Do · New Families · **Join** (prominent). Contact, Privacy, and Accessibility are in the footer. A separate Photos page is superseded by the planned Events area (not built), and the member area remains future work. Real photos from six 2026 Troop 32 events appear on Home (hero, program cards, and a "Scouting in action" mosaic) and What We Do ([PHOTO-LOG.md](PHOTO-LOG.md#where-each-photo-is-used)). These fall within the youth-photo policy approved 2026-10-07 (E0).
 
 ## Public site
 
@@ -31,18 +31,19 @@ The **v1.0 launch** column is a *proposed* scope for the recruiting-ready Websit
 | **Home** | Yes | Welcome, what Troop 32 is, how to visit or join | Prospective families, community | Could feature the regular Monday meeting and a link to "Join." Tagline use ("Eagle Bound!") is to be decided. |
 | **About Troop 32** | Yes | Who we are | Everyone | History must be confirmed by leadership before use (see [PROJECT.md](PROJECT.md#open-content-items-requiring-confirmation)). |
 | ↳ Troop 32-B and Troop 32-G | Yes | Explain the two-troop structure simply | Prospective families | Short explanation. The rest of the site still uses "Troop 32." |
-| ↳ Troop leadership | Yes | Who leads the troop | Prospective families | Scoutmaster: James Vickers. Other names, photos, and contact details depend on [privacy policy](PRIVACY.md#open-policy-questions). |
+| ↳ Troop leadership | Yes | Who leads the troop | Prospective families | Scoutmaster: James Vickers. Other adult leaders may be named as Mr. or Mrs. Last Name ([PRIVACY.md](PRIVACY.md#adult-names)). Which roles to list, and contact details, are [still open](PRIVACY.md#open-policy-questions). |
 | **What Is Scouting?** | Yes | Scouting for newcomers | Families new to Scouting | Link to official Scouting America resources. |
 | ↳ Scout Oath, Scout Law, and Scouting values | Yes | Show the principles Scouts live by | Everyone | Approved text in [CONTENT-GUIDE.md](CONTENT-GUIDE.md#scouting-principles-as-editorial-principles). Includes Motto, Slogan, and Outdoor Code. |
 | **What Scouts Do** | Yes | The program in action | Prospective families, Scouts | General descriptions only. No specific dates or locations of outings. |
 | ↳ Outdoor activities | Yes, if content is supplied | Camping, hiking, and outdoor skills | | `[TO BE PROVIDED]`: what the troop actually does. |
 | ↳ Service | Yes, if content is supplied | Community service | | `[TO BE PROVIDED]` |
 | ↳ Advancement | Yes | Ranks and merit badges explained | Families, Scouts | Link to official advancement resources. |
-| ↳ The Eagle Scout journey | Yes (general only) | What Eagle means and how Scouts get there | Families, Scouts | Recognizing individual Eagle Scouts depends on [policy](PRIVACY.md#open-policy-questions). |
+| ↳ The Eagle Scout journey | Yes (general only) | What Eagle means and how Scouts get there | Families, Scouts | A Scout named in Eagle project or other recognition content, upcoming or completed, is named as First L., like anywhere else on the site ([PRIVACY.md](PRIVACY.md#eagle-scout-projects)). Whether to publish Eagle biographies and individual portraits is [still open](PRIVACY.md#open-policy-questions). |
 | **Join Troop 32** | Yes | How to join, step by step | Prospective families | Age and eligibility details must be confirmed. Link to official applications. |
 | ↳ Information for new families | Yes | What to expect, costs, gear, first steps | Prospective families | Costs and fees `[TO BE PROVIDED]` by leadership. |
 | ↳ Regular meetings | Yes | When and where | Prospective families | **Approved public:** Mondays, 7:00 PM, Santa Rosa Bible Church, 4575 Badger Road, Santa Rosa, California. |
-| **Photos** | On hold | Show Scouting in action | Everyone | **On hold until a youth-photo policy is approved.** v1.0 may use non-identifying activity images in the meantime. |
+| **Photos** | Superseded | Show Scouting in action | Everyone | Replaced by the planned **Events** area below. The youth-photo policy was approved 2026-10-07 (E0). |
+| **Events** (future) | Later | Upcoming Events, Recent Adventures (completed less than 12 months ago), Troop 32 Archive (12 months or older), with curated event galleries | Everyone | Policy approved 2026-10-07 (E0): primary nav label "Events", plus a homepage teaser. General information only for ordinary events; full details only for designated public events ([PRIVACY.md → Events](PRIVACY.md#events-what-may-be-public-approved-e0-2026-10-07)). **Not built.** Needs its own PLAN and approval. |
 | **Contact** | Yes | Reach the troop | Everyone | Through an official troop channel. **The channel must be decided before launch.** No personal youth contact details. |
 | **Privacy** | Yes | How the site handles information | Everyone | Public-facing notice. Wording needs leadership review. |
 | **Accessibility** | Yes | Accessibility commitment and how to report problems | Everyone | States the WCAG 2.2 AA target without claiming guaranteed compliance. |
@@ -57,7 +58,7 @@ Conceptually, it might include:
 
 | Concept | Notes |
 | --- | --- |
-| Detailed calendar and logistics | Outing and event details that must not be public. |
+| Detailed calendar and logistics | Outing and event details that must not be public. Stored outside the public repository and linked to the public event by a stable event identifier (E0, 2026-10-07). |
 | Announcements | Member-only news. |
 | Documents and forms | Troop materials. Official Scouting America forms may simply be linked. |
 | Other member resources | `[TO BE PROVIDED]` |

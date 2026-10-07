@@ -30,11 +30,17 @@ Class B and C photos need explicit human publication approval. Thumbnail review 
 
 **Approval is not placement.** A human-approved photo is *available* for editorial use. It doesn't have to appear on the site, and where it appears is an editorial decision recorded in [Where each photo is used](#where-each-photo-is-used).
 
-> **Pre-launch governance item (still open).** Most published photos are privacy class **B** (identifiable youth). Each was approved individually by the adult project lead, but the troop-wide **youth-photo policy** is still undecided ([PRIVACY.md → Open policy questions](PRIVACY.md#open-policy-questions)). [PROJECT.md](PROJECT.md#website-v10-objectives-temporary) says v1.0 must either launch without identifiable youth photos or wait for an approved policy. Individual photo approvals recorded here **do not** resolve that policy. The designated adult leader and troop leadership must decide it before public launch.
+> **Youth-photo policy approved (E0, 2026-10-07).** Recognizable Scouts may appear in approved public photos of ordinary Scouting activities, after the review and approval steps above ([PRIVACY.md → Youth names, photographs, and recognition](PRIVACY.md#youth-names-photographs-and-recognition)). This resolves the earlier pre-launch item about privacy-class-B photos. Every photo still needs its own full-resolution review for sensitive details in the frame.
+>
+> **Already-approved photos are not re-reviewed** just because the policy changed. That includes `water-sailing-01.jpg`, which is approved under the swimming/aquatic rule.
+
+**Swimming and aquatic photos.** Use contextual judgment ([PRIVACY.md](PRIVACY.md#swimming-and-aquatic-photographs)). If a girl in a swimsuit is a prominent or high-resolution subject, the photo needs specific **designated adult leader** approval. Record that approval, and the approver's role, in the photo's entry.
+
+**Names.** This log still never records youth names. Captions on the site may use First L. where the [naming rules](PRIVACY.md#youth-names) allow. Record only the fact that a photo has a named caption, never the name itself.
 
 ## Where each photo is used
 
-Each photo appears in exactly one place. Slots are defined in `src/data/photos.ts`.
+In general page slots, each photo appears in exactly one place, so the site shows variety. Slots are defined in `src/data/photos.ts`. A future event gallery may also include a photo used in a slot. That reuse is allowed as part of the event's historical record ([PRIVACY.md → Event galleries](PRIVACY.md#event-galleries)). This log keeps its current single-file structure for now.
 
 | Page › section | Photo | Collection | Frame |
 | --- | --- | --- | --- |

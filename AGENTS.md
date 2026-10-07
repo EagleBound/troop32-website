@@ -159,6 +159,8 @@ The existing production site at troop32.org stays untouched while the replacemen
 - **Treat this repository as public.** Anything committed is publicly disclosed. Never commit real credentials, secrets, passwords, API keys, private member data, private contact information, rosters, medical or emergency information, or other protected information. Use clearly fake placeholder data.
 - **Privacy takes precedence over convenience** and over deadlines. Youth contact details, rosters, private logistics, transportation, medical/emergency information, credentials, and private records never go on the public site without an approved policy and authorization.
 - The regular Monday meeting information is intentionally public. **This permission does not extend** to outings, campouts, special events, travel, pickup/drop-off, or temporary changes.
+- **Events:** ordinary troop events show only general information (name, month/year, general description, well-known destination). Exact public details are allowed only for events leadership explicitly designates as public/community events. Private event logistics (rendezvous points, times, transportation, attendees, campsites, patrols, and similar) **never enter this repository, even as an unrendered field.**
+- **Youth names:** first name + last initial only, never full names, and **never in URLs or slugs**. Recognizable Scouts may appear in photos approved through the documented review process.
 - **When uncertain, treat it as private and flag it for human review.**
 
 Full rules: [`docs/PRIVACY.md`](docs/PRIVACY.md).

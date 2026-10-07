@@ -100,13 +100,50 @@ Follow [PRIVACY.md](PRIVACY.md). In short:
 - The regular Monday meeting is public. Specific outings, campouts, travel, and special events are **not**, unless leadership approves the specific item.
 - When in doubt, leave it out and flag it.
 
+### Naming people
+
+| Who | How | Example |
+| --- | --- | --- |
+| Scouts / youth | Real first name + last initial (First L.). Never a full last name. | *Jordan Q.* (documentation example only) |
+| Adult leaders | Mr. Last Name or Mrs. Last Name, as appropriate | *Mr. Example* (documentation example only) |
+
+The examples in this table are fictional. **Actual site content uses the Scout's real first name and real last initial**, never a placeholder or fictional name ([PRIVACY.md → Youth names](PRIVACY.md#youth-names)).
+
+- The rule depends on whether the person is a Scout or an adult, **not on the type of event or content**. It applies the same way to event stories, captions, Eagle projects, courts of honor, service projects, awards, and historical records.
+- The Webmaster confirms whether a person is a Scout or an adult. If that isn't known and it matters, ask; don't guess. Fix the naming if the Webmaster corrects it.
+
+- Name a youth in a caption only when it adds real editorial value, such as recognition or a leadership role. Don't name Scouts just because you know who they are.
+- **Alt text** describes the photo, not who is in it. Don't name individual youth in alt text.
+- **Never put youth names in URLs or slugs**, not even abbreviated. Slugs describe the event or project: `eagle-project-trail-bench-2026`, not the Scout's name.
+
+### Writing about events
+
+Full rules: [PRIVACY.md → Events](PRIVACY.md#events-what-may-be-public-approved-e0-2026-10-07).
+
+- **Ordinary troop events:** event name, month and year, a general description, and a well-known destination where appropriate (for example Camp Meriwether, Melita Island, or Philmont Scout Ranch). No youth full names, meeting points, unnecessary exact dates or times, departure/return schedules, transportation, attendees, campsites, patrol assignments, or itineraries.
+- **Designated public/community events** (for example the Annual Pancake Breakfast or an Open House): the exact date, time, public venue, and admission details are allowed, but **only** when leadership has designated that event as public.
+- **Eagle projects** follow the same rules as any other event. A named Scout is First L., upcoming or completed. The event type decides the logistics. An ordinary listing shows month and year and a general description (e.g. *Eagle Project · Jordan Q. — July 2027*, a fictional example). Exact date, time, location, and participation details appear only if leadership designates the project a public event ([PRIVACY.md](PRIVACY.md#named-scouts-in-event-content-including-eagle-projects)). The slug never contains the name: `/events/eagle-project-trail-bench-2027/`.
+- **Event pages and galleries** are a historical record. They may reuse photos that also appear elsewhere on the site.
+
+### Events area (future)
+
+These decisions are approved but **not yet built**:
+
+- The primary navigation label will be **Events**.
+- It will contain **Upcoming Events**, **Recent Adventures** (completed events less than 12 months old), and the **Troop 32 Archive** (12 months or older).
+- A homepage teaser for Events / Recent Adventures is approved.
+- Event galleries: normally 6–12 curated photos; more than 12 triggers an editorial warning; 20 is the hard maximum.
+
 ## Imagery
 
-No final youth-photo policy exists yet (see [PRIVACY.md](PRIVACY.md#open-policy-questions)). Until one does:
+Photo policy: [PRIVACY.md → Youth names, photographs, and recognition](PRIVACY.md#youth-names-photographs-and-recognition).
 
 - Obtain appropriate permission before using any image.
-- Avoid unnecessary identifying captions. Don't pair names with faces.
+- Recognizable Scouts may appear in approved photos of ordinary Scouting activities.
+- Avoid identifying captions that don't add editorial value (see [Naming people](#naming-people)).
 - Avoid images that reveal private locations.
+- Use contextual judgment for swimming and aquatic photos. Ordinary boating, sailing, canoeing, and kayaking photos are fine. Photos that prominently show a girl in a swimsuit need specific designated adult leader approval ([PRIVACY.md](PRIVACY.md#swimming-and-aquatic-photographs)).
+- Prefer variety in general page slots: use each photo once there. Event galleries may reuse photos.
 - Remove embedded GPS/location metadata from images before public use.
 - Prefer images that show activities and the spirit of Scouting.
 - Every meaningful image needs alt text (see below).
