@@ -188,6 +188,7 @@ Launching v1.0 and any cutover from the old site to the new site are **separate,
 | Framework | [Astro](https://astro.build) (static output) |
 | Styling | Plain modern CSS with design tokens; no Tailwind, no UI framework |
 | JavaScript | Only the accessible mobile-menu toggle; FAQ uses native HTML disclosure (`<details>`) |
+| Identity | Troop 32 Santa Rosa emblem (`src/assets/brand/troop32-emblem.png`) beside the text "Troop 32 / Santa Rosa, California" in the global header; Apple touch icon from the same emblem; the "32" SVG favicon remains |
 | Fonts | Source Serif 4 + Source Sans 3, self-hosted, SIL Open Font License |
 | Images | Astro responsive images (WebP at several widths) from approved, sanitized derivatives in `src/assets/photos/`; separate photo slot per page section in `src/data/photos.ts`; original SVG illustrations in slots awaiting photos |
 | Repeated facts | `src/data/site.ts` |
@@ -205,6 +206,8 @@ The v1.0 pages avoid unconfirmed facts by using general Scouting descriptions. T
 - Official Scouting America links (youth protection, applications) to add to New Families and Join.
 - Age and grade eligibility, costs, and uniform and gear guidance (currently general: "troop leaders can explain").
 - The public role-based contact address.
+
+- Confirmation by troop leadership that the Troop 32 emblem's Scouting America–derived fleur-de-lis elements are used consistently with current Scouting America brand guidance.
 
 ## Major unresolved architectural decisions
 
@@ -244,12 +247,13 @@ These came from the existing public site and may be stale. They must be **confir
 | 2026-10-06 | Website v1.0 priority: a recruiting-ready public site for the upcoming Open House; member functionality deferred. | Adult project lead, via approved EXECUTE work package |
 | 2026-10-06 | Recorded three neighboring troop websites as design references, not templates ([DESIGN-REFERENCES.md](DESIGN-REFERENCES.md)). | Adult project lead, via approved EXECUTE work package |
 | 2026-10-06 | Website v1.0 architecture: Astro static site, plain CSS, TypeScript where Astro uses it, minimal JavaScript, self-hosted open-license fonts. No Tailwind or UI framework. | Adult project lead, via approved EXECUTE work package (WP1) |
-| 2026-10-06 | Design direction "trail-worn and trustworthy": forest / cream / charcoal / khaki with one warm accent; text identity "Troop 32, Santa Rosa, California"; no Scouting America marks or assumed troop emblem. | Adult project lead, via approved EXECUTE work package (WP1) |
+| 2026-10-06 | Design direction "trail-worn and trustworthy": forest / cream / charcoal / khaki with one warm accent; text identity "Troop 32, Santa Rosa, California"; no Scouting America marks or assumed troop emblem. *(The text-only identity part is superseded below by the approved troop emblem.)* | Adult project lead, via approved EXECUTE work package (WP1) |
 | 2026-10-06 | v1.0 page set and navigation: Home, About, What We Do, New Families, Join (prominent), plus Contact, Privacy, Accessibility, 404 ([SITE-MAP.md](SITE-MAP.md)). | Adult project lead, via approved EXECUTE work package (WP1) |
 | 2026-10-06 | WP1 local foundation built; not deployed. | Adult project lead, via approved EXECUTE work package (WP1) |
 | 2026-10-06 | Permanent rule: external sources (Drive, Dropbox, OneDrive, SharePoint, Box, photo libraries, shared folders, their synced local folders, and similar) are read-only for AI agents. The rule cannot be overridden by EXECUTE or a direct request; changing it requires a designated-adult-approved governance amendment ([AGENTS.md §7](../AGENTS.md#7-external-sources-are-read-only)). | Adult project lead, via approved EXECUTE work package |
 | 2026-10-06 | PLAN may use short-lived, disclosed scratch files in a system temporary folder for analyzing authorized material ([AGENTS.md §3](../AGENTS.md#3-plan-mode-the-default)). | Adult project lead, via approved EXECUTE work package |
 | 2026-10-06 | Photos from the Troop 32 Google Drive collection the adult project lead authorizes are troop-controlled and authorized for public website use; each individual photo still requires full-resolution review and human publication approval, recorded in [PHOTO-LOG.md](PHOTO-LOG.md). | Adult project lead |
 | 2026-10-06 | First real photos published: 3 from Melita Island 2026 (all privacy class B after full-resolution review). Separate photo slots per page; illustrations intentionally retained for future event collections; homepage mosaic hidden until 4+ photos from 3+ events. | Adult project lead, via approved EXECUTE work package |
+| 2026-10-06 | **Supersedes the text-only identity:** the Troop 32 Santa Rosa emblem, supplied and approved by the adult project lead, is the site's primary visual identity in the global header (56 px desktop, 44 px mobile), with the text identity kept alongside it; also used as the Apple touch icon. Not used in the footer, hero, or favicon. The emblem contains Scouting America–derived fleur-de-lis elements; **open item before public launch:** troop leadership to confirm against current Scouting America brand guidance (no legal conclusion made). See [CONTENT-GUIDE.md](CONTENT-GUIDE.md#the-troop-32-emblem). | Adult project lead, via approved EXECUTE work package |
 
 Add new rows as decisions are made. Record who approved each decision by role.

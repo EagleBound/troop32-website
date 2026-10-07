@@ -149,3 +149,12 @@ The project's accessibility target is **WCAG 2.2 Level AA**. Writing these rules
 - Follow current **Scouting America brand guidance** and troop leadership direction for logos, names, and visual identity.
 - This guide does not reach legal conclusions about Scouting America logos, trademarks, uniforms, badges, or insignia. **Flag uncertainties for human review.**
 - Do not create new troop logos or emblems without troop leadership direction.
+
+### The Troop 32 emblem
+
+The **Troop 32 Santa Rosa emblem** (a round patch reading "TROOP" / "SANTA ROSA CA." around a gold fleur-de-lis with two stars and a large "32") was supplied and approved by the adult project lead as the site's **primary visual identity**.
+
+- **Where it appears:** the global header, to the left of the "Troop 32 / Santa Rosa, California" text, which always stays alongside it. Also as the Apple home-screen icon. It does **not** appear in the footer, the homepage hero, or the browser-tab favicon (the bold "32" favicon reads better at small sizes). Using it in one place keeps it from being repeated.
+- **Don't alter it.** Never redraw, recolor, re-letter, stretch, or crop into the artwork. Only ordinary preparation is allowed: proportional resizing and making the area outside the circle transparent. The prepared copy is `src/assets/brand/troop32-emblem.png`; the original file is kept outside this repository.
+- **Accessibility:** in the header it is decorative (`alt=""`), because the linked text next to it names the troop.
+- **Open item before public launch:** the emblem contains **Scouting America–derived fleur-de-lis elements** (the fleur-de-lis with two stars). Troop leadership should confirm that this use is consistent with current Scouting America brand guidance. This guide makes no legal or trademark conclusion.

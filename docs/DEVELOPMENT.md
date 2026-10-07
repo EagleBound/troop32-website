@@ -75,7 +75,8 @@ then open the address it prints (normally <http://localhost:4321/>). Stop it wit
 | **Photo approval record** | `docs/PHOTO-LOG.md` | Source, privacy review, and approval for every published photo. |
 | **Styles** | `src/styles/global.css` | Colors, fonts, spacing, and buttons, defined once as "design tokens" at the top. Each component also has its own `<style>` section. |
 | **Approved photos** | `src/assets/photos/` | Only approved, sanitized derivatives (metadata removed, neutral names). Never originals. |
-| **Other site files** | `public/` | Files copied as-is: `favicon.svg`, `robots.txt`, and `_headers` (security headers for hosting). |
+| **Troop emblem** | `src/assets/brand/troop32-emblem.png` | 512×512 prepared copy of the Troop 32 emblem used in the header (see below). |
+| **Other site files** | `public/` | Files copied as-is: `favicon.svg`, `apple-touch-icon.png`, `robots.txt`, and `_headers` (security headers for hosting). |
 
 ## Common tasks
 
@@ -111,6 +112,17 @@ Only photos approved under the troop's photo policy ([PRIVACY.md](PRIVACY.md#pho
 Astro automatically creates smaller, faster versions of the photo for phones and computers. Always check the built page before committing.
 
 **Keep the site balanced.** Slots that still show an illustration are being kept on purpose for photos from other Troop 32 events (service projects, weekend camping, high adventure such as Philmont or Northern Tier, fundraisers, ordinary meetings). Don't fill a slot just because a photo exists. The homepage photo mosaic (`photos.gallery`) stays hidden until it holds at least four approved photos from at least three different events.
+
+### The troop emblem
+
+The header shows the Troop 32 emblem from `src/assets/brand/troop32-emblem.png`. It was prepared from the original emblem file, which is kept **outside** this repository and never modified, by:
+
+- making the white corners outside the circle transparent, using a soft circular edge just inside the red ring so no white fringe shows on dark backgrounds;
+- resizing proportionally to 512×512 PNG with no metadata.
+
+`public/apple-touch-icon.png` is a 180×180 copy that keeps the white corners, because phones place transparent areas on black and round the corners themselves.
+
+Never edit the artwork itself (see [CONTENT-GUIDE.md](CONTENT-GUIDE.md#the-troop-32-emblem)). If a cleaner original becomes available, regenerate these two files from it the same way.
 
 ### Change colors or fonts
 

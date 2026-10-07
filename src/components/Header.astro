@@ -1,8 +1,10 @@
 ---
-// Site header: text identity, flat navigation, and a prominent Join link.
+// Site header: troop emblem + text identity, flat navigation, and a prominent Join link.
 // On small screens the navigation collapses behind a menu button.
 // Without JavaScript the navigation simply stays visible.
+import { Image } from 'astro:assets';
 import { site, navigation } from '../data/site';
+import emblem from '../assets/brand/troop32-emblem.png';
 
 const current = Astro.url.pathname;
 ---
@@ -10,8 +12,20 @@ const current = Astro.url.pathname;
 <header class="site-header">
   <div class="container header-inner">
     <a class="identity" href="/">
-      <span class="identity-name">{site.name}</span>
-      <span class="identity-place">{site.locality}</span>
+      <Image
+        src={emblem}
+        alt=""
+        width={56}
+        height={56}
+        densities={[1, 2, 3]}
+        loading="eager"
+        decoding="async"
+        class="identity-emblem"
+      />
+      <span class="identity-text">
+        <span class="identity-name">{site.name}</span>
+        <span class="identity-place">{site.locality}</span>
+      </span>
     </a>
 
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" hidden>
@@ -86,10 +100,25 @@ const current = Astro.url.pathname;
 
   .identity {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
     color: var(--cream-50);
     text-decoration: none;
     line-height: 1.1;
+  }
+
+  /* Troop emblem: decorative (alt=""), because the linked text names the troop. */
+  .identity :global(.identity-emblem) {
+    flex: none;
+    display: block;
+    width: 56px;
+    height: 56px;
+  }
+
+  .identity-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
   }
 
   .identity:hover {
@@ -97,6 +126,7 @@ const current = Astro.url.pathname;
   }
 
   .identity-name {
+    white-space: nowrap;
     font-family: var(--font-heading);
     font-size: 1.75rem;
     font-weight: 700;
@@ -210,6 +240,27 @@ const current = Astro.url.pathname;
 
   /* Small screens: collapse the menu when JavaScript is available. */
   @media (max-width: 47.99rem) {
+    /* Emblem shrinks, and the identity may wrap its place line rather than push the menu button down. */
+    .identity {
+      flex: 1 1 0;
+      min-width: 0;
+      gap: var(--space-2);
+    }
+
+    .identity :global(.identity-emblem) {
+      width: 44px;
+      height: 44px;
+    }
+
+    .identity-name {
+      font-size: 1.5rem;
+    }
+
+    .identity-place {
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+    }
+
     .has-js .menu-toggle:not([hidden]) {
       display: inline-flex;
     }
