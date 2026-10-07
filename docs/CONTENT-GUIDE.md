@@ -126,13 +126,12 @@ Full rules: [PRIVACY.md → Events](PRIVACY.md#events-what-may-be-public-approve
 - **Event pages and galleries** are a historical record. They may reuse photos that also appear elsewhere on the site.
 - **Event records:** how to write one, its fields, and what the build checks are in [DEVELOPMENT.md → Add an event](DEVELOPMENT.md#add-an-event).
 
-### Events area (future)
+### Events area
 
-These decisions are approved but **not yet built**:
-
-- The primary navigation label will be **Events**.
-- It will contain **Upcoming Events**, **Recent Adventures** (completed events less than 12 months old), and the **Troop 32 Archive** (12 months or older).
-- A homepage teaser for Events / Recent Adventures is approved.
+- The primary navigation label is **Events** (built in E2).
+- `/events/` shows **Upcoming events** and **Recent Adventures** (completed events less than 12 months old); `/events/archive/` is the **Troop 32 Archive** (12 months or older).
+- The Events pages are a selection of events suitable for the public, **not** the troop's full calendar. Don't write copy that suggests every troop event appears there.
+- A homepage teaser for Events / Recent Adventures is approved but **not yet built** (planned for E3, with the first real events).
 - Event galleries: normally 6–12 curated photos; more than 12 triggers an editorial warning; 20 is the hard maximum.
 
 ## Imagery

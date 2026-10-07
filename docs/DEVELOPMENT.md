@@ -70,20 +70,41 @@ The build also **checks every event record** (see [Add an event](#add-an-event))
 npm test
 ```
 
-This runs the automated tests in `tests/` with Node's built-in test runner (no extra tools). They check the event rules: the schema, Upcoming/Recent/Archive classification (including the 12-month boundary), and the content checks. A run that ends with `fail 0` passed. Test data is **fictional** (for example *Jordan Q.*); never put a real Scout in a test.
+This runs the automated tests in `tests/events/` with Node's built-in test runner (no extra tools). They check the event rules: the schema, Upcoming/Recent/Archive classification (including the 12-month boundary), the content checks, and what the Events pages may show. A run that ends with `fail 0` passed. Test data is **fictional** (for example *Jordan Q.*); never put a real Scout in a test.
+
+```bash
+npm run test:pages
+```
+
+This builds the site twice (the normal build into `dist/` and the fixture build into `dist-fixtures/`, see below) and then checks the finished Events pages: which events appear where, empty states, status labels, that no private or review details leak, alt text, and that no fixture content reaches `dist/`. It takes about half a minute.
+
+### Preview the Events pages with fictional data (fixture mode)
+
+The real event folder starts empty, so the Events pages normally show their empty states. To see them filled in, use **fixture mode**, which loads clearly fictional test events from `tests/fixtures/events/` instead:
+
+```bash
+npm run dev:fixtures       # live preview
+npm run build:fixtures     # build into dist-fixtures/
+npm run preview:fixtures   # serve dist-fixtures/
+```
+
+- Every page shows a **"Fictional test data"** banner.
+- "Today" is fixed at **2027-08-15**, so the same events always land in the same places.
+- The output goes to `dist-fixtures/` (ignored by Git) and uses its own cache, so fixtures **never** reach `dist/`, which is what gets published.
+- The fixture images are artificial placeholder graphics, not photographs. **Never** put a real Scout, a real photo, or a real event in `tests/fixtures/`.
 
 ## Where things live
 
 | What | Where | Notes |
 | --- | --- | --- |
 | **Pages** | `src/pages/` | Each file is one page. `about.astro` becomes `/about/`; `index.astro` is the home page; `404.astro` is the "page not found" page. |
-| **Shared building blocks** | `src/components/` | Header, footer, meeting card, photo frame, page header, closing call to action, and the placeholder illustrations (`Scene.astro`). |
+| **Shared building blocks** | `src/components/` | Header, footer, meeting card, photo frame, page header, closing call to action, and the placeholder illustrations (`Scene.astro`). Event cards, lists, details, and galleries are in `src/components/events/`. |
 | **Page shell** | `src/layouts/BaseLayout.astro` | The `<head>`, skip link, header, and footer that wrap every page. |
 | **Repeated troop facts** | `src/data/site.ts` | Troop name, meeting day/time/place, Scoutmaster, public contact, navigation. **Change a fact here and it updates on every page.** |
 | **Scouting principles** | `src/data/principles.ts` | Scout Oath, Law, Motto, Slogan, Outdoor Code. Must match [CONTENT-GUIDE.md](CONTENT-GUIDE.md). |
 | **Photo slots** | `src/data/photos.ts` | Which approved photo (or fallback illustration) appears in each photo spot. Each page section has its **own** slot (`hero`, `home.*`, `whatWeDo.*`, and the `gallery` mosaic list), so a photo never repeats on another page by accident. |
-| **Events** | `src/content/events/` | One Markdown file per event (see [Add an event](#add-an-event)). Rules: `src/lib/events/`; collection setup: `src/content.config.ts`. |
-| **Tests** | `tests/` | Automated tests, run with `npm test`. |
+| **Events** | `src/content/events/` | One Markdown file per event (see [Add an event](#add-an-event)). Pages: `src/pages/events/`. Rules: `src/lib/events/`; collection setup: `src/content.config.ts`. |
+| **Tests** | `tests/` | Automated tests (`npm test`, `npm run test:pages`). Fictional fixture events: `tests/fixtures/events/`. |
 | **Photo approval record** | `docs/PHOTO-LOG.md` | Source, privacy review, and approval for every published photo. |
 | **Styles** | `src/styles/global.css` | Colors, fonts, spacing, and buttons, defined once as "design tokens" at the top. Each component also has its own `<style>` section. |
 | **Approved photos** | `src/assets/photos/` | Only approved, sanitized derivatives (metadata removed, neutral names). Never originals. |
@@ -131,7 +152,7 @@ Astro automatically creates smaller, faster versions of the photo for phones and
 
 ### Add an event
 
-> **Data only, so far.** Event records and their checks exist, but no Events pages show them yet (a later work package). Policy: [PRIVACY.md → Events](PRIVACY.md#events-what-may-be-public-approved-e0-2026-10-07) and [Youth names](PRIVACY.md#youth-names).
+> Events appear at **/events/** (Upcoming and Recent Adventures), **/events/archive/**, and each event's own page **/events/<file-name>/**. The homepage doesn't show events yet. Policy: [PRIVACY.md → Events](PRIVACY.md#events-what-may-be-public-approved-e0-2026-10-07) and [Youth names](PRIVACY.md#youth-names).
 
 Each event is one Markdown file in `src/content/events/`. **The file name is the event's permanent URL**: lowercase words joined by hyphens, at most 60 characters. Including the year is recommended (`eagle-project-trail-bench-2027.md` → `/events/eagle-project-trail-bench-2027/`) but not required. **Never put a Scout's name in the file name**, not even First L. Don't rename a published event.
 
@@ -162,7 +183,9 @@ The story of the event goes here, in plain Markdown.
 
 - **`uid`**: `evt-` plus 8 random lowercase letters and digits, unique to this event. A future member area will use it to link private information without putting that information here. Make one with `node -e "console.log('evt-'+Math.random().toString(36).slice(2,10).padEnd(8,'0'))"`.
 - **`status`**: a planned event whose month has passed is hidden and flagged until you mark it `completed`, `cancelled`, or `postponed`; the site never assumes it happened. `postponed` shows in Upcoming as "Postponed; new date to be announced". When the new month is known, set `status: planned` and the new `month`. `cancelled` shows as "Cancelled" through its month, then disappears.
-- **Where it appears** (worked out at each build): Upcoming for planned, postponed, and current cancelled events; **Recent Adventures** for completed events less than 12 months after their month; the **Troop 32 Archive** after that. Because the site is static, an event moves only when the site is rebuilt.
+- **Where it appears** (worked out at each build): Upcoming for planned, postponed, and current cancelled events; **Recent Adventures** for completed events less than 12 months after their month; the **Troop 32 Archive** after that. Because the site is static, an event moves only when the site is rebuilt. Drafts, planned events whose month has passed, and cancelled events after their month have **no page** (their address shows "page not found").
+- **What the page shows**: title, summary, the month (or month range), status label, destination, cover, story, and gallery. For a **public/community** event it also shows the exact date; while the event is still planned it adds the time, venue and address, and how to take part. A postponed or cancelled public event shows only its original date and venue name. A completed one keeps its date and venue name. The `uid`, the review, and who authorized the public designation are **never** shown.
+- **The story** (the Markdown below the `---`): use `##` headings, not `#` (the page already has the main heading). Don't put images, videos, or embedded content in the story; the build rejects them. Photos go in `cover` and `gallery`.
 - **Photos** must already be approved and listed in [PHOTO-LOG.md](PHOTO-LOG.md) (the build checks this) and saved in `src/assets/photos/`. Every photo needs alt text; don't name youth in alt text. A planned event may use an older photo as its cover, but its alt text and caption must not suggest the photo shows the upcoming event.
 - **Names**: a Scout is real First L.; an adult leader is Mr. or Mrs. Last Name. You are the review point for who is a Scout and who is an adult. If you're not sure, ask; don't guess.
 - **Never add** meeting points, departure or return times, drivers or transport, attendee lists, patrols, itineraries, campsite details, contact details, or Google Drive links. The schema rejects unknown fields, and the build rejects Drive links.

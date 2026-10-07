@@ -23,6 +23,8 @@ export interface CheckableEvent {
   };
   /** Full raw file text (frontmatter and body), for the text scans. */
   text: string;
+  /** Markdown body only (after the frontmatter). */
+  body?: string;
 }
 
 export interface CheckResult {
@@ -32,6 +34,17 @@ export interface CheckResult {
 
 export const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 export const SLUG_MAX_LENGTH = 60;
+/** Slugs that would collide with fixed pages under /events/. */
+export const RESERVED_SLUGS: readonly string[] = ['archive'];
+
+// Photos enter an event only through `cover` and `gallery`, where alt text and
+// the PHOTO-LOG check apply. Body images or embedded media would bypass both.
+const BODY_MEDIA_PATTERNS = [
+  /!\[[^\]]*\]\s*[([]/, // Markdown image: ![alt](src) or ![alt][ref]
+  /<\s*(?:img|picture|source|video|audio|iframe|embed|object|script)\b/i,
+];
+// A level-one heading in the body would duplicate the page's own <h1>.
+const BODY_H1_PATTERN = /^#[ \t]/m;
 
 const GOOGLE_DRIVE_PATTERN = /\b(?:drive|docs)\.google\.com\b/i;
 const EMAIL_PATTERN = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/;
@@ -71,6 +84,17 @@ export function checkEvents(
     // Slug: permanent URL. Kebab-case, short. Including the year is recommended, not required.
     if (!SLUG_PATTERN.test(event.id) || event.id.length > SLUG_MAX_LENGTH) {
       errors.push(`${where}: file name must be lowercase kebab-case, at most ${SLUG_MAX_LENGTH} characters (it becomes the permanent URL).`);
+    }
+    if (RESERVED_SLUGS.includes(event.id)) {
+      errors.push(`${where}: "${event.id}" is reserved for a fixed page (/events/${event.id}/). Choose another file name.`);
+    }
+
+    const body = event.body ?? '';
+    if (BODY_MEDIA_PATTERNS.some((pattern) => pattern.test(body))) {
+      errors.push(`${where}: the story contains an image or embedded media. Put photos in \`cover\` or \`gallery\`, where alt text and PHOTO-LOG.md are checked.`);
+    }
+    if (BODY_H1_PATTERN.test(body)) {
+      warnings.push(`${where}: the story uses a "# " heading. The page already has the main heading; use "## " instead.`);
     }
 
     const other = uids.get(data.uid);

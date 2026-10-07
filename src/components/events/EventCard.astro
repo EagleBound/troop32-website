@@ -1,0 +1,66 @@
+---
+// One event in a list: optional cover, linked title, date/status line, summary.
+import PhotoFrame from '../PhotoFrame.astro';
+import EventMeta from './EventMeta.astro';
+import { toPhotoSlot } from './photo-slot';
+import type { SiteEvent } from '../../lib/events/collection';
+
+interface Props {
+  event: SiteEvent;
+  /** Heading level for the title, so it fits the page outline. */
+  headingLevel?: 'h2' | 'h3';
+}
+
+const { event, headingLevel = 'h3' } = Astro.props;
+const Heading = headingLevel;
+---
+
+<article class="event-card">
+  {
+    event.cover && (
+      <PhotoFrame slot={toPhotoSlot(event.cover)} ratio="landscape" sizes="(min-width: 64rem) 33vw, (min-width: 48rem) 50vw, 100vw" />
+    )
+  }
+  <div class="event-card-body">
+    <Heading class="event-card-title"><a href={event.href}>{event.title}</a></Heading>
+    <EventMeta event={event} />
+    <p class="event-card-summary">{event.summary}</p>
+  </div>
+</article>
+
+<style>
+  .event-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    height: 100%;
+    padding: var(--space-4);
+    background: var(--cream-50);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+  }
+
+  .event-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .event-card-title {
+    margin: 0;
+    font-size: var(--text-xl);
+  }
+
+  .event-card-title a {
+    color: var(--forest-900);
+  }
+
+  .event-card-title a:hover {
+    color: var(--forest-700);
+  }
+
+  .event-card-summary {
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+</style>

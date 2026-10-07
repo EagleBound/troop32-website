@@ -15,6 +15,8 @@ interface Props {
   sizes?: string;
   /** Image widths Astro generates. Large frames (such as panoramas) need bigger ones. */
   widths?: number[];
+  /** 'eager' for a large photo near the top of the page. Default: lazy. */
+  loading?: 'lazy' | 'eager';
 }
 
 const {
@@ -23,6 +25,7 @@ const {
   showCaption = false,
   sizes = '(min-width: 52rem) 50vw, 100vw',
   widths = [480, 800, 1200],
+  loading = 'lazy',
 } = Astro.props;
 
 // Focal point uses classes (not inline styles) so the strict Content-Security-Policy still applies.
@@ -33,7 +36,7 @@ const focusClasses = [`fx-${slot.focus?.x ?? 50}`, `fy-${slot.focus?.y ?? 50}`];
   <div class:list={['photo-frame-media', ...focusClasses]}>
     {
       slot.image ? (
-        <Image src={slot.image} alt={slot.alt ?? ''} widths={widths} sizes={sizes} />
+        <Image src={slot.image} alt={slot.alt ?? ''} widths={widths} sizes={sizes} loading={loading} />
       ) : (
         <Scene scene={slot.scene} />
       )

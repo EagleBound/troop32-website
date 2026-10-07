@@ -1,0 +1,62 @@
+---
+// A list of event cards, or the "empty" slot when there are none.
+import EventCard from './EventCard.astro';
+import type { SiteEvent } from '../../lib/events/collection';
+
+interface Props {
+  events: SiteEvent[];
+  headingLevel?: 'h2' | 'h3';
+}
+
+const { events, headingLevel = 'h3' } = Astro.props;
+---
+
+{
+  events.length > 0 ? (
+    <ul class="event-list" role="list">
+      {events.map((event) => (
+        <li>
+          <EventCard event={event} headingLevel={headingLevel} />
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <div class="event-empty">
+      <slot name="empty" />
+    </div>
+  )
+}
+
+<style>
+  .event-list {
+    display: grid;
+    gap: var(--space-5);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (min-width: 48rem) {
+    .event-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .event-list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .event-empty {
+    max-width: var(--reading-width);
+    padding: var(--space-5);
+    border: 1px dashed var(--khaki-400);
+    border-radius: var(--radius-lg);
+    color: var(--color-text-muted);
+  }
+
+  .event-empty :global(p) {
+    margin: 0;
+  }
+</style>

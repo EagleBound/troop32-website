@@ -62,6 +62,7 @@ export const directionsUrl =
 export const navigation = [
   { href: '/about/', label: 'About' },
   { href: '/what-we-do/', label: 'What We Do' },
+  { href: '/events/', label: 'Events' },
   { href: '/new-families/', label: 'New Families' },
   { href: '/join/', label: 'Join', cta: true },
 ] as const;

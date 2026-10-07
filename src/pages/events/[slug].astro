@@ -1,0 +1,81 @@
+---
+// /events/<slug>/: the permanent page for one event.
+// Pages exist only for events in Upcoming, Recent Adventures, or the Archive;
+// drafts, needs-update events, and past cancelled events have none (404).
+// This page receives a PublicEvent (src/lib/events/present.ts), never the raw record.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import PhotoFrame from '../../components/PhotoFrame.astro';
+import EventMeta from '../../components/events/EventMeta.astro';
+import PublicEventDetails from '../../components/events/PublicEventDetails.astro';
+import EventGallery from '../../components/events/EventGallery.astro';
+import { toPhotoSlot } from '../../components/events/photo-slot';
+import { getEventPages } from '../../lib/events/collection';
+import type { SiteEvent } from '../../lib/events/collection';
+import { site } from '../../data/site';
+
+export const getStaticPaths = getEventPages;
+
+interface Props {
+  event: SiteEvent;
+  Content: Awaited<ReturnType<typeof getEventPages>>[number]['props']['Content'];
+}
+
+const { event, Content } = Astro.props;
+
+const eyebrow = {
+  upcoming: 'Upcoming event',
+  recent: 'Recent adventure',
+  archive: `From the ${site.name} Archive`,
+}[event.view];
+const back = event.view === 'archive'
+  ? { href: '/events/archive/', label: `Back to the ${site.name} Archive` }
+  : { href: '/events/', label: 'Back to all events' };
+---
+
+<BaseLayout title={event.title} description={event.summary}>
+  <PageHeader eyebrow={eyebrow} title={event.title} intro={event.summary}>
+    <div class="event-header-meta">
+      <EventMeta event={event} />
+    </div>
+  </PageHeader>
+
+  <div class="section section--tight">
+    <div class="container event-body">
+      {event.cover && (
+        <PhotoFrame slot={toPhotoSlot(event.cover)} ratio="wide" showCaption sizes="(min-width: 72rem) 72rem, 100vw" widths={[480, 800, 1200, 1600]} loading="eager" />
+      )}
+
+      <PublicEventDetails event={event} />
+
+      <div class="reading event-story">
+        <Content />
+      </div>
+
+      <EventGallery event={event} />
+
+      <p><a href={back.href}>{back.label}</a></p>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .event-header-meta {
+    margin-top: var(--space-5);
+    color: var(--cream-100);
+  }
+
+  .event-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .event-story:empty {
+    display: none;
+  }
+
+  .event-story > :global(:first-child) {
+    margin-top: 0;
+  }
+</style>

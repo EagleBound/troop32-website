@@ -1,0 +1,50 @@
+---
+// Photos from a completed event: a static, captioned grid. No lightbox and no
+// JavaScript. Every photo has governed alt text (E1 schema) and a PHOTO-LOG.md entry.
+import PhotoFrame from '../PhotoFrame.astro';
+import { toPhotoSlot } from './photo-slot';
+import type { SiteEvent } from '../../lib/events/collection';
+
+interface Props {
+  event: SiteEvent;
+}
+
+const { event } = Astro.props;
+---
+
+{
+  event.gallery.length > 0 && (
+    <section class="event-gallery" aria-labelledby="event-gallery-title">
+      <h2 id="event-gallery-title">Photos</h2>
+      <ul class="event-gallery-grid" role="list">
+        {event.gallery.map((photo) => (
+          <li>
+            <PhotoFrame slot={toPhotoSlot(photo)} ratio="landscape" showCaption sizes="(min-width: 64rem) 33vw, (min-width: 40rem) 50vw, 100vw" />
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+<style>
+  .event-gallery-grid {
+    display: grid;
+    gap: var(--space-5);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (min-width: 40rem) {
+    .event-gallery-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .event-gallery-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>

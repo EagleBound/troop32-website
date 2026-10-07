@@ -78,6 +78,9 @@ web_modules/
 .next
 out
 
+# Fixture-mode build of the Events pages (fictional test data; never deployed)
+dist-fixtures/
+
 # Nuxt.js build / generate output
 .nuxt
 dist

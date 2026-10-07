@@ -107,3 +107,30 @@ test('public-community events may state exact times and dates', () => {
   const text = 'Saturday, March 6, 8:00 to 11:00 AM.';
   assert.deepEqual(run(event({ text, data: { designation: 'public-community', status: 'planned', month: '2027-09' } })).warnings, []);
 });
+
+test('"archive" is a reserved slug', () => {
+  assert.ok(has(run(event({ id: 'archive' })).errors, 'reserved'));
+  assert.deepEqual(run(event({ id: 'archive-day-2027' })).errors, []);
+});
+
+test('body images and embedded media are errors (photos go through cover/gallery)', () => {
+  for (const body of [
+    '![A Scout](../../assets/photos/x.jpg)',
+    'Text ![alt][ref] more.',
+    '<img src="x.jpg" alt="">',
+    '<picture><source srcset="x.webp"></picture>',
+    '<video src="x.mp4"></video>',
+    '<iframe src="https://example.com"></iframe>',
+    '<SCRIPT>alert(1)</SCRIPT>',
+  ]) {
+    assert.ok(has(run(event({ body })).errors, 'embedded media'), body);
+  }
+  for (const body of ['A [link](https://example.com) and an exclamation! [not an image]', 'Scouts imagined a bridge.']) {
+    assert.deepEqual(run(event({ body })).errors, [], body);
+  }
+});
+
+test('a level-one heading in the body warns; lower levels do not', () => {
+  assert.ok(has(run(event({ body: 'Intro\n\n# The hike\n' })).warnings, '"# "'));
+  assert.deepEqual(run(event({ body: '## The hike\n\n### Day one\n#hashtag' })).warnings, []);
+});

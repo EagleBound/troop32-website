@@ -1,0 +1,84 @@
+---
+// Public schedule details for a leadership-designated public/community event.
+// present.ts has already reduced them to what this event's status may show.
+import type { SiteEvent } from '../../lib/events/collection';
+
+interface Props {
+  event: SiteEvent;
+}
+
+const { event } = Astro.props;
+const info = event.publicInfo;
+---
+
+{
+  info && (
+    <section class="public-details" aria-labelledby="public-details-title">
+      <h2 id="public-details-title">Event details</h2>
+      <dl>
+        <div>
+          <dt>When</dt>
+          <dd>
+            {event.when.prefix && `${event.when.prefix} `}
+            <time datetime={event.when.datetime}>{event.when.text}</time>
+            {info.time && (
+              <>
+                <br />
+                {info.time}
+              </>
+            )}
+          </dd>
+        </div>
+        {info.venueName && (
+          <div>
+            <dt>Where</dt>
+            <dd>
+              {info.venueName}
+              {info.venueAddress && (
+                <>
+                  <br />
+                  {info.venueAddress}
+                </>
+              )}
+            </dd>
+          </div>
+        )}
+        {info.participation && (
+          <div>
+            <dt>How to take part</dt>
+            <dd>{info.participation}</dd>
+          </div>
+        )}
+      </dl>
+    </section>
+  )
+}
+
+<style>
+  .public-details {
+    max-width: var(--reading-width);
+    padding: var(--space-5);
+    background: var(--color-surface);
+    border-left: 4px solid var(--khaki-400);
+    border-radius: var(--radius);
+  }
+
+  .public-details h2 {
+    margin-top: 0;
+    font-size: var(--text-xl);
+  }
+
+  dl {
+    display: grid;
+    gap: var(--space-3);
+    margin: 0;
+  }
+
+  dt {
+    font-weight: 700;
+  }
+
+  dd {
+    margin: 0;
+  }
+</style>

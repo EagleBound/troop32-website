@@ -1,0 +1,54 @@
+---
+// /events/archive/: completed events 12 months or older, grouped by year.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import EventList from '../../components/events/EventList.astro';
+import { getEventViews } from '../../lib/events/collection';
+import { groupByYear } from '../../lib/events/present';
+import { site } from '../../data/site';
+
+const { archive } = await getEventViews();
+const years = groupByYear(archive);
+---
+
+<BaseLayout title={`${site.name} Archive`} description={`Past adventures and milestones from ${site.name}, ${site.locality}.`}>
+  <PageHeader eyebrow="Events" title={`${site.name} Archive`} intro="Adventures and milestones from past years." />
+
+  {
+    years.length > 0 ? (
+      years.map(({ year, events }) => (
+        <section class="section section--tight archive-year" aria-labelledby={`year-${year}`}>
+          <div class="container">
+            <h2 id={`year-${year}`}>{year}</h2>
+            <EventList events={events} />
+          </div>
+        </section>
+      ))
+    ) : (
+      <section class="section section--tight" aria-label="Archive">
+        <div class="container">
+          <EventList events={[]}>
+            <p slot="empty">
+              The {site.name} Archive is just getting started. As we add reviewed stories from the troop's history,
+              they'll appear here.
+            </p>
+          </EventList>
+        </div>
+      </section>
+    )
+  }
+
+  <div class="container back-link">
+    <p><a href="/events/">Back to all events</a></p>
+  </div>
+</BaseLayout>
+
+<style>
+  .archive-year + .archive-year {
+    padding-top: 0;
+  }
+
+  .back-link {
+    padding-bottom: var(--space-7);
+  }
+</style>

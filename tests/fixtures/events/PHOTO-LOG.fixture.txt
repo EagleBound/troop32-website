@@ -1,0 +1,12 @@
+# Fixture photo log (FICTIONAL)
+
+Stands in for docs/PHOTO-LOG.md in fixture mode only, so the E1 photo check
+still runs. These are artificial placeholder graphics, not photographs.
+
+#### `test-placeholder-01.png`
+
+#### `test-placeholder-02.png`
+
+#### `test-placeholder-03.png`
+
+#### `test-placeholder-04.png`

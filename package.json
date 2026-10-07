@@ -12,7 +12,11 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "test": "node --test \"tests/**/*.test.ts\""
+    "test": "node --test \"tests/events/**/*.test.ts\"",
+    "dev:fixtures": "node scripts/fixtures.mjs dev",
+    "build:fixtures": "node scripts/fixtures.mjs build",
+    "preview:fixtures": "node scripts/fixtures.mjs preview",
+    "test:pages": "npm run build && npm run build:fixtures && node --test \"tests/pages/**/*.test.ts\""
   },
   "dependencies": {
     "@fontsource-variable/source-sans-3": "^5.3.0",

@@ -6,6 +6,7 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { site } from '../data/site';
+import { FIXTURE_MODE } from '../lib/events/fixture-mode';
 
 interface Props {
   /** Page title. The site name is appended automatically. */
@@ -36,6 +37,13 @@ const fullTitle = title ? `${title} | ${site.name}, ${site.locality}` : `${site.
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to main content</a>
+    {
+      FIXTURE_MODE && (
+        <p class="fixture-banner" role="note">
+          <strong>Fictional test data.</strong> Not Troop 32 history. These events, names, and images are invented for testing.
+        </p>
+      )
+    }
     <Header />
     <main id="main" tabindex="-1">
       <slot />
@@ -64,5 +72,14 @@ const fullTitle = title ? `${title} | ${site.name}, ${site.locality}` : `${site.
 
   main:focus {
     outline: none;
+  }
+
+  .fixture-banner {
+    margin: 0;
+    padding: var(--space-2) var(--space-4);
+    background: var(--ember-700);
+    color: var(--cream-50);
+    font-weight: 600;
+    text-align: center;
   }
 </style>

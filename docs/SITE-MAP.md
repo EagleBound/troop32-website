@@ -18,9 +18,12 @@ The long-term map below is still proposed. For v1.0, several entries were **comb
 | `/contact/` | Contact | Contact |
 | `/privacy/` | Privacy | Privacy |
 | `/accessibility/` | Accessibility | Accessibility |
+| `/events/` | Events | Upcoming events, Recent Adventures, and a link to the Archive (added in E2) |
+| `/events/archive/` | Troop 32 Archive | Completed events 12 months or older, by year (E2) |
+| `/events/<slug>/` | One event | Permanent page for each event shown in a view (E2) |
 | (any unknown URL) | 404 | Page-not-found help |
 
-**Header navigation:** About · What We Do · New Families · **Join** (prominent). Contact, Privacy, and Accessibility are in the footer. A separate Photos page is superseded by the planned Events area (not built), and the member area remains future work. Real photos from six 2026 Troop 32 events appear on Home (hero, program cards, and a "Scouting in action" mosaic) and What We Do ([PHOTO-LOG.md](PHOTO-LOG.md#where-each-photo-is-used)). These fall within the youth-photo policy approved 2026-10-07 (E0).
+**Header navigation:** About · What We Do · Events · New Families · **Join** (prominent). Events is also in the footer's Explore list. Contact, Privacy, and Accessibility are in the footer. A separate Photos page is superseded by the Events area, and the member area remains future work. Real photos from six 2026 Troop 32 events appear on Home (hero, program cards, and a "Scouting in action" mosaic) and What We Do ([PHOTO-LOG.md](PHOTO-LOG.md#where-each-photo-is-used)). These fall within the youth-photo policy approved 2026-10-07 (E0).
 
 ## Public site
 
@@ -43,7 +46,7 @@ The **v1.0 launch** column is a *proposed* scope for the recruiting-ready Websit
 | ↳ Information for new families | Yes | What to expect, costs, gear, first steps | Prospective families | Costs and fees `[TO BE PROVIDED]` by leadership. |
 | ↳ Regular meetings | Yes | When and where | Prospective families | **Approved public:** Mondays, 7:00 PM, Santa Rosa Bible Church, 4575 Badger Road, Santa Rosa, California. |
 | **Photos** | Superseded | Show Scouting in action | Everyone | Replaced by the planned **Events** area below. The youth-photo policy was approved 2026-10-07 (E0). |
-| **Events** (future) | Later | Upcoming Events, Recent Adventures (completed less than 12 months ago), Troop 32 Archive (12 months or older), with curated event galleries | Everyone | Policy approved 2026-10-07 (E0): primary nav label "Events", plus a homepage teaser. General information only for ordinary events; full details only for designated public events ([PRIVACY.md → Events](PRIVACY.md#events-what-may-be-public-approved-e0-2026-10-07)). **Not built.** Needs its own PLAN and approval. |
+| **Events** | Built (E2), no events yet | Upcoming Events, Recent Adventures (completed less than 12 months ago), Troop 32 Archive (12 months or older), with curated event galleries | Everyone | Policy approved 2026-10-07 (E0): primary nav label "Events", plus a homepage teaser. General information only for ordinary events; full details only for designated public events ([PRIVACY.md → Events](PRIVACY.md#events-what-may-be-public-approved-e0-2026-10-07)). Pages built in E2; they show empty states until real events are added. **The homepage teaser is not built yet** (E3). |
 | **Contact** | Yes | Reach the troop | Everyone | Through an official troop channel. **The channel must be decided before launch.** No personal youth contact details. |
 | **Privacy** | Yes | How the site handles information | Everyone | Public-facing notice. Wording needs leadership review. |
 | **Accessibility** | Yes | Accessibility commitment and how to report problems | Everyone | States the WCAG 2.2 AA target without claiming guaranteed compliance. |
