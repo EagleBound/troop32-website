@@ -4,20 +4,20 @@ import PageHeader from '../components/PageHeader.astro';
 import MeetingCard from '../components/MeetingCard.astro';
 import { site } from '../data/site';
 
-// The public role-based contact address is pending leadership confirmation.
-// When it is approved, set `site.contact.email` in src/data/site.ts and the
-// email section below appears automatically. Never add personal contact details.
+// Two public ways to reach the troop: a regular Monday meeting (no need to
+// call ahead) and the role-based Scoutmaster address in `site.contact.email`
+// (src/data/site.ts). Never add personal contact details.
 const email = site.contact.email;
 ---
 
 <BaseLayout
   title="Contact"
-  description={`How to reach ${site.name} in ${site.locality}: visit a meeting ${site.meeting.day} at ${site.meeting.time}.`}
+  description={`How to reach ${site.name} in ${site.locality}: visit a meeting ${site.meeting.day} at ${site.meeting.time}, or email the Scoutmaster.`}
 >
   <PageHeader
     eyebrow="Contact"
     title={`Get in touch with ${site.name}`}
-    intro={`The best way to reach ${site.name} is in person. Come to a meeting, where Scouts and troop leaders are happy to answer your questions.`}
+    intro={`There are two easy ways to reach ${site.name}: come to a regular ${site.meeting.dayName} meeting, no need to call ahead, or email the Scoutmaster.`}
   />
 
   <section class="section" aria-labelledby="contact-title">
@@ -27,13 +27,14 @@ const email = site.contact.email;
         <p>
           {site.name} meets on {site.meeting.day} at {site.meeting.time} at {site.meeting.place}. Visiting a meeting is
           the quickest way to ask questions about joining, see the troop in action, and meet the people who make it
-          work.
+          work. You don't need to call ahead: just come.
         </p>
         {
           email && (
             <section class="email-block" aria-labelledby="email-title">
-              <h2 id="email-title">Email the troop</h2>
-              <p>
+              <h2 id="email-title">Email the Scoutmaster</h2>
+              <p class="email-intro">Questions about joining or about {site.name}? Write to the Scoutmaster at:</p>
+              <p class="email-address">
                 <a href={`mailto:${email}`}>{email}</a>
               </p>
             </section>
@@ -41,7 +42,7 @@ const email = site.contact.email;
         }
         <h2>About this website</h2>
         <p>
-          Read how this website handles <a href="/privacy/">privacy</a> and our commitment to
+          Read how this website handles <a href="/privacy/">privacy</a> and our commitment to{' '}
           <a href="/accessibility/">accessibility</a>.
         </p>
       </div>
@@ -74,6 +75,13 @@ const email = site.contact.email;
 
   .email-block p {
     margin: 0;
+  }
+
+  .email-block .email-intro {
+    margin-bottom: var(--space-2);
+  }
+
+  .email-block .email-address {
     font-size: var(--text-lg);
     font-weight: 700;
   }

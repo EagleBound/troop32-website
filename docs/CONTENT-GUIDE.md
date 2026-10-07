@@ -89,7 +89,12 @@ The text above was supplied directly to this project. Third-party websites that 
 **Confirmed for public use so far:**
 
 - Troop 32 normally meets **Mondays at 7:00 PM** at **Santa Rosa Bible Church, 4575 Badger Road, Santa Rosa, California**.
-- The current Scoutmaster is **James Vickers**.
+- The current Scoutmaster is **Mr. Vickers** (adult-name form; see [PRIVACY.md → Adult names](PRIVACY.md#adult-names)). His page is `/about/scoutmaster/`.
+- Prospective families may simply come to a regular Monday meeting; they don't need to contact the troop first.
+- The public contact address is **scoutmaster@troop32.org** (role-based).
+- Eligibility follows Scouting America's official Scouts BSA rule (verified 2026-10-07; see [PROJECT.md](PROJECT.md#content-still-needing-confirmation-before-launch)).
+- Uniform and gear: talk with adult leaders before buying; the troop has lightly worn uniform items; the troop provides certain group equipment, including tents and cooking utensils.
+- Troop 32 follows Scouting America's Youth Protection requirements and policies.
 - "Eagle Bound!" is an existing project tagline. Don't call it an official troop motto unless leadership confirms it.
 
 ## Privacy in content
@@ -164,7 +169,7 @@ The project's accessibility target is **WCAG 2.2 Level AA**. Writing these rules
 
 ## Contact information
 
-- Public contact goes through an **official troop channel**. The channel is still to be decided (see [PRIVACY.md](PRIVACY.md#open-policy-questions)).
+- Public contact goes through the role-based **scoutmaster@troop32.org** and the regular Monday meeting. No other email address or phone number is published.
 - Never publish personal email addresses or phone numbers of youth. Publish adults' personal details only if policy allows.
 - Prefer role-based contact (for example, "the Scoutmaster") over personal details.
 

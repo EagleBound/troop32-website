@@ -15,7 +15,8 @@ The long-term map below is still proposed. For v1.0, several entries were **comb
 | `/what-we-do/` | What We Do | What Scouts Do, Outdoor activities, Service, Advancement, The Eagle Scout journey |
 | `/new-families/` | New Families | What Is Scouting?, Information for new families, safety for parents |
 | `/join/` | Join | Join Troop 32, Regular meetings |
-| `/contact/` | Contact | Contact |
+| `/about/scoutmaster/` | Mr. Vickers, Scoutmaster | Short Scoutmaster page; biography to be added later (L1) |
+| `/contact/` | Contact | Contact (Monday meeting or scoutmaster@troop32.org) |
 | `/privacy/` | Privacy | Privacy |
 | `/accessibility/` | Accessibility | Accessibility |
 | `/events/` | Events | Upcoming events (compact list, no photos), Recent Adventures (photo cards), and a link to the Archive (added in E2) |
@@ -34,7 +35,7 @@ The **v1.0 launch** column is a *proposed* scope for the recruiting-ready Websit
 | **Home** | Yes | Welcome, what Troop 32 is, how to visit or join | Prospective families, community | Could feature the regular Monday meeting and a link to "Join." Tagline use ("Eagle Bound!") is to be decided. |
 | **About Troop 32** | Yes | Who we are | Everyone | History must be confirmed by leadership before use (see [PROJECT.md](PROJECT.md#open-content-items-requiring-confirmation)). |
 | ↳ Troop 32-B and Troop 32-G | Yes | Explain the two-troop structure simply | Prospective families | Short explanation. The rest of the site still uses "Troop 32." |
-| ↳ Troop leadership | Yes | Who leads the troop | Prospective families | Scoutmaster: James Vickers. Other adult leaders may be named as Mr. or Mrs. Last Name ([PRIVACY.md](PRIVACY.md#adult-names)). Which roles to list, and contact details, are [still open](PRIVACY.md#open-policy-questions). |
+| ↳ Troop leadership | Yes | Who leads the troop | Prospective families | Scoutmaster: Mr. Vickers, with his own page at `/about/scoutmaster/`. Other adult leaders may be named as Mr. or Mrs. Last Name ([PRIVACY.md](PRIVACY.md#adult-names)). Which roles to list, and contact details, are [still open](PRIVACY.md#open-policy-questions). |
 | **What Is Scouting?** | Yes | Scouting for newcomers | Families new to Scouting | Link to official Scouting America resources. |
 | ↳ Scout Oath, Scout Law, and Scouting values | Yes | Show the principles Scouts live by | Everyone | Approved text in [CONTENT-GUIDE.md](CONTENT-GUIDE.md#scouting-principles-as-editorial-principles). Includes Motto, Slogan, and Outdoor Code. |
 | **What Scouts Do** | Yes | The program in action | Prospective families, Scouts | General descriptions only. No specific dates or locations of outings. |

@@ -1,0 +1,85 @@
+---
+// /about/scoutmaster/: a short page introducing the troop's Scoutmaster.
+//
+// The URL names the ROLE, not the person, so it stays correct when the
+// Scoutmaster changes. Name and biography come from `site.scoutmaster` in
+// src/data/site.ts.
+//
+// For the Webmaster (these comments are not sent to visitors):
+// - Add biography paragraphs to `site.scoutmaster.bio` only after the
+//   Scoutmaster has reviewed and approved the exact text. While `bio` is empty,
+//   the page shows a short "we'll share more" line instead.
+// - Good content: Scouting background, years with the troop, why they
+//   volunteer. A photo needs the normal photo review (docs/PHOTO-LOG.md).
+// - Never add a personal email, phone number, home address, employer, or
+//   family details. The public contact stays the role-based address in
+//   `site.contact.email`.
+// - Use "Mr./Mrs. Last Name", never a full name (docs/PRIVACY.md → Adult names).
+// Full steps: docs/DEVELOPMENT.md ("Update the Scoutmaster page").
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import MeetingCard from '../../components/MeetingCard.astro';
+import { site } from '../../data/site';
+
+const { displayName, bio } = site.scoutmaster;
+const email = site.contact.email;
+---
+
+<BaseLayout
+  title={`${displayName}, Scoutmaster`}
+  description={`Meet ${displayName}, the Scoutmaster of ${site.name} in ${site.locality}.`}
+>
+  <PageHeader eyebrow="Our leaders" title={`${displayName}, Scoutmaster`} />
+
+  <section class="section" aria-labelledby="scoutmaster-title">
+    <div class="container scoutmaster-layout">
+      <div class="reading">
+        <h2 id="scoutmaster-title">About our Scoutmaster</h2>
+        <p>{displayName} serves as the Scoutmaster of {site.name}.</p>
+        <p>
+          In Scouting, the Scoutmaster and other adult leaders coach and mentor the Scouts' own leaders, help keep
+          activities safe, and make sure every Scout has the chance to learn and grow.
+        </p>
+        {
+          bio.length > 0 ? (
+            bio.map((paragraph) => <p>{paragraph}</p>)
+          ) : (
+            <p>
+              We'll share more about {displayName} here in the future. In the meantime, the best way to get to know
+              him is to visit a {site.meeting.dayName} meeting.
+            </p>
+          )
+        }
+        {
+          email && (
+            <>
+              <h2>Questions for the Scoutmaster?</h2>
+              <p>
+                Email <a href={`mailto:${email}`}>{email}</a>, or come to a {site.meeting.dayName} meeting. You don't
+                need to call ahead.
+              </p>
+            </>
+          )
+        }
+        <p><a href="/about/">Back to About {site.name}</a></p>
+      </div>
+      <aside aria-label="Meeting time and place">
+        <MeetingCard headingLevel={2} title="Visit a meeting" />
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .scoutmaster-layout {
+    display: grid;
+    gap: var(--space-7);
+  }
+
+  @media (min-width: 60rem) {
+    .scoutmaster-layout {
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      align-items: start;
+    }
+  }
+</style>

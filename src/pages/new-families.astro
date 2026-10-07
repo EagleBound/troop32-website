@@ -5,9 +5,10 @@ import MeetingCard from '../components/MeetingCard.astro';
 import JoinCallout from '../components/JoinCallout.astro';
 import { site } from '../data/site';
 
-// Frequently asked questions. Answers stay general until troop leadership
-// confirms troop-specific details (see docs/PROJECT.md, open content items).
-const faqs = [
+// Frequently asked questions. Eligibility follows Scouting America's official
+// rule (verified 2026-10-07, docs/PROJECT.md). Costs stay general until
+// troop-approved figures are available (an open item for the Webmaster).
+const faqs: { q: string; a: string[]; link?: { href: string; text: string } }[] = [
   {
     q: 'What is Scouting?',
     a: [
@@ -18,14 +19,15 @@ const faqs = [
   {
     q: 'Who can join?',
     a: [
-      `${site.name} is open to boys and girls. Scouting America sets the age and grade requirements for troop membership. Troop leaders can explain them and help you find the right fit for your child.`,
+      `${site.name} is open to boys and girls. Under Scouting America's rules, youth can join Scouts BSA if they are age 11 but not yet 18; or at least 10 years old and have earned the Arrow of Light award; or at least 10 years old, in fifth grade, and registering on or after March 1.`,
     ],
+    link: { href: site.official.scoutsBsaFaq, text: "Read Scouting America's official Scouts BSA age requirements" },
   },
   {
     q: 'What happens at a meeting?',
     a: [
       `${site.name} meets on ${site.meeting.day} at ${site.meeting.time} at ${site.meeting.place}. Troop meetings are where Scouts plan upcoming activities, practice skills, work on advancement, and spend time with their patrols.`,
-      'The easiest way to understand it is to visit and see for yourself.',
+      `The easiest way to understand it is to visit and see for yourself. You don't need to contact us first: just come to a ${site.meeting.dayName} meeting.`,
     ],
   },
   {
@@ -37,7 +39,9 @@ const faqs = [
   {
     q: 'What does my Scout need?',
     a: [
-      'Scouts wear a uniform and use a Scout handbook, and outdoor activities call for some personal gear. You do not need everything on day one. Troop leaders can tell you what a new Scout needs first.',
+      "Scouts wear a uniform and use a Scout handbook, and outdoor activities call for some personal gear. You do not need everything on day one, and it is best to talk with the troop's adult leaders before buying uniform items or major camping gear.",
+      "Before buying a new uniform, check the troop's supply of lightly worn uniform items. Scouts grow quickly, and many uniform pieces see little wear before they are outgrown.",
+      'The troop provides certain group equipment, including tents and cooking utensils. Adult leaders are glad to share their experience before you buy personal equipment such as hiking boots and sleeping bags.',
     ],
   },
   {
@@ -78,6 +82,11 @@ const faqs = [
                   {item.a.map((paragraph) => (
                     <p>{paragraph}</p>
                   ))}
+                  {item.link && (
+                    <p>
+                      <a href={item.link.href}>{item.link.text}</a>
+                    </p>
+                  )}
                 </div>
               </details>
             ))
@@ -95,12 +104,16 @@ const faqs = [
       <p class="eyebrow">For parents</p>
       <h2 id="safety-title">How Scouting keeps youth safe</h2>
       <p>
-        The safety of every Scout comes first. Scouting America has youth protection policies that apply to every
-        troop, and every adult who registers as a Scouting volunteer must complete youth protection training.
+        The safety of every Scout comes first. {site.name} follows Scouting America's Youth Protection requirements
+        and policies. They apply to every troop, and every adult who registers as a Scouting volunteer must complete
+        Youth Protection training.
       </p>
       <p>
         Those policies cover how adults supervise and interact with youth, so that activities are safe, supervised,
         and appropriate. Troop leaders are glad to answer questions about how these policies work in {site.name}.
+      </p>
+      <p>
+        <a href={site.official.youthProtection}>Read Scouting America's Youth Protection information</a>
       </p>
       <p>
         On this website, we also protect Scouts' privacy: we do not publish youth contact information or the details

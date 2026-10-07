@@ -16,8 +16,18 @@ export const site = {
     girls: 'Troop 32-G',
   },
 
-  /** Approved public fact (docs/PROJECT.md). */
-  scoutmaster: 'James Vickers',
+  /**
+   * The Scoutmaster, shown publicly in the E0 adult-name form (Mr./Mrs. Last
+   * Name), never a full name. `bio` holds reviewed paragraphs for
+   * /about/scoutmaster/; while it is empty the page shows a short "more to
+   * come" line. When the Scoutmaster changes, update `displayName` and `bio`.
+   * See docs/DEVELOPMENT.md ("Update the Scoutmaster page").
+   */
+  scoutmaster: {
+    displayName: 'Mr. Vickers',
+    href: '/about/scoutmaster/',
+    bio: [] as string[],
+  },
 
   /**
    * The REGULAR weekly meeting. Approved as public information.
@@ -35,12 +45,24 @@ export const site = {
   },
 
   /**
-   * Public role-based contact channel.
-   * PENDING leadership confirmation. Leave as null until an official troop
-   * address is approved. Never use a personal email address or phone number.
+   * Public role-based contact channel (approved). It forwards privately to the
+   * current Scoutmaster; that forwarding is set up OUTSIDE this repository.
+   * NEVER add the forwarding destination, a personal email address, or a phone
+   * number anywhere in this repository. A Scoutmaster change normally means
+   * changing the forwarding, not this file.
    */
   contact: {
-    email: null as string | null,
+    email: 'scoutmaster@troop32.org' as string | null,
+  },
+
+  /**
+   * Official Scouting America pages the site links to. Verified 2026-10-07
+   * (docs/PROJECT.md). Re-check them when content is reviewed.
+   */
+  official: {
+    scoutsBsa: 'https://www.scouting.org/programs/scouts-bsa/',
+    scoutsBsaFaq: 'https://www.scouting.org/programs/scouts-bsa/faqs/',
+    youthProtection: 'https://www.scouting.org/training/safeguarding-youth/',
   },
 
   /**

@@ -40,8 +40,8 @@ import { scoutOath, scoutLaw, scoutMotto, scoutSlogan, outdoorCode } from '../da
     <div class="container reading">
       <h2 id="leadership-title">Leadership</h2>
       <p>
-        {site.name} is led by its Scouts, with the support of trained adult volunteers. Our Scoutmaster is
-        <strong>{site.scoutmaster}</strong>.
+        {site.name} is led by its Scouts, with the support of trained adult volunteers. Our Scoutmaster is{' '}
+        <strong><a href={site.scoutmaster.href}>{site.scoutmaster.displayName}</a></strong>.
       </p>
       <p>
         In Scouting, the Scoutmaster and other adult leaders coach and mentor the Scouts' own leaders, help keep

@@ -24,7 +24,7 @@ import { site } from '../data/site';
             <h3>Visit a meeting</h3>
             <p>
               Come to a {site.name} meeting on {site.meeting.day} at {site.meeting.time} at {site.meeting.place}. It is
-              the best way to see what the troop is like.
+              the best way to see what the troop is like, and you don't need to call ahead.
             </p>
           </li>
           <li>
@@ -38,7 +38,7 @@ import { site } from '../data/site';
             <h3>Register with Scouting America</h3>
             <p>
               When your family is ready, troop leaders will help you complete the registration paperwork and get your
-              new Scout started.
+              new Scout started. <a href={site.official.scoutsBsa}>Learn about the Scouts BSA program from Scouting America</a>.
             </p>
           </li>
         </ol>
@@ -53,7 +53,7 @@ import { site } from '../data/site';
     <div class="container reading">
       <h2 id="more-title">Still deciding?</h2>
       <p>
-        Read the <a href="/new-families/">answers to common questions from new families</a>, learn
+        Read the <a href="/new-families/">answers to common questions from new families</a>, learn{' '}
         <a href="/what-we-do/">what Scouts do</a>, or find out more <a href="/about/">about {site.name}</a>.
       </p>
     </div>

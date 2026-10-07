@@ -72,7 +72,7 @@ The two troops normally meet together and take part in outings together. In ordi
 
 **Regular meetings (approved for public use):** Troop 32 normally meets on **Mondays at 7:00 PM** at **Santa Rosa Bible Church, 4575 Badger Road, Santa Rosa, California**. This approval covers the *regular* meeting only. See [PRIVACY.md](PRIVACY.md#regular-meeting-information-vs-activity-logistics).
 
-**Current Scoutmaster:** James Vickers.
+**Current Scoutmaster:** Mr. Vickers (public adult-name form; see [PRIVACY.md → Adult names](PRIVACY.md#adult-names)).
 
 **Tagline:** "Eagle Bound!" is an existing repository/project tagline. It is **not** described as an official Troop 32 motto unless troop leadership confirms that.
 
@@ -181,7 +181,7 @@ Launching v1.0 and any cutover from the old site to the new site are **separate,
 - **First real events and homepage teaser (E3):** five 2026 events (Philmont Trek, Melita Island, Chill Outing, Snow Camping, Pancake Breakfast), month-level dates, summaries only, using only already-approved photos ([PHOTO-LOG.md → Event pages](PHOTO-LOG.md#event-pages)). The homepage shows up to three text-only event cards between the photo mosaic and the Scout Law. Eagle service projects are not yet event pages.
 - **First upcoming public event:** Pancake Breakfast, Sunday, March 7, 2027, designated public/community by the designated adult leader; location to be announced. Upcoming events on `/events/` use a compact list. The breakfast appears under Upcoming there, not on the homepage.
 - **Not yet deployed.** No hosting account, preview URL, or DNS change exists. The site is marked `noindex` until launch.
-- **Public contact channel pending.** The Contact page uses the Monday meeting as the contact pathway until leadership approves a role-based troop address (`contact.email` in `src/data/site.ts`).
+- **Recruiting content confirmed (L1):** public contact scoutmaster@troop32.org (mailbox and forwarding set up by troop leadership, outside the repository; confirm it works before launch); "no need to call ahead" for Monday meetings; official Scouts BSA eligibility; uniform and gear guidance; Youth Protection statement with an official link; a Scoutmaster page at `/about/scoutmaster/`.
 - **Astro telemetry:** the Astro build tool sends anonymous usage data about the tool (not about website visitors) unless disabled. Turning it off is a pending decision (see the WP1 execution report).
 
 ### Website v1.0 technical architecture
@@ -208,11 +208,24 @@ Future member functionality is a separate project and is not part of this archit
 
 The v1.0 pages avoid unconfirmed facts by using general Scouting descriptions. These items should be confirmed or supplied:
 
-- That prospective families are welcome to visit a regular Monday meeting (the site invites them to).
-- The current Scouting America rank list and Eagle Scout requirements as summarized on What We Do, and the current program terminology (external verification).
-- Official Scouting America links (youth protection, applications) to add to New Families and Join.
-- Age and grade eligibility, costs, and uniform and gear guidance (currently general: "troop leaders can explain").
-- The public role-based contact address.
+- ~~That prospective families are welcome to visit a regular Monday meeting.~~ **Confirmed (L1):** they may simply show up.
+- ~~The current Scouting America rank list and Eagle Scout summary on What We Do.~~ **Verified (L1)** against Scouting America's Advancement and Awards page (Scout, Tenderfoot, Second Class, First Class, Star, Life, Eagle Scout); no change needed.
+- ~~Official Scouting America links (youth protection, applications).~~ **Added (L1).**
+- ~~Age and grade eligibility.~~ **Published (L1)** from Scouting America's official Scouts BSA FAQ.
+- ~~Uniform and gear guidance.~~ **Confirmed (L1).**
+- ~~The public role-based contact address.~~ **Confirmed (L1):** scoutmaster@troop32.org.
+- **Costs: still open.** The site keeps its general cost wording until troop-approved figures are available. *(For the future Webmaster.)*
+- **Scoutmaster biography: still open.** `/about/scoutmaster/` shows a short "we'll share more" line until reviewed paragraphs are added ([DEVELOPMENT.md](DEVELOPMENT.md#update-the-scoutmaster-page)). *(For the future Webmaster.)*
+- **Public mailbox:** troop leadership to confirm scoutmaster@troop32.org receives and forwards mail before launch.
+
+**Official sources checked 2026-10-07** (re-check when content is reviewed):
+
+| Topic | Official page |
+| --- | --- |
+| Eligibility | https://www.scouting.org/programs/scouts-bsa/faqs/ ("What is the age range for joining Scouts BSA?") |
+| Program overview | https://www.scouting.org/programs/scouts-bsa/ ("Ages: Youth 11-17") |
+| Youth Protection | https://www.scouting.org/training/safeguarding-youth/ (the former /training/youth-protection/ address redirects here) |
+| Ranks | https://www.scouting.org/programs/scouts-bsa/advancement-and-awards/ (current rank requirement sheets, last changed 2024) |
 
 - Confirmation by troop leadership that the Troop 32 emblem's Scouting America–derived fleur-de-lis elements are used consistently with current Scouting America brand guidance.
 
@@ -223,7 +236,7 @@ Each of these needs its own PLAN and approval before anything is built:
 1. **Launch target and hosting for v1.0.** Whether v1.0 launches at a new address or replaces troop32.org, where it is hosted, and who holds the accounts. This is the most deadline-sensitive decision.
 2. ~~**Site technology.**~~ Decided 2026-10-06: Astro static site (see the decision log).
 3. **Future member area:** authentication provider, data storage, account management, authorization model, and hosting of private information. This also needs a privacy review and designated adult leader approval.
-4. **Contact method.** How the public reaches the troop (an official troop channel, not personal addresses).
+4. ~~**Contact method.**~~ Decided 2026-10-07 (L1): scoutmaster@troop32.org plus the regular Monday meeting.
 5. **Content management.** How Scout Webmasters and non-technical leaders could supply updates.
 6. ~~**Photo sources.**~~ Decided 2026-10-06: authorized read-only external source → private staging → full-resolution review → human approval → sanitized derivative → repository ([PHOTO-LOG.md](PHOTO-LOG.md)). Youth-photo policy decided 2026-10-07 (E0; see [PRIVACY.md](PRIVACY.md#youth-names-photographs-and-recognition)).
 7. **Cutover plan** from the existing production site.
@@ -287,5 +300,7 @@ These came from the existing public site and may be stale. They must be **confir
 | 2026-10-07 | **Compact Upcoming list and location to be announced:** Upcoming events on `/events/` are a compact list (one row per event: date column, title, status, summary; no photos). Recent Adventures and the Archive keep photo cards. New `publicDetails.venueToBeAnnounced: true` (public-community events only, never together with `venue`) shows "To be announced" while the event is planned. Clarified that `publicDesignation.approvedOn` is the date authorization to publish was given or confirmed to the Webmaster; the authorization requirement is unchanged. Example page sections (About the event, What to expect, Additional information) live only in a fictional fixture and in DEVELOPMENT.md guidance. | Adult project lead, via approved EXECUTE work package |
 | 2026-10-07 | **Pancake Breakfast 2027 (first upcoming public event):** planned public-community event on Sunday, March 7, 2027; location to be announced. Public designation authorized by the designated adult leader (role recorded; name not stored), confirmed 2026-10-07. Summary "Troop 32's pancake breakfast is open to the public." and the line "More details will be added here when they're available." No venue, time, price, menu, tickets, contact, participation details, names, or images. ~~Leads the homepage teaser under the existing E3 rule.~~ *(Superseded below: upcoming events are not on the homepage.)* | Adult project lead, via approved EXECUTE work package |
 | 2026-10-07 | **Homepage teaser shows recent completed events only (post-review correction):** "Recent adventures" on the homepage now shows only the first three items of the Recent Adventures view (completed, under 12 months, newest first), and is omitted when there are none. Upcoming events, including public-community ones, never take a slot. **Supersedes** the E3 rule that put planned public-community events first. **Reason:** the section should showcase actual recent Scout activities; upcoming public events could otherwise displace that content, and they already have their place under Upcoming on `/events/`. The unused `publicEvent` presentation field was removed. The heading stays "Recent adventures"; no homepage Upcoming section. | Adult project lead, via approved EXECUTE work package |
+| 2026-10-07 | **Recruiting content (L1):** families may simply come to a regular Monday meeting (no need to call ahead). Public contact is the role-based scoutmaster@troop32.org, forwarded privately outside the repository; no forwarding destination or personal detail is ever stored. The Scoutmaster is shown as "Mr. Vickers" (E0 adult-name form; the earlier full-name display is retired; Git history keeps old text) with a minimal page at `/about/scoutmaster/` and a reviewed-biography slot for the future Webmaster. Uniform and gear guidance as supplied (talk with adult leaders first; lightly worn uniform items; troop provides certain group equipment, including tents and cooking utensils). Youth Protection statement with an official link. Costs stay general (open). | Adult project lead, via approved EXECUTE work package (L1) |
+| 2026-10-07 | **Eligibility follows Scouting America (L1):** the supplied wording ("ages 11 through 18; 10½ with Arrow of Light") was replaced by the official Scouts BSA rule, as authorized: age 11 but not yet 18; or at least 10 with the Arrow of Light award; or at least 10, in fifth grade, and registering on or after March 1. Source: scouting.org Scouts BSA FAQ, checked 2026-10-07. | Adult project lead, via approved EXECUTE work package (L1) |
 
 Add new rows as decisions are made. Record who approved each decision by role.

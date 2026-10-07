@@ -117,9 +117,33 @@ npm run preview:fixtures   # serve dist-fixtures/
 
 Edit `meeting` in `src/data/site.ts`. Every page updates automatically. Changes to public information still go through the [workflow](WORKFLOW.md), and only the **regular** meeting belongs there, never outing or event details ([PRIVACY.md](PRIVACY.md#regular-meeting-information-vs-activity-logistics)).
 
-### Set the public contact email
+### The public contact email
 
-When troop leadership approves an official, role-based troop address, set `contact.email` in `src/data/site.ts`. The Contact page shows it automatically. Never use a personal email address or phone number.
+The site's only public email address is the role-based **`scoutmaster@troop32.org`** (`contact.email` in `src/data/site.ts`). It appears on the Contact page and the Scoutmaster page. Mail to it is forwarded privately to the current Scoutmaster; that forwarding is set up by troop leadership **outside this repository**.
+
+- **Never** put the forwarding destination, a personal email address, or a phone number anywhere in this repository: not in pages, docs, tests, or commit messages. The repository is public.
+- When the Scoutmaster changes, the forwarding is normally updated, not the website.
+- A page test fails if any other email address or a phone number appears on the site.
+
+### Update the Scoutmaster page
+
+The Scoutmaster has a short page at **`/about/scoutmaster/`** (`src/pages/about/scoutmaster.astro`). The address names the role, so it stays the same when the Scoutmaster changes. The About page links to it.
+
+Everything on it comes from `scoutmaster` in `src/data/site.ts`:
+
+```ts
+scoutmaster: {
+  displayName: 'Mr. Vickers',   // always "Mr./Mrs. Last Name", never a full name
+  href: '/about/scoutmaster/',
+  bio: [] as string[],          // reviewed paragraphs; empty = the "we'll share more" line
+},
+```
+
+- **To add a biography:** write a few short paragraphs, have the Scoutmaster approve the exact text, then add them to `bio`, one string per paragraph. The "We'll share more about … in the future" line disappears automatically.
+- **Good content:** Scouting background, time with the troop, why they volunteer. A photo needs the normal review in [PHOTO-LOG.md](PHOTO-LOG.md) and a small page change.
+- **Never add:** a personal email, phone number, home address, employer, or family details.
+- **When the Scoutmaster changes:** update `displayName` and clear or replace `bio`. Ask troop leadership to update the email forwarding. The "visit a meeting" line on the page uses "him"; adjust that wording in the page file if needed.
+- Notes for the Webmaster go in the page file's top `---` section as `//` comments, which visitors never see. Don't use `<!-- -->` comments in pages: those are sent to every visitor.
 
 ### Add an approved photo
 
