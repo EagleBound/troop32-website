@@ -152,7 +152,7 @@ Astro automatically creates smaller, faster versions of the photo for phones and
 
 ### Add an event
 
-> Events appear at **/events/** (Upcoming and Recent Adventures), **/events/archive/**, and each event's own page **/events/<file-name>/**. The homepage doesn't show events yet. Policy: [PRIVACY.md → Events](PRIVACY.md#events-what-may-be-public-approved-e0-2026-10-07) and [Youth names](PRIVACY.md#youth-names).
+> Events appear at **/events/** (Upcoming and Recent Adventures), **/events/archive/**, and each event's own page **/events/<file-name>/**. The homepage shows up to three of them in a text-only "Recent adventures" teaser: planned public/community events first, then the newest Recent Adventures. Ordinary upcoming, postponed, and cancelled events are not featured there. Policy: [PRIVACY.md → Events](PRIVACY.md#events-what-may-be-public-approved-e0-2026-10-07) and [Youth names](PRIVACY.md#youth-names).
 
 Each event is one Markdown file in `src/content/events/`. **The file name is the event's permanent URL**: lowercase words joined by hyphens, at most 60 characters. Including the year is recommended (`eagle-project-trail-bench-2027.md` → `/events/eagle-project-trail-bench-2027/`) but not required. **Never put a Scout's name in the file name**, not even First L. Don't rename a published event.
 

@@ -1,0 +1,35 @@
+---
+// Homepage Events teaser: up to 3 text-only cards chosen by selectTeaserEvents
+// (src/lib/events/present.ts). No photos, so photos already on the homepage
+// aren't repeated. Renders nothing when no event qualifies.
+import EventList from './EventList.astro';
+import type { SiteEvent } from '../../lib/events/collection';
+
+interface Props {
+  events: SiteEvent[];
+}
+
+const { events } = Astro.props;
+---
+
+{
+  events.length > 0 && (
+    <section class="section section--tight event-teaser" aria-labelledby="event-teaser-title">
+      <div class="container">
+        <p class="eyebrow">Events</p>
+        <h2 id="event-teaser-title">Recent adventures</h2>
+        <EventList events={events} showCover={false} />
+        <p class="event-teaser-more">
+          <a href="/events/">See all events</a>
+        </p>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .event-teaser-more {
+    margin: var(--space-5) 0 0;
+    font-weight: 600;
+  }
+</style>

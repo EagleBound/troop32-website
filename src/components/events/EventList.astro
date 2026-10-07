@@ -6,9 +6,10 @@ import type { SiteEvent } from '../../lib/events/collection';
 interface Props {
   events: SiteEvent[];
   headingLevel?: 'h2' | 'h3';
+  showCover?: boolean;
 }
 
-const { events, headingLevel = 'h3' } = Astro.props;
+const { events, headingLevel = 'h3', showCover = true } = Astro.props;
 ---
 
 {
@@ -16,7 +17,7 @@ const { events, headingLevel = 'h3' } = Astro.props;
     <ul class="event-list" role="list">
       {events.map((event) => (
         <li>
-          <EventCard event={event} headingLevel={headingLevel} />
+          <EventCard event={event} headingLevel={headingLevel} showCover={showCover} />
         </li>
       ))}
     </ul>

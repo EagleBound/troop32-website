@@ -56,6 +56,8 @@ export interface PublicEvent<TImage = unknown> {
   summary: string;
   status: ClassifiableEvent['status'];
   view: PublicView;
+  /** True for a leadership-designated public/community event (already public via its badge). */
+  publicEvent: boolean;
   /** Year used to group the Archive (the event's last month). */
   year: number;
   /** Status badge text, if any. */
@@ -168,6 +170,7 @@ export function toPublicEvent<TImage>(slug: string, record: EventRecord<TImage>,
     summary: record.summary,
     status: record.status,
     view,
+    publicEvent: isPublic,
     year: parseYearMonth(record.endMonth ?? record.month).year,
     ...(badge ? { badge } : {}),
     when,
@@ -176,6 +179,23 @@ export function toPublicEvent<TImage>(slug: string, record: EventRecord<TImage>,
     ...(record.cover ? { cover: copyPhoto(record.cover) } : {}),
     gallery: (record.gallery ?? []).map(copyPhoto),
   };
+}
+
+export const TEASER_LIMIT = 3;
+
+/**
+ * Events featured on the homepage (E3 decision Q7), chosen from views that are
+ * already classified and sorted, so no classification happens here:
+ * planned public-community events first (soonest first), then Recent
+ * Adventures (newest first), at most `limit`. Ordinary upcoming, postponed,
+ * and cancelled events are never featured. Empty → the section is omitted.
+ */
+export function selectTeaserEvents<T extends Pick<PublicEvent, 'status' | 'publicEvent'>>(
+  views: { upcoming: readonly T[]; recent: readonly T[] },
+  limit: number = TEASER_LIMIT,
+): T[] {
+  const publicUpcoming = views.upcoming.filter((event) => event.publicEvent && event.status === 'planned');
+  return [...publicUpcoming, ...views.recent].slice(0, limit);
 }
 
 /** Archive groups, newest year first. Keeps the order of `events` within a year. */

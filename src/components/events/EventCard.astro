@@ -9,15 +9,17 @@ interface Props {
   event: SiteEvent;
   /** Heading level for the title, so it fits the page outline. */
   headingLevel?: 'h2' | 'h3';
+  /** Show the cover photo. False gives a compact text-only card (homepage teaser). */
+  showCover?: boolean;
 }
 
-const { event, headingLevel = 'h3' } = Astro.props;
+const { event, headingLevel = 'h3', showCover = true } = Astro.props;
 const Heading = headingLevel;
 ---
 
 <article class="event-card">
   {
-    event.cover && (
+    showCover && event.cover && (
       <PhotoFrame slot={toPhotoSlot(event.cover)} ratio="landscape" sizes="(min-width: 64rem) 33vw, (min-width: 48rem) 50vw, 100vw" />
     )
   }

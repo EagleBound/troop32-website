@@ -49,17 +49,73 @@ const VISIBLE = {
 };
 const HIDDEN = ['example-past-cancelled-2027', 'example-needs-update-2027', 'example-draft-outing-2027'];
 
-test('normal build: empty states, no event pages, no fixtures', () => {
+// The REAL records (src/content/events/). Tests about them avoid dates that
+// change with "today": completed events always have a page, in Recent or Archive.
+const REAL_DIR = 'src/content/events';
+const realRecords = readdirSync(REAL_DIR)
+  .filter((name) => name.endsWith('.md'))
+  .map((name) => {
+    const source = readFileSync(join(REAL_DIR, name), 'utf8');
+    return {
+      slug: name.replace(/\.md$/, ''),
+      uid: source.match(/^uid:\s*(\S+)/m)?.[1] ?? '',
+      draft: /^draft:\s*true\b/m.test(source),
+      status: source.match(/^status:\s*(\S+)/m)?.[1] ?? '',
+    };
+  });
+const eventDirs = (root: string) =>
+  readdirSync(join(root, 'events')).filter((name) => name !== 'archive' && name !== 'index.html');
+
+/** For each view section: either cards or its approved empty-state text. */
+function cardsOrEmpty(html: string, id: string, emptyText: string) {
+  const hasCards = cardSlugs(html, id).length > 0;
+  const hasEmpty = text(html.split(`aria-labelledby="${id}"`)[1]?.split('</section>')[0] ?? '').includes(emptyText);
+  assert.ok(hasCards !== hasEmpty, `${id}: expected either cards or the empty state`);
+}
+
+test('normal build: detail pages match the real records exactly', () => {
+  const pages = eventDirs(DIST);
+  const known = new Set(realRecords.map((r) => r.slug));
+  for (const slug of pages) assert.ok(known.has(slug), `page without a real record: ${slug}`);
+  for (const r of realRecords.filter((r) => !r.draft && r.status === 'completed')) {
+    assert.ok(pages.includes(r.slug), `completed record without a page: ${r.slug}`);
+  }
+  for (const r of realRecords.filter((r) => r.draft)) assert.ok(!pages.includes(r.slug), `draft has a page: ${r.slug}`);
+});
+
+test('normal build: each view shows cards or its approved empty state', () => {
   const events = page(DIST, 'events');
-  assert.ok(text(events).includes('Upcoming adventures are shared here when appropriate for the public.'));
-  assert.match(events, /<a href="\/join\/">Learn more about visiting a Monday meeting<\/a>/);
-  assert.ok(text(events).includes('Stories and photos from recent Troop 32 adventures will appear here.'));
+  cardsOrEmpty(events, 'upcoming-title', 'Upcoming adventures are shared here when appropriate for the public.');
+  cardsOrEmpty(events, 'recent-title', 'Stories and photos from recent Troop 32 adventures will appear here.');
   assert.ok(text(events).includes('Older adventures and milestones will be collected in the Troop 32 Archive.'));
-  assert.ok(text(page(DIST, 'events/archive')).includes('The Troop 32 Archive is just getting started.'));
+  if (cardSlugs(events, 'upcoming-title').length === 0) {
+    assert.match(events, /<a href="\/join\/"[^>]*>Learn more about visiting a Monday meeting<\/a>/);
+  }
+  const archive = page(DIST, 'events/archive');
+  assert.ok(/id="year-\d{4}"/.test(archive) || text(archive).includes('The Troop 32 Archive is just getting started.'));
+});
 
-  const eventDirs = readdirSync(join(DIST, 'events')).filter((name) => name !== 'archive' && name !== 'index.html');
-  assert.deepEqual(eventDirs, [], 'no event detail pages in the normal build');
+test('normal build: no uid, review, or approval metadata on any page', () => {
+  const uids = realRecords.map((r) => r.uid).filter(Boolean);
+  for (const file of allFiles(DIST).filter((f) => f.endsWith('.html'))) {
+    const html = readFileSync(file, 'utf8');
+    for (const uid of uids) assert.ok(!html.includes(uid), `${file} contains a uid`);
+    assert.ok(!/\bevt-[a-z0-9]{8}\b|reviewedBy|reviewedOn|approvedBy|approvedOn|publicDesignation|adult-project-lead/.test(html), `${file} contains metadata`);
+  }
+});
 
+test('normal build: homepage teaser links only to real event pages, at most 3, no images', () => {
+  const home = page(DIST, '');
+  const section = home.match(/<section[^>]*aria-labelledby="event-teaser-title"[\s\S]*?<\/section>/)?.[0];
+  if (!section) return; // omitted when nothing qualifies
+  const slugs = [...section.matchAll(/class="event-card-title"[^>]*><a href="\/events\/([^/"]+)\/"/g)].map((m) => m[1]);
+  assert.ok(slugs.length >= 1 && slugs.length <= 3, `teaser has ${slugs.length} cards`);
+  for (const slug of slugs) assert.ok(eventDirs(DIST).includes(slug), `teaser links to missing page ${slug}`);
+  assert.ok(!/<img|<figure/.test(section), 'teaser cards are text-only');
+  assert.match(section, /<a href="\/events\/"[^>]*>See all events<\/a>/);
+});
+
+test('normal build: no fixture events or assets', () => {
   for (const file of allFiles(DIST)) {
     assert.ok(!/test-placeholder|fixture/i.test(file), `fixture asset in dist: ${file}`);
     if (/\.(html|css|js|json|xml|txt)$/.test(file)) {
@@ -157,6 +213,31 @@ test('fixture build: accessible structure and images', () => {
   assert.equal(main(eagle).match(/<figure/g)?.length, 8, 'cover + 7 gallery photos');
   assert.ok(text(eagle).includes('Mr. Example checks the frame'), 'captions render');
   assert.match(eagle, /<h2 id="event-gallery-title"[^>]*>Photos<\/h2>/);
+});
+
+test('fixture build: homepage teaser (public upcoming first, then recent; max 3; text-only; placed before the Scout Law)', () => {
+  const home = page(FIXTURES, '');
+  const section = home.match(/<section[^>]*aria-labelledby="event-teaser-title"[\s\S]*?<\/section>/)?.[0] ?? '';
+  assert.deepEqual(cardSlugs(home, 'event-teaser-title'), [
+    'example-community-pancake-breakfast-2027', // planned public-community
+    'example-eagle-project-trail-bench-2027', // newest recent
+    'example-summer-trek-2027',
+  ]);
+  assert.ok(!/<img|<figure/.test(section), 'text-only cards');
+  for (const excluded of ['Example Lake Campout', 'Example Ridge Hike', 'Example River Paddle']) {
+    assert.ok(!text(section).includes(excluded), `${excluded} must not be featured`);
+  }
+  const at = (id: string) => home.indexOf(`id="${id}"`);
+  assert.ok(at('gallery-title') < at('event-teaser-title') && at('event-teaser-title') < at('law-title'), 'between mosaic and Scout Law');
+  assert.equal(home.match(/<h1[\s>]/g)?.length, 1);
+});
+
+test('homepage: existing photos unchanged and not repeated by the teaser (both builds)', () => {
+  for (const root of [DIST, FIXTURES]) {
+    const home = page(root, '');
+    assert.equal(home.match(/<figure/g)?.length, 7, `${root}: 3 program cards + 4 mosaic tiles`);
+    assert.equal(home.match(/<img /g)?.length, 9, `${root}: emblem + hero + 7 framed photos`);
+  }
 });
 
 test('navigation: Events between What We Do and New Families; footer link', () => {

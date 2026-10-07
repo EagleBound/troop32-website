@@ -8,7 +8,7 @@ import type { ImageMetadata } from 'astro';
 import { selectEventViews } from './classify.ts';
 import { fixtureToday } from './fixture-mode.ts';
 import { troopToday } from './months.ts';
-import { toPublicEvent } from './present.ts';
+import { selectTeaserEvents, toPublicEvent } from './present.ts';
 import type { PublicEvent, PublicView } from './present.ts';
 
 export type SiteEvent = PublicEvent<ImageMetadata>;
@@ -35,6 +35,11 @@ export async function getEventViews(): Promise<Record<PublicView, SiteEvent[]>> 
     recent: present(views.recent, 'recent'),
     archive: present(views.archive, 'archive'),
   };
+}
+
+/** Events for the homepage teaser (may be empty: then the section is omitted). */
+export async function getHomepageTeaser(): Promise<SiteEvent[]> {
+  return selectTeaserEvents(await getEventViews());
 }
 
 /**

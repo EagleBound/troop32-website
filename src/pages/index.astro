@@ -8,6 +8,8 @@ import JoinCallout from '../components/JoinCallout.astro';
 import { site } from '../data/site';
 import { photos, galleryIsReady } from '../data/photos';
 import { scoutLaw } from '../data/principles';
+import EventTeaser from '../components/events/EventTeaser.astro';
+import { getHomepageTeaser } from '../lib/events/collection';
 
 const pillars = [
   {
@@ -29,6 +31,8 @@ const pillars = [
     href: '/what-we-do/#service',
   },
 ];
+
+const teaserEvents = await getHomepageTeaser();
 ---
 
 <BaseLayout
@@ -160,6 +164,9 @@ const pillars = [
       </section>
     )
   }
+
+  <!-- 6b. Events teaser: text-only cards (no photos, so homepage photos aren't repeated). Omitted when nothing qualifies. -->
+  <EventTeaser events={teaserEvents} />
 
   <!-- 7. Scout Law -->
   <section class="section section--forest law" aria-labelledby="law-title">
