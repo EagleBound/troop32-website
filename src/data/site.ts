@@ -30,19 +30,18 @@ export const site = {
   },
 
   /**
-   * The REGULAR weekly meeting. Approved as public information.
-   * Never add outing, campout, travel, or temporary-change details here.
+   * The local Scouting America council and service area that serve Troop 32
+   * (approved wording, P2). Shown on the About page.
    */
-  meeting: {
-    day: 'Mondays',
-    /** Singular form for phrases like "Visit a Monday meeting". */
-    dayName: 'Monday',
-    time: '7:00 PM',
-    place: 'Santa Rosa Bible Church',
-    street: '4575 Badger Road',
-    city: 'Santa Rosa',
-    state: 'California',
+  council: {
+    name: 'Golden Gate Area Council',
+    abbreviation: 'GGAC',
+    serviceArea: 'Redwood Empire Service Area',
   },
+
+  // There is deliberately NO regular-meeting day, time, place, address, or
+  // directions here. Recurring meeting logistics are not public (P2; see
+  // docs/PRIVACY.md). Prospective families plan a visit through the Scoutmaster.
 
   /**
    * Public role-based contact channel (approved). It forwards privately to the
@@ -72,13 +71,11 @@ export const site = {
   indexable: false,
 } as const;
 
-/** Single-line meeting address, e.g. for directions. */
-export const meetingAddress = `${site.meeting.street}, ${site.meeting.city}, ${site.meeting.state}`;
-
-/** A plain directions link (not an embedded map, which would track visitors). */
-export const directionsUrl =
-  'https://www.google.com/maps/search/?api=1&query=' +
-  encodeURIComponent(`${site.meeting.place}, ${meetingAddress}`);
+/**
+ * Where "Contact the Scoutmaster" links go: the public role-based address when
+ * one is configured, otherwise the Contact page.
+ */
+export const scoutmasterContactHref = site.contact.email ? `mailto:${site.contact.email}` : '/contact/';
 
 /** Header navigation. `cta` marks the visually prominent item. */
 export const navigation = [

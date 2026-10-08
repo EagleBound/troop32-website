@@ -1,20 +1,17 @@
 ---
-// Site footer: meeting information, key links, and Scouting America affiliation.
-import { site, meetingAddress, directionsUrl } from '../data/site';
+// Site footer: how to plan a visit, key links, and Scouting America affiliation.
+// No recurring meeting day, time, or place (P2; docs/PRIVACY.md).
+import { site, scoutmasterContactHref } from '../data/site';
 
 const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
   <div class="container footer-grid">
-    <section aria-labelledby="footer-meeting">
-      <h2 id="footer-meeting" class="footer-heading">Visit a meeting</h2>
-      <p>
-        <strong>{site.meeting.day}, {site.meeting.time}</strong><br />
-        {site.meeting.place}<br />
-        {meetingAddress}
-      </p>
-      <p><a href={directionsUrl} rel="noopener noreferrer">Get directions to {site.meeting.place}</a></p>
+    <section aria-labelledby="footer-visit">
+      <h2 id="footer-visit" class="footer-heading">Visit {site.name}</h2>
+      <p>Prospective families are always welcome at our weekly meetings. Get in touch with the Scoutmaster to plan a visit.</p>
+      <p><a href={scoutmasterContactHref}>Contact the Scoutmaster</a></p>
     </section>
 
     <nav aria-labelledby="footer-explore">
@@ -39,10 +36,8 @@ const year = new Date().getFullYear();
   </div>
 
   <div class="container footer-base">
-    <p>
-      {site.name} ({site.units.boys} and {site.units.girls}) is part of {site.organization}. &copy; {year}
-      {site.name}, {site.locality}.
-    </p>
+    <p>{site.name} ({site.units.boys} and {site.units.girls}) is part of {site.organization}.</p>
+    <p class="footer-copyright">&copy; {year} {site.name}, {site.locality}.</p>
   </div>
 </footer>
 
@@ -101,5 +96,9 @@ const year = new Date().getFullYear();
 
   .footer-base p {
     margin: 0;
+  }
+
+  .footer-base .footer-copyright {
+    margin-top: var(--space-2);
   }
 </style>

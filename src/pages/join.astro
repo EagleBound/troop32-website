@@ -2,12 +2,12 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import MeetingCard from '../components/MeetingCard.astro';
-import { site } from '../data/site';
+import { site, scoutmasterContactHref } from '../data/site';
 ---
 
 <BaseLayout
   title="Join"
-  description={`How to join ${site.name}: visit a meeting ${site.meeting.day} at ${site.meeting.time} at ${site.meeting.place}, ${site.meeting.city}.`}
+  description={`How to join ${site.name} in ${site.locality}: plan a visit to a meeting, talk with troop leaders, and register with Scouting America.`}
 >
   <PageHeader
     eyebrow="Join us"
@@ -23,8 +23,8 @@ import { site } from '../data/site';
           <li>
             <h3>Visit a meeting</h3>
             <p>
-              Come to a {site.name} meeting on {site.meeting.day} at {site.meeting.time} at {site.meeting.place}. It is
-              the best way to see what the troop is like, and you don't need to call ahead.
+              <a href={scoutmasterContactHref}>Get in touch with the Scoutmaster</a> and we'll help you plan a visit to
+              a {site.name} meeting. It's the best way to see what the troop is like.
             </p>
           </li>
           <li>
@@ -43,7 +43,7 @@ import { site } from '../data/site';
           </li>
         </ol>
       </div>
-      <aside aria-label="Meeting time and place">
+      <aside aria-label="Our weekly meetings">
         <MeetingCard headingLevel={2} />
       </aside>
     </div>

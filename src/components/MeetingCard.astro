@@ -1,36 +1,30 @@
 ---
-// The regular weekly meeting, from central site data.
-// Only the REGULAR meeting is public; never add outing or event logistics here.
-import { site, meetingAddress, directionsUrl } from '../data/site';
+// "Our weekly meetings": what troop meetings are for, and how a prospective
+// family can plan a visit. Deliberately NO day, time, place, address, or
+// directions: recurring meeting logistics are not public (P2; docs/PRIVACY.md).
+import { site, scoutmasterContactHref } from '../data/site';
 
 interface Props {
   /** Heading level used for the card title, to keep page outlines logical. */
   headingLevel?: 2 | 3;
-  title?: string;
 }
 
-const { headingLevel = 2, title = `Come to a ${site.meeting.dayName} meeting` } = Astro.props;
+const { headingLevel = 2 } = Astro.props;
 const Heading = `h${headingLevel}` as 'h2' | 'h3';
+const Subheading = `h${headingLevel + 1}` as 'h3' | 'h4';
 ---
 
-<section class="meeting-card" aria-label="Regular meeting time and place">
-  <Heading class="meeting-title">{title}</Heading>
-  <dl class="meeting-details">
-    <div>
-      <dt>When</dt>
-      <dd>{site.meeting.day} at {site.meeting.time}</dd>
-    </div>
-    <div>
-      <dt>Where</dt>
-      <dd>
-        {site.meeting.place}<br />
-        {meetingAddress}
-      </dd>
-    </div>
-  </dl>
-  <a class="meeting-directions" href={directionsUrl} rel="noopener noreferrer">
-    Get directions to {site.meeting.place}
-  </a>
+<section class="meeting-card" aria-label="Our weekly meetings">
+  <Heading class="meeting-title">Our weekly meetings</Heading>
+  <p>
+    {site.name} meets weekly throughout the year. Meetings give Scouts time to work on advancement, practice skills,
+    plan upcoming adventures, build leadership, and have fun together.
+  </p>
+  <Subheading class="meeting-subtitle">Interested in visiting?</Subheading>
+  <p>
+    Prospective families are always welcome. Get in touch with the Scoutmaster and we'll help you plan a visit.
+  </p>
+  <a class="meeting-contact" href={scoutmasterContactHref}>Contact the Scoutmaster</a>
 </section>
 
 <style>
@@ -61,20 +55,10 @@ const Heading = `h${headingLevel}` as 'h2' | 'h3';
     color: var(--forest-900);
   }
 
-  .meeting-details {
-    display: grid;
-    gap: var(--space-4);
-    margin-bottom: var(--space-5);
-  }
-
-  @media (min-width: 36rem) {
-    .meeting-details {
-      grid-template-columns: auto 1fr;
-      column-gap: var(--space-6);
-    }
-  }
-
-  .meeting-details dt {
+  .meeting-subtitle {
+    margin-top: var(--space-5);
+    margin-bottom: var(--space-2);
+    font-family: var(--font-body);
     font-size: var(--text-sm);
     font-weight: 700;
     letter-spacing: 0.1em;
@@ -82,13 +66,7 @@ const Heading = `h${headingLevel}` as 'h2' | 'h3';
     color: var(--khaki-700);
   }
 
-  .meeting-details dd {
-    margin: 0;
-    font-size: var(--text-lg);
-    font-weight: 600;
-  }
-
-  .meeting-directions {
+  .meeting-contact {
     font-weight: 700;
     color: var(--forest-700);
   }

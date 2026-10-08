@@ -146,7 +146,7 @@ export const photos = {
       scene: 'forest',
       image: tentPitching,
       alt: 'Scouts work together to raise a large tent in a field of tall golden grass.',
-      caption: 'Pitching camp',
+      caption: 'Setting up camp',
       focus: { x: 40, y: 60 },
       event: CHILL_OUTING_2026,
       tile: 'wide',

@@ -19,7 +19,7 @@ General information intended for prospective families, community members, Scouts
 - What Scouting is, and the Scout Oath, Scout Law, Scout Motto, Scout Slogan, and Outdoor Code.
 - General description of Troop 32 and its program, once confirmed (see [CONTENT-GUIDE.md](CONTENT-GUIDE.md#no-invented-facts)).
 - How to join, and links to official Scouting America resources.
-- **The regular meeting information** listed below.
+- That Troop 32 meets weekly throughout the year, and that prospective families can plan a visit through the Scoutmaster. **Not** the meeting day, time, or place (see [Regular meetings and activity logistics](#regular-meetings-and-activity-logistics)).
 - The troop's official public contact channel, once decided.
 
 ### Tier 2: May belong in a future authenticated member area
@@ -61,15 +61,22 @@ Youth names, photographs, captions, and Eagle Scout recognition are now governed
 
 Some Tier 4 items, such as health forms, may be handled by Scouting America systems or troop leadership. They are **not** handled by this website project unless a future approved work package specifically decides otherwise.
 
-## Regular meeting information vs. activity logistics
+## Regular meetings and activity logistics
 
-**Intentionally public (approved):**
+**Decided P2 (2026-10-07), with designated adult leader approval. Supersedes the earlier decision that made the regular meeting public.**
 
-> Troop 32 normally meets **Mondays at 7:00 PM** at **Santa Rosa Bible Church, 4575 Badger Road, Santa Rosa, California**.
+The troop's **recurring meeting logistics are private.** The public website and this repository never contain:
 
-This may be used in recruiting and prospective-family content.
+- the regular meeting day or time;
+- the regular meeting place or its street address;
+- directions or map links to it;
+- any equivalent wording that would let a visitor work out where and when Scouts predictably gather.
 
-**This permission does NOT extend to:**
+They never enter this repository, even as an unrendered field or in a test. Families learn the details privately: a prospective family gets in touch with the Scoutmaster (scoutmaster@troop32.org), who helps them plan a visit.
+
+**What may be public:** that Troop 32 meets weekly throughout the year, what meetings are for (advancement, skills, planning adventures, leadership, fun), and that prospective families are welcome to plan a visit through the Scoutmaster.
+
+The same privacy applies to:
 
 - outings, campouts, or hikes;
 - service projects;
@@ -81,7 +88,11 @@ This may be used in recruiting and prospective-family content.
 
 Specific youth activity logistics stay **private** unless troop leadership explicitly approves that particular information for public distribution.
 
-**Why the difference?** A regular weekly meeting at a public church building is how families find the troop. Specific dates and places of youth activities away from the meeting location can reveal where identifiable youth will be, and when, which raises safety concerns.
+**Why?** A predictable weekly time and place tells anyone exactly where a group of identifiable youth will be, every week. Planning visits through the Scoutmaster still lets families find the troop, while a responsible adult knows who is coming.
+
+**Public events are unchanged.** Troop leadership may still explicitly designate a genuinely public event (for example a community breakfast or an open house) and publish its date, time, and venue under the [Events](#events-what-may-be-public-approved-e0-2026-10-07) rules.
+
+**Removing it doesn't erase older copies.** Earlier versions of this repository (Git history) and other public places, such as the previous troop32.org site, web archives, and unit listings, may still show the old details. Those are tracked as separate follow-up items; this policy governs current content.
 
 ## Events: what may be public (approved E0, 2026-10-07)
 
@@ -239,7 +250,7 @@ Questions resolved in work package E0 (2026-10-07) are struck through. Their dec
 2. ~~**Youth names.**~~ **Resolved:** real First L. throughout public content, whatever the type of event or content; never full last names; never in URLs ([Youth names](#youth-names)). The same rule applies to youth leaders, such as a Senior Patrol Leader.
 3. ~~**Eagle Scout and award recognition.**~~ **Resolved for naming:** any Scout named in recognition (Eagle projects, awards, courts of honor), upcoming or completed, is named as First L.; event rules govern the accompanying logistics ([Eagle Scout projects](#eagle-scout-projects)). *Still open: whether to publish Eagle Scout biographies and individual portraits, and any consent step.*
 4. ~~**Adult leader information.**~~ **Resolved for names:** Mr. or Mrs. Last Name, as appropriate ([Adult names](#adult-names)). *Still open: which roles are listed, and role-based contact addresses (see question 5).*
-5. ~~**Public contact channel.**~~ **Resolved (L1, 2026-10-07):** the role-based address scoutmaster@troop32.org, forwarded privately outside this repository, plus the regular Monday meeting. No forwarding destination or personal contact detail is ever stored in the repository.
+5. ~~**Public contact channel.**~~ **Resolved (L1, 2026-10-07):** the role-based address scoutmaster@troop32.org, forwarded privately outside this repository. *(Originally also "plus the regular meeting"; since P2, prospective families plan a visit through the Scoutmaster and no meeting day, time, or place is public.)* No forwarding destination or personal contact detail is ever stored in the repository.
 6. ~~**Calendar.**~~ **Resolved:** general information only for ordinary events; full public details only for events leadership designates as public ([Events](#events-what-may-be-public-approved-e0-2026-10-07)). *Still open: who records a public-event designation, and how.*
 7. **Member area.** What information belongs there, who gets accounts, and who manages them? *(E0 set only the boundary: private event information never goes in this repository and links to public events by a stable event identifier.)*
 8. ~~**Retention.**~~ **Resolved:** the Archive is kept indefinitely by default, and leadership can remove or revise youth content on request ([Recency and retention](#recency-and-retention)).

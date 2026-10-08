@@ -88,21 +88,22 @@ The text above was supplied directly to this project. Third-party websites that 
 
 **Confirmed for public use so far:**
 
-- Troop 32 normally meets **Mondays at 7:00 PM** at **Santa Rosa Bible Church, 4575 Badger Road, Santa Rosa, California**.
+- Troop 32 meets **weekly throughout the year**. The meeting day, time, and place are **not public** (P2; see [PRIVACY.md](PRIVACY.md#regular-meetings-and-activity-logistics)).
+- Troop 32 is a Scouting America troop served by the **Redwood Empire Service Area** of the **Golden Gate Area Council (GGAC)** (approved wording, P2).
 - The current Scoutmaster is **Mr. Vickers** (adult-name form; see [PRIVACY.md → Adult names](PRIVACY.md#adult-names)). His page is `/about/scoutmaster/`.
-- Prospective families may simply come to a regular Monday meeting; they don't need to contact the troop first.
+- Prospective families are always welcome, and **plan a visit through the Scoutmaster**. *(Supersedes the L1 wording that families could simply come without contacting the troop.)*
 - The public contact address is **scoutmaster@troop32.org** (role-based).
 - Eligibility follows Scouting America's official Scouts BSA rule (verified 2026-10-07; see [PROJECT.md](PROJECT.md#content-still-needing-confirmation-before-launch)).
 - Uniform and gear: talk with adult leaders before buying; the troop has lightly worn uniform items; the troop provides certain group equipment, including tents and cooking utensils.
 - Troop 32 follows Scouting America's Youth Protection requirements and policies.
-- "Eagle Bound!" is an existing project tagline. Don't call it an official troop motto unless leadership confirms it.
+- "Eagle Bound!" is Troop 32's **troop slogan** (confirmed P2). Call it the "troop slogan", not an official motto. It appears as the homepage hero eyebrow.
 
 ## Privacy in content
 
 Follow [PRIVACY.md](PRIVACY.md). In short:
 
 - No youth contact information, rosters, private logistics, or medical/emergency information.
-- The regular Monday meeting is public. Specific outings, campouts, travel, and special events are **not**, unless leadership approves the specific item.
+- The regular meeting's day, time, and place are **not** public: say only that the troop meets weekly, and invite families to plan a visit through the Scoutmaster. Specific outings, campouts, travel, and special events are **not** public either, unless leadership approves the specific item.
 - When in doubt, leave it out and flag it.
 
 ### Naming people
@@ -169,7 +170,7 @@ The project's accessibility target is **WCAG 2.2 Level AA**. Writing these rules
 
 ## Contact information
 
-- Public contact goes through the role-based **scoutmaster@troop32.org** and the regular Monday meeting. No other email address or phone number is published.
+- Public contact goes through the role-based **scoutmaster@troop32.org**. Prospective families plan a visit to a meeting through the Scoutmaster. No other email address or phone number is published.
 - Never publish personal email addresses or phone numbers of youth. Publish adults' personal details only if policy allows.
 - Prefer role-based contact (for example, "the Scoutmaster") over personal details.
 
@@ -196,7 +197,7 @@ The project's accessibility target is **WCAG 2.2 Level AA**. Writing these rules
 
 The **Troop 32 Santa Rosa emblem** (a round patch reading "TROOP" / "SANTA ROSA CA." around a gold fleur-de-lis with two stars and a large "32") was supplied and approved by the adult project lead as the site's **primary visual identity**.
 
-- **Where it appears:** the global header, to the left of the "Troop 32 / Santa Rosa, California" text, which always stays alongside it. Also as the Apple home-screen icon. It does **not** appear in the footer, the homepage hero, or the browser-tab favicon (the bold "32" favicon reads better at small sizes). Using it in one place keeps it from being repeated.
+- **Where it appears:** the global header, to the left of the "Troop 32 / Santa Rosa, California" text, which always stays alongside it (66 px on screens 768 px and wider, 52 px on phones, 44 px on very narrow phones; enlarged in P2). On screens 768 px and wider a third plain-text line, "Scouting America", appears under the place line. It is plain text, not the Scouting America logo or wordmark. Also as the Apple home-screen icon. It does **not** appear in the footer, the homepage hero, or the browser-tab favicon (the bold "32" favicon reads better at small sizes). Using it in one place keeps it from being repeated.
 - **Don't alter it.** Never redraw, recolor, re-letter, stretch, or crop into the artwork. Only ordinary preparation is allowed: proportional resizing and making the area outside the circle transparent. The prepared copy is `src/assets/brand/troop32-emblem.png`; the original file is kept outside this repository.
 - **Accessibility:** in the header it is decorative (`alt=""`), because the linked text next to it names the troop.
-- **Open item before public launch:** the emblem contains **Scouting America–derived fleur-de-lis elements** (the fleur-de-lis with two stars). Troop leadership should confirm that this use is consistent with current Scouting America brand guidance. This guide makes no legal or trademark conclusion.
+- **Open item before public launch:** the emblem contains **Scouting America–derived fleur-de-lis elements** (the fleur-de-lis with two stars). Troop leadership should confirm that this use is consistent with current Scouting America brand guidance. The same review should cover the plain-text "Scouting America" identity line in the header (added in P2). This guide makes no legal or trademark conclusion.

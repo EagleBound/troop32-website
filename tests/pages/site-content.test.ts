@@ -40,11 +40,13 @@ test('no phone numbers on the site', () => {
   }
 });
 
-test('Contact: two pathways, and a mailto link under "Email the Scoutmaster"', () => {
+test('Contact: visits are planned through the Scoutmaster, with a mailto link under "Email the Scoutmaster"', () => {
   const contact = main(page('contact'));
   assert.match(contact, /<h2 id="email-title"[^>]*>Email the Scoutmaster<\/h2>/);
   assert.match(contact, new RegExp(`href="mailto:${PUBLIC_EMAIL}"`));
-  assert.ok(text(page('contact')).includes('no need to call ahead'));
+  const body = text(page('contact'));
+  assert.ok(body.includes("Get in touch with the Scoutmaster and we'll help you plan a visit."));
+  assert.ok(!/no need to call ahead|just come/i.test(body), 'L1 "just show up" wording is superseded (P2)');
 });
 
 test('the Scoutmaster appears only as "Mr. Vickers", never by full name', () => {
@@ -64,7 +66,8 @@ test('Scoutmaster page: minimal, intentional, contact and meeting pathway', () =
   const body = text(main(html));
   assert.ok(body.includes('Mr. Vickers serves as the Scoutmaster of Troop 32.'));
   assert.ok(body.includes("We'll share more about Mr. Vickers here in the future."), 'empty-bio line while bio is empty');
-  assert.ok(body.includes('visit a Monday meeting'));
+  assert.ok(body.includes('the best way to get to know him is to visit a troop meeting.'));
+  assert.ok(body.includes("We're glad to help prospective families plan a visit to a meeting."));
   assert.match(html, new RegExp(`href="mailto:${PUBLIC_EMAIL}"`));
   assert.ok(!/<img /.test(main(html)), 'no photo');
   assert.match(html, /<a href="\/about\/" class="nav-link"[^>]*aria-current="page"/, 'About is current in the navigation');
@@ -99,11 +102,14 @@ test('Privacy notice matches what the site actually publishes (P1)', () => {
     'we use only their first name and last initial',
     'adult leaders are named as Mr. or Mrs. Last Name',
     "If you'd like a photo, name, or story about your family changed or removed, email scoutmaster@troop32.org or speak with a troop leader.",
+    "We don't publish the day, time, or place of our regular meetings.",
     'Last reviewed: October 2026',
   ]) {
     assert.ok(body.includes(shown), `missing "${shown}"`);
   }
-  assert.equal(html.match(new RegExp(`href="mailto:${PUBLIC_EMAIL}"`, 'g'))?.length, 2, 'removals + questions');
+  assert.ok(!body.includes('Our regular meeting is also public'), 'superseded public-meeting statement (P2)');
+  assert.ok(!body.includes('directions to our meeting place'), 'no directions link exists any more (P2)');
+  assert.equal(main(html).match(new RegExp(`href="mailto:${PUBLIC_EMAIL}"`, 'g'))?.length, 2, 'removals + questions');
 });
 
 test('Accessibility: email reporting pathway and review date (P1)', () => {
@@ -120,7 +126,9 @@ test('New Families: official eligibility, visiting, gear, Youth Protection; cost
   assert.ok(body.includes('at least 10 years old, in fifth grade, and registering on or after March 1'));
   assert.ok(!/10½|10 1\/2|through 18/.test(body), 'superseded eligibility wording');
   assert.match(nf, /href="https:\/\/www\.scouting\.org\/programs\/scouts-bsa\/faqs\/"/);
-  assert.ok(body.includes("You don't need to contact us first: just come to a Monday meeting."));
+  assert.ok(body.includes('Troop 32 meets weekly throughout the year.'));
+  assert.ok(body.includes("Get in touch with the Scoutmaster and we'll help you plan a visit."));
+  assert.ok(!/just come|no need to call ahead|don't need to (?:call|contact)/i.test(body), 'L1 "just show up" wording is superseded (P2)');
   assert.ok(body.includes("check the troop's supply of lightly worn uniform items"));
   assert.ok(body.includes('including tents and cooking utensils'));
   assert.ok(!body.includes('Troop leaders can tell you what a new Scout needs first'));
@@ -130,9 +138,12 @@ test('New Families: official eligibility, visiting, gear, Youth Protection; cost
   assert.match(nf, /<a href="https:\/\/www\.scouting\.org\/training\/safeguarding-youth\/"[^>]*>Read Scouting America's Youth Protection information<\/a>/);
 });
 
-test('Join: no need to call ahead; official Scouts BSA link', () => {
+test('Join: plan a visit through the Scoutmaster; official Scouts BSA link', () => {
   const joinPage = page('join');
-  assert.ok(text(main(joinPage)).includes("you don't need to call ahead"));
+  const body = text(main(joinPage));
+  assert.ok(body.includes("Get in touch with the Scoutmaster and we'll help you plan a visit to a Troop 32 meeting."));
+  assert.ok(!/call ahead/i.test(body), 'L1 "no need to call ahead" wording is superseded (P2)');
+  assert.match(joinPage, new RegExp(`<a href="mailto:${PUBLIC_EMAIL}"[^>]*>Get in touch with the Scoutmaster</a>`));
   assert.match(joinPage, /<a href="https:\/\/www\.scouting\.org\/programs\/scouts-bsa\/"[^>]*>Learn about the Scouts BSA program from Scouting America<\/a>/);
 });
 
@@ -140,7 +151,8 @@ test('external links on the recruiting pages go only to official Scouting Americ
   for (const route of ['join', 'new-families', 'contact', 'about', 'about/scoutmaster']) {
     for (const m of main(page(route)).matchAll(/href="(https?:\/\/[^"]+)"/g)) {
       const host = new URL(m[1]).hostname;
-      assert.ok(host === 'www.scouting.org' || host === 'www.google.com', `${route}: unexpected external link ${m[1]}`);
+      // (Before P2, a Google Maps directions link was also allowed here.)
+      assert.ok(host === 'www.scouting.org', `${route}: unexpected external link ${m[1]}`);
     }
   }
 });

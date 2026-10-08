@@ -14,9 +14,9 @@ The long-term map below is still proposed. For v1.0, several entries were **comb
 | `/about/` | About | About Troop 32, Troop 32-B and Troop 32-G, Troop leadership, Scout Oath / Scout Law / Scouting values |
 | `/what-we-do/` | What We Do | What Scouts Do, Outdoor activities, Service, Advancement, The Eagle Scout journey |
 | `/new-families/` | New Families | What Is Scouting?, Information for new families, safety for parents |
-| `/join/` | Join | Join Troop 32, Regular meetings |
+| `/join/` | Join | Join Troop 32, plan a visit to a meeting |
 | `/about/scoutmaster/` | Mr. Vickers, Scoutmaster | Short Scoutmaster page; biography to be added later (L1) |
-| `/contact/` | Contact | Contact (Monday meeting or scoutmaster@troop32.org) |
+| `/contact/` | Contact | Contact (scoutmaster@troop32.org; plan a visit through the Scoutmaster) |
 | `/privacy/` | Privacy | Privacy |
 | `/accessibility/` | Accessibility | Accessibility |
 | `/events/` | Events | Upcoming events (compact list, no photos), Recent Adventures (photo cards), and a link to the Archive (added in E2) |
@@ -32,9 +32,9 @@ The **v1.0 launch** column is a *proposed* scope for the recruiting-ready Websit
 
 | Section / page | v1.0 launch | Purpose | Main audience | Notes and open questions |
 | --- | --- | --- | --- | --- |
-| **Home** | Yes | Welcome, what Troop 32 is, how to visit or join | Prospective families, community | Could feature the regular Monday meeting and a link to "Join." Tagline use ("Eagle Bound!") is to be decided. |
+| **Home** | Yes | Welcome, what Troop 32 is, how to visit or join | Prospective families, community | Invites families to plan a visit through the Scoutmaster (no meeting day, time, or place; P2), with a link to "Join." "Eagle Bound!" is Troop 32's confirmed troop slogan and is used as the homepage hero eyebrow (P2). |
 | **About Troop 32** | Yes | Who we are | Everyone | History must be confirmed by leadership before use (see [PROJECT.md](PROJECT.md#open-content-items-requiring-confirmation)). |
-| ↳ Troop 32-B and Troop 32-G | Yes | Explain the two-troop structure simply | Prospective families | Short explanation. The rest of the site still uses "Troop 32." |
+| ↳ Troop 32-B and Troop 32-G | Yes | Explain the two-troop structure simply | Prospective families | Short explanation, after the approved council affiliation sentence (P2). The rest of the site still uses "Troop 32." |
 | ↳ Troop leadership | Yes | Who leads the troop | Prospective families | Scoutmaster: Mr. Vickers, with his own page at `/about/scoutmaster/`. Other adult leaders may be named as Mr. or Mrs. Last Name ([PRIVACY.md](PRIVACY.md#adult-names)). Which roles to list, and contact details, are [still open](PRIVACY.md#open-policy-questions). |
 | **What Is Scouting?** | Yes | Scouting for newcomers | Families new to Scouting | Link to official Scouting America resources. |
 | ↳ Scout Oath, Scout Law, and Scouting values | Yes | Show the principles Scouts live by | Everyone | Approved text in [CONTENT-GUIDE.md](CONTENT-GUIDE.md#scouting-principles-as-editorial-principles). Includes Motto, Slogan, and Outdoor Code. |
@@ -45,7 +45,7 @@ The **v1.0 launch** column is a *proposed* scope for the recruiting-ready Websit
 | ↳ The Eagle Scout journey | Yes (general only) | What Eagle means and how Scouts get there | Families, Scouts | A Scout named in Eagle project or other recognition content, upcoming or completed, is named as First L., like anywhere else on the site ([PRIVACY.md](PRIVACY.md#eagle-scout-projects)). Whether to publish Eagle biographies and individual portraits is [still open](PRIVACY.md#open-policy-questions). |
 | **Join Troop 32** | Yes | How to join, step by step | Prospective families | Age and eligibility details must be confirmed. Link to official applications. |
 | ↳ Information for new families | Yes | What to expect, costs, gear, first steps | Prospective families | Costs and fees `[TO BE PROVIDED]` by leadership. |
-| ↳ Regular meetings | Yes | When and where | Prospective families | **Approved public:** Mondays, 7:00 PM, Santa Rosa Bible Church, 4575 Badger Road, Santa Rosa, California. |
+| ↳ Regular meetings | Yes | What meetings are for, and how to plan a visit | Prospective families | "Our weekly meetings" card. The day, time, and place are **not public** (P2, superseding the earlier public-meeting approval); families plan a visit through the Scoutmaster ([PRIVACY.md](PRIVACY.md#regular-meetings-and-activity-logistics)). |
 | **Photos** | Superseded | Show Scouting in action | Everyone | Replaced by the planned **Events** area below. The youth-photo policy was approved 2026-10-07 (E0). |
 | **Events** | Built (E2); first events added (E3) | Upcoming Events, Recent Adventures (completed less than 12 months ago), Troop 32 Archive (12 months or older), with curated event galleries | Everyone | Policy approved 2026-10-07 (E0): primary nav label "Events", plus a homepage teaser. General information only for ordinary events; full details only for designated public events ([PRIVACY.md → Events](PRIVACY.md#events-what-may-be-public-approved-e0-2026-10-07)). Pages built in E2. First five real 2026 events and the homepage teaser (up to three text-only cards) added in E3. |
 | **Contact** | Yes | Reach the troop | Everyone | Through an official troop channel. **The channel must be decided before launch.** No personal youth contact details. |

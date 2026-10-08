@@ -21,18 +21,22 @@ import { scoutOath, scoutLaw, scoutMotto, scoutSlogan, outdoorCode } from '../da
     <div class="container grid-2">
       <div class="reading">
         <h2 id="structure-title">One troop, two Scouting America troops</h2>
+        <p class="affiliation">
+          {site.name} is a {site.organization} troop served by the {site.council.serviceArea} of the{' '}
+          {site.council.name} ({site.council.abbreviation}).
+        </p>
         <p>
           Organizationally, {site.name} is two Scouting America troops: <strong>{site.units.boys}</strong> for boys
           and <strong>{site.units.girls}</strong> for girls.
         </p>
         <p>
           The two troops normally meet together and go on outings together. That is why families, and this website,
-          simply call us <strong>{site.name}</strong>. You will see the {site.units.boys} and {site.units.girls}
+          simply call us <strong>{site.name}</strong>. You will see the {site.units.boys} and {site.units.girls}{' '}
           names mainly where the difference matters, such as registration, records, and some awards and leadership
           positions.
         </p>
       </div>
-      <MeetingCard headingLevel={3} title="Where to find us" />
+      <MeetingCard headingLevel={3} />
     </div>
   </section>
 

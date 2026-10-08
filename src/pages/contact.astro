@@ -4,30 +4,30 @@ import PageHeader from '../components/PageHeader.astro';
 import MeetingCard from '../components/MeetingCard.astro';
 import { site } from '../data/site';
 
-// Two public ways to reach the troop: a regular Monday meeting (no need to
-// call ahead) and the role-based Scoutmaster address in `site.contact.email`
-// (src/data/site.ts). Never add personal contact details.
+// The public way to reach the troop is the role-based Scoutmaster address in
+// `site.contact.email` (src/data/site.ts). Prospective families plan a visit
+// through the Scoutmaster; recurring meeting logistics are not public (P2).
+// Never add personal contact details.
 const email = site.contact.email;
 ---
 
 <BaseLayout
   title="Contact"
-  description={`How to reach ${site.name} in ${site.locality}: visit a meeting ${site.meeting.day} at ${site.meeting.time}, or email the Scoutmaster.`}
+  description={`How to reach ${site.name} in ${site.locality}: get in touch with the Scoutmaster, and we'll help prospective families plan a visit to a meeting.`}
 >
   <PageHeader
     eyebrow="Contact"
     title={`Get in touch with ${site.name}`}
-    intro={`There are two easy ways to reach ${site.name}: come to a regular ${site.meeting.dayName} meeting, no need to call ahead, or email the Scoutmaster.`}
+    intro={`The best way to reach ${site.name} is to get in touch with the Scoutmaster. Prospective families are always welcome to visit a meeting, and we'll help you plan it.`}
   />
 
   <section class="section" aria-labelledby="contact-title">
     <div class="container contact-layout">
       <div class="reading">
-        <h2 id="contact-title">Talk with us in person</h2>
+        <h2 id="contact-title">Visit a meeting</h2>
         <p>
-          {site.name} meets on {site.meeting.day} at {site.meeting.time} at {site.meeting.place}. Visiting a meeting is
-          the quickest way to ask questions about joining, see the troop in action, and meet the people who make it
-          work. You don't need to call ahead: just come.
+          Visiting a meeting is the best way to ask questions about joining, see the troop in action, and meet the
+          people who make it work. Get in touch with the Scoutmaster and we'll help you plan a visit.
         </p>
         {
           email && (
@@ -46,8 +46,8 @@ const email = site.contact.email;
           <a href="/accessibility/">accessibility</a>.
         </p>
       </div>
-      <aside aria-label="Meeting time and place">
-        <MeetingCard headingLevel={2} title="Visit a meeting" />
+      <aside aria-label="Our weekly meetings">
+        <MeetingCard headingLevel={2} />
       </aside>
     </div>
   </section>

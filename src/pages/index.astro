@@ -36,7 +36,7 @@ const teaserEvents = await getHomepageTeaser();
 ---
 
 <BaseLayout
-  description={`${site.name} is a Scouting America troop in ${site.locality}, open to boys and girls. Visit a meeting ${site.meeting.day} at ${site.meeting.time} at ${site.meeting.place}.`}
+  description={`${site.name} is a Scouting America troop in ${site.locality}, open to boys and girls. Prospective families are always welcome to visit a meeting.`}
 >
   {/* 2. Hero */}
   <section class="hero on-dark" aria-labelledby="hero-title">
@@ -58,14 +58,14 @@ const teaserEvents = await getHomepageTeaser();
     </div>
     <div class="container hero-inner">
       <div class="hero-copy">
-      <p class="eyebrow">{site.name} · {site.locality}</p>
+      <p class="eyebrow">Eagle Bound!</p>
       <h1 id="hero-title">Adventure, leadership, and friendship for youth in Santa Rosa</h1>
       <p class="hero-lead">
         {site.name} is a Scouting America troop for boys and girls. Scouts camp, hike, serve their community, and
         learn to lead, one adventure at a time.
       </p>
       <div class="button-row">
-        <a class="button button--primary" href="/join/">Visit a {site.meeting.dayName} meeting</a>
+        <a class="button button--primary" href="/join/">Plan a visit</a>
         <a class="button button--secondary" href="/what-we-do/">See what Scouts do</a>
       </div>
       </div>
@@ -79,11 +79,12 @@ const teaserEvents = await getHomepageTeaser();
         <p class="eyebrow">Visit us</p>
         <h2 id="visit-title">The easiest first step: come see a meeting</h2>
         <p class="lead">
-          {site.name} meets on {site.meeting.day}. Bring your questions and see what a Scout meeting is really like.
+          Bring your questions and see what a Scout meeting is really like. Get in touch with the Scoutmaster and
+          we'll help you plan a visit.
         </p>
         <p><a href="/join/">How joining works</a></p>
       </div>
-      <MeetingCard headingLevel={3} title="Our weekly meeting" />
+      <MeetingCard headingLevel={3} />
     </div>
   </section>
 

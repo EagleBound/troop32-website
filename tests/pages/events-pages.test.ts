@@ -90,7 +90,7 @@ test('normal build: each view shows cards or its approved empty state', () => {
   cardsOrEmpty(events, 'recent-title', 'Stories and photos from recent Troop 32 adventures will appear here.');
   assert.ok(text(events).includes('Older adventures and milestones will be collected in the Troop 32 Archive.'));
   if (cardSlugs(events, 'upcoming-title').length === 0) {
-    assert.match(events, /<a href="\/join\/"[^>]*>Learn more about visiting a Monday meeting<\/a>/);
+    assert.match(events, /<a href="\/join\/"[^>]*>Learn more about visiting a meeting<\/a>/);
   }
   const archive = page(DIST, 'events/archive');
   assert.ok(/id="year-\d{4}"/.test(archive) || text(archive).includes('The Troop 32 Archive is just getting started.'));

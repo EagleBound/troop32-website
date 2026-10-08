@@ -100,7 +100,7 @@ npm run preview:fixtures   # serve dist-fixtures/
 | **Pages** | `src/pages/` | Each file is one page. `about.astro` becomes `/about/`; `index.astro` is the home page; `404.astro` is the "page not found" page. |
 | **Shared building blocks** | `src/components/` | Header, footer, meeting card, photo frame, page header, closing call to action, and the placeholder illustrations (`Scene.astro`). Event cards, lists, details, and galleries are in `src/components/events/`. |
 | **Page shell** | `src/layouts/BaseLayout.astro` | The `<head>`, skip link, header, and footer that wrap every page. |
-| **Repeated troop facts** | `src/data/site.ts` | Troop name, meeting day/time/place, Scoutmaster, public contact, navigation. **Change a fact here and it updates on every page.** |
+| **Repeated troop facts** | `src/data/site.ts` | Troop name, council and service area, Scoutmaster, public contact, navigation. **Change a fact here and it updates on every page.** It deliberately has no meeting day, time, or place. |
 | **Scouting principles** | `src/data/principles.ts` | Scout Oath, Law, Motto, Slogan, Outdoor Code. Must match [CONTENT-GUIDE.md](CONTENT-GUIDE.md). |
 | **Photo slots** | `src/data/photos.ts` | Which approved photo (or fallback illustration) appears in each photo spot. Each page section has its **own** slot (`hero`, `home.*`, `whatWeDo.*`, and the `gallery` mosaic list), so a photo never repeats on another page by accident. |
 | **Events** | `src/content/events/` | One Markdown file per event (see [Add an event](#add-an-event)). Pages: `src/pages/events/`. Rules: `src/lib/events/`; collection setup: `src/content.config.ts`. |
@@ -118,9 +118,13 @@ npm run preview:fixtures   # serve dist-fixtures/
 - **Comments in pages:** write `{/* note */}` in the HTML part of an `.astro` file, or `//` comments in the top `---` section. Don't use `<!-- note -->`: those are sent to every visitor. A page test checks this.
 - **Spaces before links:** if a line of text ends and the next line starts with a link or bold text, Astro drops the space between them ("visit a<a…>meeting" shows as "visit ameeting"). End the first line with `{' '}`, or keep the text and the link on one line. A page test checks this too.
 
-### Change the meeting time or place
+### Meeting information (keep it private)
 
-Edit `meeting` in `src/data/site.ts`. Every page updates automatically. Changes to public information still go through the [workflow](WORKFLOW.md), and only the **regular** meeting belongs there, never outing or event details ([PRIVACY.md](PRIVACY.md#regular-meeting-information-vs-activity-logistics)).
+The regular meeting's day, time, and place are **not public** and are not stored anywhere in this repository ([PRIVACY.md](PRIVACY.md#regular-meetings-and-activity-logistics)). If the meeting moves or changes time, **nothing on the website changes.**
+
+The "Our weekly meetings" card (`src/components/MeetingCard.astro`) and the footer say only that the troop meets weekly and invite families to plan a visit through the Scoutmaster. Don't add a day, time, place, address, map, or directions to them or to any page. `tests/pages/meeting-privacy.test.ts` fails the build checks if a weekday, clock time, street address, church or other place of worship, map link, or "directions" shows up in the header, footer, meeting card, page titles or descriptions, or anywhere on a non-event page.
+
+A public event that leadership designates (see [Add an event](#add-an-event)) may still show its own date, time, and venue on its event page.
 
 ### The public contact email
 
@@ -147,7 +151,7 @@ scoutmaster: {
 - **To add a biography:** write a few short paragraphs, have the Scoutmaster approve the exact text, then add them to `bio`, one string per paragraph. The "We'll share more about … in the future" line disappears automatically.
 - **Good content:** Scouting background, time with the troop, why they volunteer. A photo needs the normal review in [PHOTO-LOG.md](PHOTO-LOG.md) and a small page change.
 - **Never add:** a personal email, phone number, home address, employer, or family details.
-- **When the Scoutmaster changes:** update `displayName` and clear or replace `bio`. Ask troop leadership to update the email forwarding. The "visit a meeting" line on the page uses "him"; adjust that wording in the page file if needed.
+- **When the Scoutmaster changes:** update `displayName` and clear or replace `bio`. Ask troop leadership to update the email forwarding. The "visit a troop meeting" line on the page uses "him"; adjust that wording in the page file if needed.
 - Notes for the Webmaster go in the page file's top `---` section as `//` comments, which visitors never see. Don't use `<!-- -->` comments in pages: those are sent to every visitor.
 
 ### Add an approved photo
@@ -272,6 +276,8 @@ The header shows the Troop 32 emblem from `src/assets/brand/troop32-emblem.png`.
 
 - making the white corners outside the circle transparent, using a soft circular edge just inside the red ring so no white fringe shows on dark backgrounds;
 - resizing proportionally to 512×512 PNG with no metadata.
+
+**Header sizes (P2):** the emblem is 66 px on screens 768 px and wider, 52 px on phones, and 44 px on very narrow phones (under 360 px), so the troop name and the Menu button still fit on one row. On 768 px and wider, a third plain-text line, "SCOUTING AMERICA", sits under "SANTA ROSA, CALIFORNIA". It is hidden on phones, where there isn't room beside the Menu button. It is plain text, not the Scouting America logo. All of this is in `src/components/Header.astro`; `tests/pages/identity.test.ts` checks it.
 
 `public/apple-touch-icon.png` is a 180×180 copy that keeps the white corners, because phones place transparent areas on black and round the corners themselves.
 

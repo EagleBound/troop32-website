@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import MeetingCard from '../components/MeetingCard.astro';
 import JoinCallout from '../components/JoinCallout.astro';
-import { site } from '../data/site';
+import { site, scoutmasterContactHref } from '../data/site';
 
 // Frequently asked questions. Eligibility follows Scouting America's official
 // rule (verified 2026-10-07, docs/PROJECT.md). Costs stay general until
@@ -26,9 +26,10 @@ const faqs: { q: string; a: string[]; link?: { href: string; text: string } }[] 
   {
     q: 'What happens at a meeting?',
     a: [
-      `${site.name} meets on ${site.meeting.day} at ${site.meeting.time} at ${site.meeting.place}. Troop meetings are where Scouts plan upcoming activities, practice skills, work on advancement, and spend time with their patrols.`,
-      `The easiest way to understand it is to visit and see for yourself. You don't need to contact us first: just come to a ${site.meeting.dayName} meeting.`,
+      `${site.name} meets weekly throughout the year. Troop meetings are where Scouts plan upcoming activities, practice skills, work on advancement, and spend time with their patrols.`,
+      "The easiest way to understand it is to visit and see for yourself. Get in touch with the Scoutmaster and we'll help you plan a visit.",
     ],
+    link: { href: scoutmasterContactHref, text: 'Contact the Scoutmaster' },
   },
   {
     q: 'What does it cost?',
@@ -93,8 +94,8 @@ const faqs: { q: string; a: string[]; link?: { href: string; text: string } }[] 
           }
         </div>
       </div>
-      <aside aria-label="Visit a meeting">
-        <MeetingCard headingLevel={2} title="Visit a meeting" />
+      <aside aria-label="Our weekly meetings">
+        <MeetingCard headingLevel={2} />
       </aside>
     </div>
   </section>

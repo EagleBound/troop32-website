@@ -51,7 +51,7 @@ In general page slots, each photo appears in exactly one place, so the site show
 | Home › "Scouting in action" mosaic, wide tile | `summit-panorama-01.jpg` | Philmont 2026 | Panorama, caption "Summit day, Philmont Scout Ranch" |
 | Home › mosaic, square tile | `camp-sleeping-outdoors-01.jpg` | Chill Outing 2026 | Square, caption "Sleeping under the stars" |
 | Home › mosaic, square tile | `water-sailing-01.jpg` | Melita Island 2026 | Square, caption "Sailing" |
-| Home › mosaic, wide tile | `camp-tent-pitching-01.jpg` | Chill Outing 2026 | Panorama, caption "Pitching camp" |
+| Home › mosaic, wide tile | `camp-tent-pitching-01.jpg` | Chill Outing 2026 | Panorama, caption "Setting up camp" |
 | What We Do › Outdoor adventure | `backpacking-trail-break-01.jpg` | Philmont 2026 | Portrait 3:4 |
 | What We Do › Scout-led leadership | `leadership-patrol-huddle-01.jpg` | Melita Island 2026 | Portrait 3:4 |
 | What We Do › Service | `service-planter-bench-01.jpg` | Eagle service projects 2026 | Landscape 4:3 |
@@ -244,7 +244,7 @@ These eight photos share the following:
 | Human publication approval | Approved by the adult project lead after review of the full-resolution review copy |
 | Approver role | Adult project lead |
 | Approval date | 2026-10-06 |
-| Site use | Homepage › "Scouting in action" mosaic, wide tile, caption "Pitching camp" |
+| Site use | Homepage › "Scouting in action" mosaic, wide tile, caption "Setting up camp" |
 | Derivative | 2000×924 JPEG (resize of the review copy) |
 
 #### `camp-sleeping-outdoors-01.jpg`

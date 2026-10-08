@@ -46,7 +46,7 @@ const email = site.contact.email;
           ) : (
             <p>
               We'll share more about {displayName} here in the future. In the meantime, the best way to get to know
-              him is to visit a {site.meeting.dayName} meeting.
+              him is to visit a troop meeting.
             </p>
           )
         }
@@ -55,16 +55,16 @@ const email = site.contact.email;
             <>
               <h2>Questions for the Scoutmaster?</h2>
               <p>
-                Email <a href={`mailto:${email}`}>{email}</a>, or come to a {site.meeting.dayName} meeting. You don't
-                need to call ahead.
+                Email <a href={`mailto:${email}`}>{email}</a>. We're glad to help prospective families plan a visit to a
+                meeting.
               </p>
             </>
           )
         }
         <p><a href="/about/">Back to About {site.name}</a></p>
       </div>
-      <aside aria-label="Meeting time and place">
-        <MeetingCard headingLevel={2} title="Visit a meeting" />
+      <aside aria-label="Our weekly meetings">
+        <MeetingCard headingLevel={2} />
       </aside>
     </div>
   </section>

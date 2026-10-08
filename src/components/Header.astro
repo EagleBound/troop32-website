@@ -15,8 +15,8 @@ const current = Astro.url.pathname;
       <Image
         src={emblem}
         alt=""
-        width={56}
-        height={56}
+        width={66}
+        height={66}
         densities={[1, 2, 3]}
         loading="eager"
         decoding="async"
@@ -25,6 +25,7 @@ const current = Astro.url.pathname;
       <span class="identity-text">
         <span class="identity-name">{site.name}</span>
         <span class="identity-place">{site.locality}</span>
+        <span class="identity-org">{site.organization}</span>
       </span>
     </a>
 
@@ -111,8 +112,8 @@ const current = Astro.url.pathname;
   .identity :global(.identity-emblem) {
     flex: none;
     display: block;
-    width: 56px;
-    height: 56px;
+    width: 66px;
+    height: 66px;
   }
 
   .identity-text {
@@ -137,6 +138,16 @@ const current = Astro.url.pathname;
     font-size: 0.9rem;
     font-weight: 600;
     letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--khaki-300);
+    margin-top: 0.2rem;
+  }
+
+  /* "Scouting America" third line: plain text (not the Scouting America logo), shown from 48rem up only. */
+  .identity-org {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--khaki-300);
     margin-top: 0.2rem;
@@ -248,8 +259,8 @@ const current = Astro.url.pathname;
     }
 
     .identity :global(.identity-emblem) {
-      width: 44px;
-      height: 44px;
+      width: 52px;
+      height: 52px;
     }
 
     .identity-name {
@@ -259,6 +270,11 @@ const current = Astro.url.pathname;
     .identity-place {
       font-size: 0.8rem;
       letter-spacing: 0.06em;
+    }
+
+    /* No room for a third identity line beside the menu button; the organization is named elsewhere on every page. */
+    .identity-org {
+      display: none;
     }
 
     .has-js .menu-toggle:not([hidden]) {
@@ -288,6 +304,14 @@ const current = Astro.url.pathname;
     .has-js .nav-link--cta {
       justify-content: center;
       margin-top: var(--space-2);
+    }
+  }
+
+  /* Very narrow phones: keep the original emblem size so the name and menu button still fit on one row. */
+  @media (max-width: 22.49rem) {
+    .identity :global(.identity-emblem) {
+      width: 44px;
+      height: 44px;
     }
   }
 </style>
