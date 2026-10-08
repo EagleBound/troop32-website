@@ -109,7 +109,7 @@ npm run preview:fixtures   # serve dist-fixtures/
 | **Styles** | `src/styles/global.css` | Colors, fonts, spacing, and buttons, defined once as "design tokens" at the top. Each component also has its own `<style>` section. |
 | **Approved photos** | `src/assets/photos/` | Only approved, sanitized derivatives (metadata removed, neutral names). Never originals. |
 | **Troop emblem** | `src/assets/brand/troop32-emblem.png` | 512×512 prepared copy of the Troop 32 emblem used in the header (see below). |
-| **Other site files** | `public/` | Files copied as-is: `favicon.svg`, `apple-touch-icon.png`, `robots.txt`, and `_headers` (security headers for hosting). |
+| **Other site files** | `public/` | Files copied as-is: `favicon.svg`, `apple-touch-icon.png`, `robots.txt`, `_headers` (security and search-engine headers for hosting), and `_redirects` (legacy redirects from the old site). See [HOSTING.md](HOSTING.md). |
 
 ## Common tasks
 
@@ -296,15 +296,27 @@ The site uses two open-license fonts, **self-hosted** (served from our own site,
 
 They are a matched pair designed to work together, and both are licensed under the SIL Open Font License. They are installed as the `@fontsource-variable/source-serif-4` and `@fontsource-variable/source-sans-3` packages.
 
-## Search engines and launch
+## Search engines and redirects
 
-Until the site is officially launched, it tells search engines not to list it, in three places:
+The production site at `https://troop32.org` may be listed by search engines. The identical copy at `troop32.pages.dev` must not be. These settings work together:
 
-- `indexable: false` in `src/data/site.ts`;
-- `public/robots.txt`;
-- the `X-Robots-Tag` line in `public/_headers`.
+- `indexable: true` in `src/data/site.ts` (no `noindex` meta tag);
+- `public/robots.txt` allows crawling;
+- `public/_headers` sends `X-Robots-Tag: noindex, nofollow` **only** for the `troop32.pages.dev` hosts;
+- `site` in `astro.config.mjs` gives every page (except the 404 page) a canonical link to its `https://troop32.org/…/` address.
 
-All three are changed together in the separately approved launch work package.
+Never change one of them on its own. `npm run test:pages` (`tests/pages/launch.test.ts`) fails if they disagree. Details are in [HOSTING.md → Search engines](HOSTING.md#search-engines).
+
+### Add a legacy redirect
+
+Old addresses from the previous WordPress site are redirected in `public/_redirects`, but **only** when the old page has a clear equivalent here; everything else gets the 404 page, and `/log-in/` is never redirected. Add the address twice (with and without its trailing slash) pointing to an existing page ending in `/`, for example:
+
+```text
+/old-page/ /new-families/ 301
+/old-page /new-families/ 301
+```
+
+Then run `npm run test:pages`. The full policy is in [HOSTING.md → Legacy redirects](HOSTING.md#legacy-redirects).
 
 ## Troubleshooting
 
@@ -318,4 +330,4 @@ All three are changed together in the separately approved launch work package.
 | The build shows an error | Read the first red error line: it usually names the file and line. Ask Clawson in a PLAN request to explain it. |
 | Something looks very wrong after many changes | `git status` and `git diff` show exactly what changed. Nothing is permanent until it is committed. |
 
-Astro prints a note that it "collects anonymous usage data". That is information about the build tool, not about website visitors. See [PROJECT.md](PROJECT.md) for whether it has been turned off.
+Astro prints a note that it "collects anonymous usage data". That is information about the build tool, not about website visitors. It is turned off for the hosted builds on Cloudflare Pages (`ASTRO_TELEMETRY_DISABLED=1`; see [HOSTING.md](HOSTING.md#build-configuration)). To turn it off on your own computer too, set the same environment variable, or run `npx astro telemetry disable`.

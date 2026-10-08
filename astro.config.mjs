@@ -13,9 +13,9 @@ export default defineConfig({
   outDir: fixtureMode ? './dist-fixtures' : './dist',
   cacheDir: fixtureMode ? './node_modules/.astro-fixtures' : './node_modules/.astro',
 
-  // The final public address is not decided yet (see docs/PROJECT.md).
-  // Set `site` when the launch URL is approved so canonical and social links can be absolute.
-  // site: 'https://example.org',
+  // The production address (approved for launch 2026-10-08; see docs/PROJECT.md).
+  // It makes the canonical and og:url links in BaseLayout.astro absolute.
+  site: 'https://troop32.org',
 
   output: 'static',
   trailingSlash: 'always',

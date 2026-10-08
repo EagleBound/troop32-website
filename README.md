@@ -24,6 +24,7 @@ New Webmaster or adult leader? Start here.
 | [AGENTS.md](AGENTS.md) | Standing operating rules for AI development assistants working in this repository |
 | [docs/PROJECT.md](docs/PROJECT.md) | Project purpose, project phases, the Webmaster position, Troop 32 identity, roles, succession, v1.0 objectives, handoff, status, and decision log |
 | [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) | How to run, change, and build the website locally, and where everything lives |
+| [docs/HOSTING.md](docs/HOSTING.md) | How the site is hosted and deployed, search-engine and redirect settings, and the cutover and rollback runbooks |
 | [docs/WORKFLOW.md](docs/WORKFLOW.md) | How the directing human (adult project lead or Scout Webmaster), ChatGPT, and Clawson plan, execute, review, commit, and push work |
 | [docs/PRIVACY.md](docs/PRIVACY.md) | What may and may not be public for a youth Scouting organization |
 | [docs/CONTENT-GUIDE.md](docs/CONTENT-GUIDE.md) | Terminology, tone, Scouting principles, imagery, and accessibility |

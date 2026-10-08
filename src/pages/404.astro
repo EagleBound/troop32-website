@@ -4,7 +4,7 @@ import PageHeader from '../components/PageHeader.astro';
 import { site } from '../data/site';
 ---
 
-<BaseLayout title="Page not found" description={`This page could not be found on the ${site.name} website.`}>
+<BaseLayout title="Page not found" description={`This page could not be found on the ${site.name} website.`} canonical={false}>
   <PageHeader
     eyebrow="Off trail"
     title="We couldn't find that page"

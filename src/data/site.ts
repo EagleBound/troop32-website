@@ -65,10 +65,12 @@ export const site = {
   },
 
   /**
-   * Search-engine indexing. Keep false until the launch work package is
-   * approved; also update public/robots.txt and public/_headers at launch.
+   * Search-engine indexing of the production site (on since the launch work
+   * package). troop32.pages.dev stays out of search results through a
+   * host-specific X-Robots-Tag rule in public/_headers. Change this only
+   * together with public/robots.txt and public/_headers; see docs/HOSTING.md.
    */
-  indexable: false,
+  indexable: true,
 } as const;
 
 /**

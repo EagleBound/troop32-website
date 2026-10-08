@@ -1,7 +1,4 @@
-# PREVIEW / PRE-LAUNCH: ask search engines not to crawl this site.
-# At launch (separately approved work package), replace with:
-#   User-agent: *
-#   Allow: /
-# and set `indexable: true` in src/data/site.ts and remove X-Robots-Tag from public/_headers.
+# Troop 32 public website. Search engines may crawl it.
+# troop32.pages.dev is kept out of search results by X-Robots-Tag (public/_headers).
 User-agent: *
-Disallow: /
+Allow: /

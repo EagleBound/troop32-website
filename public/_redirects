@@ -1,0 +1,38 @@
+# Legacy redirects (Cloudflare Pages format: source destination status).
+# See docs/HOSTING.md ("Legacy redirects").
+#
+# Rule: only old public troop32.org (WordPress) addresses with a CLEAR equivalent
+# page on this site. Everything else from the old site gets the custom 404.
+# Never redirect /log-in/ (the old members' area) or anything under it.
+# Every destination must be a page that exists, and destinations are never
+# themselves redirected (tests/pages/launch.test.ts checks this).
+# Each address is listed with and without its trailing slash.
+
+/home/ / 301
+/home / 301
+/about-troop-32-front-page/ /about/ 301
+/about-troop-32-front-page /about/ 301
+/contact-us/ /contact/ 301
+/contact-us /contact/ 301
+/home/how-to-join/ /join/ 301
+/home/how-to-join /join/ 301
+/home/how-to-join/mandatory-forms/ /join/ 301
+/home/how-to-join/mandatory-forms /join/ 301
+/meetings/ /contact/ 301
+/meetings /contact/ 301
+/why-scouting/ /new-families/ 301
+/why-scouting /new-families/ 301
+/why-scouting/age-requirements/ /new-families/ 301
+/why-scouting/age-requirements /new-families/ 301
+/why-scouting/costs/ /new-families/ 301
+/why-scouting/costs /new-families/ 301
+/why-scouting/is-it-safe/ /new-families/ 301
+/why-scouting/is-it-safe /new-families/ 301
+/why-scouting/is-it-safe/adult-leaders/ /new-families/ 301
+/why-scouting/is-it-safe/adult-leaders /new-families/ 301
+/why-scouting/is-it-for-the-whole-family/ /new-families/ 301
+/why-scouting/is-it-for-the-whole-family /new-families/ 301
+/why-scouting/advancement/ /what-we-do/ 301
+/why-scouting/advancement /what-we-do/ 301
+/why-scouting/is-it-fun/ /what-we-do/ 301
+/why-scouting/is-it-fun /what-we-do/ 301

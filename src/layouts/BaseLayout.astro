@@ -13,10 +13,15 @@ interface Props {
   title?: string;
   /** Short description for search results and link previews. */
   description: string;
+  /** Emit canonical and og:url links (default). The 404 page turns this off. */
+  canonical?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, canonical = true } = Astro.props;
 const fullTitle = title ? `${title} | ${site.name}, ${site.locality}` : `${site.name} | ${site.locality}`;
+// Absolute production address of this page (`site` in astro.config.mjs), so the
+// identical copy on troop32.pages.dev points search engines to troop32.org.
+const canonicalUrl = canonical && Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
 ---
 
 <!doctype html>
@@ -27,6 +32,7 @@ const fullTitle = title ? `${title} | ${site.name}, ${site.locality}` : `${site.
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     {!site.indexable && <meta name="robots" content="noindex, nofollow" />}
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
     <meta name="theme-color" content="#1d3a2a" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -34,6 +40,7 @@ const fullTitle = title ? `${title} | ${site.name}, ${site.locality}` : `${site.
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content={site.name} />
+    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to main content</a>
