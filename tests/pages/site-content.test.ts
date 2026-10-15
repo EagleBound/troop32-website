@@ -147,6 +147,27 @@ test('Join: plan a visit through the Scoutmaster; official Scouts BSA link', () 
   assert.match(joinPage, /<a href="https:\/\/www\.scouting\.org\/programs\/scouts-bsa\/"[^>]*>Learn about the Scouts BSA program from Scouting America<\/a>/);
 });
 
+test('Home: tagline cards link to existing What We Do anchors; no Eagle-project photo under Eagle Bound! (T1)', () => {
+  const home = main(page(''));
+  assert.match(home, /<h2 id="pillars-title"[^>]*>Changing Lives, Creating Leaders, Eagle Bound!<\/h2>/);
+  const cards = [...home.matchAll(/<li class="pillar"[\s\S]*?<\/li>/g)].map((m) => m[0]);
+  const expected = [
+    ['Changing Lives', '/what-we-do/#outdoors', 'Explore our adventures', 'kitchen-pancake-line-01'],
+    ['Creating Leaders', '/what-we-do/#leadership', 'How Scouts lead', 'service-trail-fence-01'],
+    ['Eagle Bound!', '/what-we-do/#eagle', 'The path to Eagle', 'winter-sled-haul-01'],
+  ];
+  assert.equal(cards.length, expected.length);
+  const whatWeDo = page('what-we-do');
+  cards.forEach((card, i) => {
+    const [title, href, linkText, photo] = expected[i];
+    assert.match(card, new RegExp(`<h3[^>]*>${title}</h3>`));
+    assert.match(card, new RegExp(`<a href="${href}"[^>]*>${linkText}</a>`));
+    assert.ok(card.includes(photo), `${title} card shows ${photo}`);
+    assert.ok(whatWeDo.includes(`id="${href.split('#')[1]}"`), `${href} anchor exists`);
+  });
+  assert.ok(!/service-(trail-fence|planter-bench)/.test(cards[2]), 'Eagle-project photos stay out of the Eagle Bound! card');
+});
+
 test('external links on the recruiting pages go only to official Scouting America sites', () => {
   for (const route of ['join', 'new-families', 'contact', 'about', 'about/scoutmaster']) {
     for (const m of main(page(route)).matchAll(/href="(https?:\/\/[^"]+)"/g)) {

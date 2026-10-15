@@ -11,24 +11,28 @@ import { scoutLaw } from '../data/principles';
 import EventTeaser from '../components/events/EventTeaser.astro';
 import { getHomepageTeaser } from '../lib/events/collection';
 
+// Slot keys predate the tagline themes; the photo mapping is recorded in docs/PHOTO-LOG.md.
 const pillars = [
   {
-    title: 'Outdoor Adventure',
-    text: 'Camping, hiking, and time outdoors are at the heart of Scouting. Scouts learn to plan, pack, cook, and care for the places they explore.',
-    slot: photos.home.outdoor,
-    href: '/what-we-do/#outdoors',
-  },
-  {
-    title: 'Scout-Led Leadership',
-    text: 'Scouts plan and lead their own troop, with adults coaching from the side. Responsibility grows as each Scout does.',
+    title: 'Changing Lives',
+    text: 'From camping and hiking to community events and high-adventure treks like Philmont, Scouts build skills, confidence, and friendships that last.',
     slot: photos.home.leadership,
-    href: '/what-we-do/#leadership',
+    href: '/what-we-do/#outdoors',
+    linkText: 'Explore our adventures',
   },
   {
-    title: 'Service',
-    text: '“Do a Good Turn Daily” is more than a slogan. Scouts learn to notice what their community needs and to help.',
+    title: 'Creating Leaders',
+    text: 'Troop 32 is run by its Scouts. They plan, teach, and lead, and they grow in character, citizenship, and responsibility along the way.',
     slot: photos.home.service,
-    href: '/what-we-do/#service',
+    href: '/what-we-do/#leadership',
+    linkText: 'How Scouts lead',
+  },
+  {
+    title: 'Eagle Bound!',
+    text: 'Our troop slogan says it all. Every Scout is encouraged on the trail to Eagle, Scouting’s highest rank, earned through skill, leadership, and service.',
+    slot: photos.home.outdoor,
+    href: '/what-we-do/#eagle',
+    linkText: 'The path to Eagle',
   },
 ];
 
@@ -92,7 +96,7 @@ const teaserEvents = await getHomepageTeaser();
   <section class="section section--surface texture-contours" aria-labelledby="pillars-title">
     <div class="container">
       <p class="eyebrow">What Scouts do</p>
-      <h2 id="pillars-title">Three things Scouting does well</h2>
+      <h2 id="pillars-title">Changing Lives, Creating Leaders, Eagle Bound!</h2>
       <ul class="pillars" role="list">
         {
           pillars.map((pillar) => (
@@ -100,9 +104,7 @@ const teaserEvents = await getHomepageTeaser();
               <PhotoFrame slot={pillar.slot} ratio="portrait" sizes="(min-width: 60rem) 33vw, 100vw" />
               <h3>{pillar.title}</h3>
               <p>{pillar.text}</p>
-              <a href={pillar.href}>
-                More about {pillar.title.toLowerCase()}
-              </a>
+              <a href={pillar.href}>{pillar.linkText}</a>
             </li>
           ))
         }

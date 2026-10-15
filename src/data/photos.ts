@@ -58,7 +58,10 @@ export const photos = {
   /** Homepage hero background (decorative; the heading carries the message). */
   hero: { scene: 'ridge', image: heroTrailWalk, alt: '', event: MELITA_2026 },
 
-  /** Homepage "three things Scouting does well" cards (portrait frames). */
+  /**
+   * Homepage tagline cards (portrait frames). Keys predate the themes (T1, 2026-10-14):
+   * leadership → Changing Lives, service → Creating Leaders, outdoor → Eagle Bound!
+   */
   home: {
     outdoor: {
       scene: 'ridge',

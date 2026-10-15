@@ -45,9 +45,9 @@ In general page slots, each photo appears in exactly one place, so the site show
 | Page › section | Photo | Collection | Frame |
 | --- | --- | --- | --- |
 | Home › hero (decorative background) | `hero-trail-walk-01.jpg` | Melita Island 2026 | Full-bleed |
-| Home › Outdoor Adventure card | `winter-sled-haul-01.jpg` | Snow camping 2026 | Portrait 3:4 |
-| Home › Scout-Led Leadership card | `kitchen-pancake-line-01.jpg` | Pancake breakfast 2026 | Portrait 3:4 |
-| Home › Service card | `service-trail-fence-01.jpg` | Eagle service projects 2026 | Portrait 3:4 |
+| Home › Changing Lives card (slot `home.leadership`) | `kitchen-pancake-line-01.jpg` | Pancake breakfast 2026 | Portrait 3:4 |
+| Home › Creating Leaders card (slot `home.service`) | `service-trail-fence-01.jpg` | Eagle service projects 2026 | Portrait 3:4 |
+| Home › Eagle Bound! card (slot `home.outdoor`) | `winter-sled-haul-01.jpg` | Snow camping 2026 | Portrait 3:4 |
 | Home › "Scouting in action" mosaic, wide tile | `summit-panorama-01.jpg` | Philmont 2026 | Panorama, caption "Summit day, Philmont Scout Ranch" |
 | Home › mosaic, square tile | `camp-sleeping-outdoors-01.jpg` | Chill Outing 2026 | Square, caption "Sleeping under the stars" |
 | Home › mosaic, square tile | `water-sailing-01.jpg` | Melita Island 2026 | Square, caption "Sailing" |
@@ -64,6 +64,12 @@ In general page slots, each photo appears in exactly one place, so the site show
   - **Patrol huddle:** from the homepage Leadership card to What We Do › Scout-led leadership. That text is about patrols, which the photo shows directly.
   - **Sailing:** from What We Do › Outdoor adventure to a square mosaic tile. The Philmont trail photo matches that section's text ("camp, hike, cook, navigate") more closely.
 - No photo slot shows a placeholder illustration any more. `Scene.astro` stays as the fallback for any slot without a photo.
+
+**Tagline cards (T1, 2026-10-14):** the homepage cards became *Changing Lives / Creating Leaders / Eagle Bound!* under the heading "Changing Lives, Creating Leaders, Eagle Bound!". The three existing card photos were **shuffled** among the cards, approved by the adult project lead, so that no Eagle-project photo sits under the Eagle Bound! heading. Slot keys in `src/data/photos.ts` were deliberately not renamed; the table above shows which slot feeds which card. No photo, crop, focal point, frame, or alt text changed. Privacy review of the new placements:
+
+- **`kitchen-pancake-line-01.jpg` → Changing Lives.** Approved crop unchanged, so the schedule sheet and "Eagle Scout" cap remain excluded. Card copy is general and links to What We Do › Outdoor adventure. Consistent with its approval.
+- **`service-trail-fence-01.jpg` → Creating Leaders.** Its approval requires that the Eagle candidate is not identified and that site copy and alt text don't describe it as an Eagle project. Both still hold: the card copy is about Scouts leading their troop and doesn't mention service projects or Eagle, and the alt text is unchanged. The section heading contains the troop slogan "Eagle Bound!", which was already on the same page as the hero eyebrow when the photo was approved. Consistent with its approval.
+- **`winter-sled-haul-01.jpg` → Eagle Bound!.** Privacy class A (everyone from behind or at a distance) with no Eagle connection. The card describes the troop slogan for every Scout and doesn't present anyone in the photo as an Eagle candidate. Consistent with its approval.
 
 ### Event pages
 
@@ -188,7 +194,7 @@ These eight photos share the following:
 | Human publication approval | Approved by the adult project lead after review of the full-resolution review copy |
 | Approver role | Adult project lead |
 | Approval date | 2026-10-06 |
-| Site use | Homepage › Service card (portrait frame) |
+| Site use | Homepage › Creating Leaders card (portrait frame). *Moved 2026-10-14 (T1) from the homepage Service card, with adult project lead approval.* |
 | Derivative | 1600×1200 JPEG (resize of the review copy) |
 
 #### `service-planter-bench-01.jpg`
@@ -216,7 +222,7 @@ These eight photos share the following:
 | Human publication approval | Approved by the adult project lead after review of the full-resolution review copy |
 | Approver role | Adult project lead |
 | Approval date | 2026-10-06 |
-| Site use | Homepage › Outdoor Adventure card (portrait frame) |
+| Site use | Homepage › Eagle Bound! card (portrait frame). *Moved 2026-10-14 (T1) from the homepage Outdoor Adventure card, with adult project lead approval.* |
 | Derivative | 1067×1600 JPEG (resize of the review copy) |
 
 #### `kitchen-pancake-line-01.jpg`
@@ -230,7 +236,7 @@ These eight photos share the following:
 | Human publication approval | Approved by the adult project lead after review of the full-resolution review copy; privacy crop specifically approved |
 | Approver role | Adult project lead |
 | Approval date | 2026-10-06 |
-| Site use | Homepage › Scout-Led Leadership card (portrait frame) |
+| Site use | Homepage › Changing Lives card (portrait frame). *Moved 2026-10-14 (T1) from the homepage Scout-Led Leadership card, with adult project lead approval.* |
 | Derivative | 1080×1440 JPEG (crop of the 2250×3000 review copy; no upscaling) |
 
 #### `camp-tent-pitching-01.jpg`
@@ -267,9 +273,9 @@ These eight photos share the following:
 | --- | --- | --- |
 | Melita Island 2026 | 3 | Home hero, Home mosaic (sailing), What We Do › Leadership |
 | Philmont 2026 | 2 | Home mosaic (summit), What We Do › Outdoor adventure |
-| Eagle service projects 2026 | 2 | Home › Service, What We Do › Service (two different projects) |
+| Eagle service projects 2026 | 2 | Home › Creating Leaders, What We Do › Service (two different projects) |
 | Chill Outing 2026 | 2 | Home mosaic (tent pitching, sleeping outdoors) |
-| Snow camping 2026 | 1 | Home › Outdoor Adventure |
-| Pancake breakfast 2026 | 1 | Home › Scout-Led Leadership |
+| Snow camping 2026 | 1 | Home › Eagle Bound! |
+| Pancake breakfast 2026 | 1 | Home › Changing Lives |
 
 The site should show variety across years, seasons, and activities. Before adding more photos from a collection already listed here, check whether a photo from a different event would tell the troop's story better. If a new photo replaces one in a slot, record the change here. The homepage photo mosaic stays hidden unless it has at least four approved photos from at least three different events (`galleryIsReady` in `src/data/photos.ts`).

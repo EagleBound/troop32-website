@@ -97,6 +97,7 @@ The text above was supplied directly to this project. Third-party websites that 
 - Uniform and gear: talk with adult leaders before buying; the troop has lightly worn uniform items; the troop provides certain group equipment, including tents and cooking utensils.
 - Troop 32 follows Scouting America's Youth Protection requirements and policies.
 - "Eagle Bound!" is Troop 32's **troop slogan** (confirmed P2). Call it the "troop slogan", not an official motto. It appears as the homepage hero eyebrow.
+- **"Changing Lives, Creating Leaders, Eagle Bound!"** is the approved heading of the homepage card section (T1, 2026-10-14), with one card per theme. The hero eyebrow stays the short slogan. Card copy makes no unverified claims: no Eagle statistics, troop history, alumni outcomes, or activities not already documented on the site.
 
 ## Privacy in content
 
